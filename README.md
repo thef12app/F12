@@ -112,7 +112,3 @@ ApiCall({ key: secrets.key });
 
 - [Webpack documentation](https://webpack.js.org/concepts/)
 - [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
-
----
-
-Michael Xieyang Liu | [Website](https://lxieyang.github.io)

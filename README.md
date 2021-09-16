@@ -1,6 +1,6 @@
 <img src="src/assets/img/icon-128.png" width="64"/>
 
-# Dev Utilities
+# Dev App
 
 ## Installing and Running
 

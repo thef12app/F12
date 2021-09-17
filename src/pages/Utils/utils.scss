@@ -17,26 +17,8 @@
 
 .search-wrapper {
   overflow: hidden;
-}
-
-.util-list {
-  flex-grow: 1;
-  overflow: auto;
-}
-
-.util-list-item {
-  background: #f3e2b4;
-  font-size: 16px;
-  padding: 10px 16px;
-  border-radius: 4px;
-}
-
-.util-list-item:first-child {
-  margin-top: 34px;
-}
-
-.util-list-item + .util-list-item {
-  margin-top: 4px;
+  flex-shrink: 0;
+  margin-bottom: 30px;
 }
 
 .search {
@@ -52,4 +34,21 @@
   &:focus {
     border-color: #666;
   }
+}
+
+.util-list {
+  flex-grow: 1;
+  overflow: auto;
+  border-radius: 8px;
+}
+
+.util-list-item {
+  background: #f3e2b4;
+  font-size: 16px;
+  padding: 10px 16px;
+  border-radius: 4px;
+}
+
+.util-list-item + .util-list-item {
+  margin-top: 4px;
 }

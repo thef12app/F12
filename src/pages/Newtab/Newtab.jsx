@@ -1,14 +1,38 @@
-import React from 'react';
-import logo from '../../assets/img/logo.svg';
-import './Newtab.css';
+import React, { useState } from 'react';
+
+import cn from 'classnames';
+
+import { Utils } from '../Utils/Utils';
 import './Newtab.scss';
 
+import CloseIcon from '../../assets/icons/close.svg';
+import ArrowIcon from '../../assets/icons/arrow.svg';
+
 const Newtab = () => {
+  const [showUtils, setShowUtils] = useState(false);
+
+  const openUtils = () => setShowUtils(true);
+  const closeUtils = () => setShowUtils(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h6>New Tab</h6>
-      </header>
+    <div className="app">
+      {showUtils && (
+        <div className="utils-wrapper">
+          <button className="close-btn" onClick={closeUtils}>
+            <CloseIcon />
+          </button>
+          <Utils />
+        </div>
+      )}
+      <button
+        className={cn('utils-btn', {
+          'utils-app-open': showUtils,
+        })}
+        title={showUtils ? 'Close utilities' : 'Utilities'}
+        onClick={openUtils}
+      >
+        <ArrowIcon />
+      </button>
     </div>
   );
 };

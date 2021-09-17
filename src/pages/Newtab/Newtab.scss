@@ -1,10 +1,90 @@
-$myColor: red;
+.app {
+  background-color: #333;
+  background-image: url('../../assets/img/jonathan-adams-rNPuIBQLKNI-unsplash.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: $myColor;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow: hidden;
+}
+
+.utils-wrapper {
+  width: calc(100vw - 80px);
+  margin: auto;
+  margin-top: 40px;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  border-radius: 16px;
+
+  animation: 0.2s ease utils-slide-in;
+}
+
+.utils-btn {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: 2px solid #ffc412;
+  border-right-width: 0;
+  border-radius: 50%;
+
+  position: fixed;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%) translateX(50%);
+  transition: 0.4s ease all;
+
+  height: 100px;
+  width: 100px;
+  padding: 0;
+  padding-left: 50px;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    height: 160px;
+    width: 160px;
+    background-color: #ffc412;
+    color: #333;
+  }
+}
+
+.utils-btn svg {
+  height: 20px;
+}
+
+.utils-btn.utils-app-open {
+  transform: translateY(-50%) translateX(100%) scale(0);
+}
+
+.close-btn {
+  position: absolute;
+  right: 58px;
+  top: 58px;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  border: none;
+  background: #333;
+  color: white;
+  cursor: pointer;
+
+  svg {
+    height: 10px;
+  }
+}
+
+.close-btn:hover {
+  background: #ffc412;
+  color: black;
+}
+
+@keyframes utils-slide-in {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

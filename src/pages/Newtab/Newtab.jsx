@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import { MemoryRouter } from 'react-router-dom';
 import cn from 'classnames';
 
 import { Utils } from '../Utils/Utils';
@@ -15,25 +16,29 @@ const Newtab = () => {
   const closeUtils = () => setShowUtils(false);
 
   return (
-    <div className="app">
-      {showUtils && (
-        <div className="utils-wrapper">
-          <button className="close-btn" onClick={closeUtils}>
-            <CloseIcon />
-          </button>
-          <Utils />
-        </div>
-      )}
-      <button
-        className={cn('utils-btn', {
-          'utils-app-open': showUtils,
-        })}
-        title={showUtils ? 'Close utilities' : 'Utilities'}
-        onClick={openUtils}
-      >
-        <ArrowIcon />
-      </button>
-    </div>
+    <MemoryRouter>
+      <div className="app">
+        {showUtils && (
+          <>
+            <button className="close-btn" onClick={closeUtils}>
+              <CloseIcon />
+            </button>
+            <div className="utils-wrapper">
+              <Utils />
+            </div>
+          </>
+        )}
+        <button
+          className={cn('utils-btn', {
+            'utils-app-open': showUtils,
+          })}
+          title={showUtils ? 'Close utilities' : 'Utilities'}
+          onClick={openUtils}
+        >
+          <ArrowIcon />
+        </button>
+      </div>
+    </MemoryRouter>
   );
 };
 

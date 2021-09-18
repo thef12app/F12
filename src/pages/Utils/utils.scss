@@ -19,6 +19,7 @@
 
 .util-main {
   flex-grow: 1;
+  padding: 16px;
 }
 
 .search-wrapper {
@@ -45,7 +46,7 @@
 .util-list {
   flex-grow: 1;
   overflow: auto;
-  border-radius: 8px;
+  margin-right: -20px;
 }
 
 .util-list-item {
@@ -53,8 +54,26 @@
   font-size: 16px;
   padding: 10px 16px;
   border-radius: 4px;
+  margin-right: 20px;
+  cursor: pointer;
+
+  transition: 0.2s ease all;
 }
 
 .util-list-item + .util-list-item {
   margin-top: 4px;
+}
+
+.util-list-item:hover {
+  background-color: #7e6b3a;
+  color: white;
+}
+
+.util-list-item.selected {
+  background: black;
+  color: white;
+  transform: translateX(30px);
+  position: relative;
+  z-index: 1;
+  cursor: default;
 }

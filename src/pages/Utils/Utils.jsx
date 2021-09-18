@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { Routes } from '../../components/Routes/Routes';
 import { utilList } from './util-list';
@@ -9,10 +9,20 @@ import { useState } from 'react';
 
 export const Utils = () => {
   const [currentlyOpen, setCurrentlyOpen] = useState();
+  const [searchText, setSearchText] = useState('');
+  const filteredUtils = useMemo(
+    () =>
+      utilList.filter(
+        (u) =>
+          !searchText ||
+          u.name.toLowerCase().search(searchText.toLowerCase()) !== -1
+      ),
+    [searchText]
+  );
+
   const history = useHistory();
 
   const openApp = (key) => {
-    console.log('clicked', key, history.location.pathname);
     history.push(key);
     setCurrentlyOpen(key);
   };
@@ -20,10 +30,16 @@ export const Utils = () => {
     <div className="utils-page">
       <div className="sidebar">
         <div className="search-wrapper">
-          <input type="text" className="search" autoFocus />
+          <input
+            type="text"
+            className="search"
+            placeholder="Search Tools"
+            onChange={(evt) => setSearchText(evt.target.value)}
+            autoFocus
+          />
         </div>
         <div className="util-list">
-          {utilList.map((u) => (
+          {filteredUtils.map((u) => (
             <div
               className={cn('util-list-item', {
                 selected: u.path === currentlyOpen,

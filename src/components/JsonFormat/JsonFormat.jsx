@@ -4,7 +4,7 @@ import prettier from 'prettier';
 import JSONParser from 'prettier/parser-babel';
 import { useRef, useEffect } from 'react';
 import { editor as monacoEditor } from 'monaco-editor';
-import './JsonFormat.scss';
+import styles from './JsonFormat.module.scss';
 
 export const JsonFormat = () => {
   const editorRoot = useRef(null);
@@ -16,6 +16,7 @@ export const JsonFormat = () => {
           enabled: false,
         },
       });
+
       monaco.onDidChangeModelContent((e) => {
         const value = monaco.getValue();
         const formatted = onChange(value);
@@ -40,5 +41,9 @@ export const JsonFormat = () => {
       return value;
     }
   };
-  return <div ref={editorRoot} className="editor-root"></div>;
+  return (
+    <div className={styles.jsonEditor}>
+      <div ref={editorRoot} className={styles.editorRoot}></div>;
+    </div>
+  );
 };

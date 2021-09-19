@@ -10,7 +10,8 @@
   "scripts": {
     "build": "node utils/build.js",
     "start": "node utils/webserver.js",
-    "prettier": "prettier --write '**/*.{js,jsx,css,html}'"
+    "prettier": "prettier --write '**/*.{js,jsx,css,html}'",
+    "update:images": "node utils/pexels/getImages"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.1",
@@ -19,6 +20,7 @@
     "@types/firefox-webext-browser": "^82.0.1",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
+    "axios": "^0.21.4",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.1",
     "monaco-editor": "^0.27.0",

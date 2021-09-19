@@ -7,7 +7,7 @@ export const Routes = () => {
   return (
     <Switch>
       <Route path="/json-formatter" component={JsonFormat} />
-      <Route path="/coming-soon" render={() => <div>Coming soon...</div>} />
+      <Route render={() => <div>Coming soon...</div>} />
     </Switch>
   );
 };

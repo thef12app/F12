@@ -11,6 +11,7 @@ import './Newtab.scss';
 import CloseIcon from '../../assets/icons/close.svg';
 import ArrowIcon from '../../assets/icons/arrow.svg';
 
+// this has to be set based on the screen resolution
 const src = images[random(0, images.length - 1)].src.large2x;
 const Newtab = () => {
   const [showUtils, setShowUtils] = useState(false);

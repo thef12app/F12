@@ -1,25 +1,73 @@
-import React from 'react';
-import logo from '../../assets/img/logo.svg';
-import Greetings from '../../containers/Greetings/Greetings';
-import './Popup.css';
+import React, { useMemo, useState } from 'react';
+import { utilList } from '../Utils/util-list';
+import styles from './Popup.module.scss';
 
 const Popup = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const list = useMemo(
+    () =>
+      utilList
+        .filter((u) => u.componentName)
+        .filter(
+          (u) => !searchTerm || u.name.toLowerCase().includes(searchTerm)
+        ),
+    [searchTerm]
+  );
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const openApp = (file) => {
+    chrome.tabs.create({
+      url: `${file}.html`,
+    });
+  };
+
+  const onSearchChange = (evt) => {
+    setSearchTerm(evt.target.value);
+
+    if (evt.key === 'Enter' && selectedItem < list.length) {
+      openApp(list[selectedItem].path);
+    } else if (evt.key === 'ArrowUp') {
+      if (selectedItem == null) {
+        setSelectedItem(list.length - 1);
+      } else if (selectedItem > 0) {
+        setSelectedItem(selectedItem - 1);
+      }
+    } else if (evt.key === 'ArrowDown') {
+      if (selectedItem == null) {
+        setSelectedItem(0);
+      } else if (selectedItem < list.length - 1) {
+        setSelectedItem(selectedItem + 1);
+      }
+    } else {
+      setSelectedItem(0);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Popup/Popup.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
+    <div className={styles.popupContainer}>
+      <div className={styles.menuTitle}>DevApp</div>
+      <div className={styles.menuSearchContainer}>
+        <input
+          autoFocus
+          placeholder="Search"
+          className={styles.menuSearch}
+          onKeyUp={onSearchChange}
+        />
+      </div>
+      <div className={styles.menuList}>
+        {list.map((util, i) => (
+          <div
+            className={
+              styles.menuItem +
+              ' ' +
+              (selectedItem === i ? styles.selectedMenu : '')
+            }
+            onClick={() => openApp(util.path)}
+          >
+            {util.name}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

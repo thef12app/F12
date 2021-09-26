@@ -22,9 +22,6 @@ export const JsonFormat = () => {
   const copyToClipboard = () => {
     const value = editor.getValue();
     copy(value);
-    chrome.tabs.create({
-      url: 'json-formatter.html',
-    });
   };
 
   useEffect(() => {

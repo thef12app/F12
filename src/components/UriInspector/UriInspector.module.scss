@@ -6,6 +6,8 @@
   width: 800px;
   max-width: 100%;
   margin: auto;
+  padding-bottom: 400px;
+  padding-top: 40px;
 }
 
 .uriInputWrapper {
@@ -26,6 +28,7 @@
   font-size: 16px;
   color: #666;
   margin: 16px 0;
+  line-height: 24px;
 }
 
 .urlPart {
@@ -84,5 +87,9 @@
 
 .row {
   display: flex;
-  gap: 16px;
+  gap: 8px;
+
+  & + & {
+    margin-top: 16px;
+  }
 }

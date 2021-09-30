@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import URL from 'url-parse';
 
 import { iteratorToArray } from '../../utils';
 import styles from './UriInspector.module.scss';
@@ -18,10 +19,12 @@ export const UriInspector = () => {
     if (_url) {
       try {
         const parsed = new URL(_url);
+        console.log(parsed);
 
         const { protocol, username, password, hostname, port, pathname, hash } =
           parsed;
-        const searchParams = iteratorToArray(parsed.searchParams.entries());
+        const searchParamsObject = new URLSearchParams(parsed.query || '');
+        const searchParams = iteratorToArray(searchParamsObject.entries());
         setParsedUrl({
           protocol: protocol.replace(/\:$/, ''),
 
@@ -73,7 +76,12 @@ export const UriInspector = () => {
 
       {parsedUrl && <UriPartsRenderer parsedUrl={parsedUrl} />}
 
-      {parsedUrl && <UriEditor parsedUrl={parsedUrl} />}
+      {parsedUrl && (
+        <UriEditor
+          parsedUrl={parsedUrl}
+          onChange={(val) => setParsedUrl(val)}
+        />
+      )}
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 
-import Form, { useForm, Field, List } from 'rc-field-form';
+import Form, { useForm, List } from 'rc-field-form';
+import URL from 'url-parse';
 
 import styles from './UriInspector.module.scss';
 import { FormField } from '../core/FormField';
+import { iteratorToArray } from '../../utils';
 
 // const urlValidationSchema = Yup.object().shape({
 //   protocol: Yup.string()
@@ -18,16 +20,63 @@ import { FormField } from '../core/FormField';
 //   pathname: Yup.string().matches(/^\//, 'Pathname should start with /'),
 // });
 
-export const UriEditor = ({ parsedUrl }) => {
+const u = new URL('h://test.com');
+console.log(u);
+
+export const UriEditor = ({ parsedUrl, onChange }) => {
   const [form] = useForm();
 
   useEffect(() => {
     form.setFieldsValue(parsedUrl);
   }, [parsedUrl]);
 
+  const onFormChange = () => {
+    const values = form.getFieldsValue();
+    const errors = form.getFieldsError();
+    const hasErrors = errors.some((e) => e.errors.length);
+    try {
+      if (!hasErrors) {
+        const url = new URL('test://test.com');
+        console.log({ values });
+
+        const searchParams = values.searchParams;
+        let validatedSearchParams = [];
+        if (searchParams?.length) {
+          const parsedSearchParams = new URLSearchParams();
+          searchParams.forEach((p) => parsedSearchParams.append(p[0], p[1]));
+          validatedSearchParams = iteratorToArray(parsedSearchParams.entries());
+        }
+
+        url.set('protocol', values.protocol + ':');
+        url.set('username', values.username || '');
+        url.set('password', values.password || '');
+        url.set('hostname', values.hostname);
+        url.set('port', values.port || '');
+        url.set('pathname', values.pathname || '/');
+        url.set('hash', values.hash || '');
+
+        const { protocol, username, password, hostname, port, pathname, hash } =
+          url;
+
+        onChange({
+          protocol: protocol.replace(/\:$/, ''),
+          username,
+          password,
+          hostname,
+          port,
+          pathname,
+          hash,
+          searchParams: validatedSearchParams,
+        });
+      }
+    } catch (ex) {
+      console.log('ignored', ex);
+    }
+  };
+
   return (
     <div>
-      <Form form={form}>
+      <Form form={form} onFieldsChange={onFormChange}>
         <div className={styles.urlEditSectionHeader}>Protocol</div>
         <FormField
           name="protocol"

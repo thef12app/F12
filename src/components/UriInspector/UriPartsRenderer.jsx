@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './UriInspector.module.scss';
 
 export const UriPartsRenderer = ({ parsedUrl }) => {
@@ -11,11 +11,22 @@ export const UriPartsRenderer = ({ parsedUrl }) => {
     hostname,
     port,
 
-    pathname,
+    pathname: _pathname,
 
-    searchParams,
+    searchParams: _searchParams,
     hash,
   } = parsedUrl;
+
+  const searchParams = useMemo(
+    () =>
+      _searchParams &&
+      !!_searchParams.length &&
+      _searchParams.filter(([k]) => k),
+    [_searchParams]
+  );
+
+  const pathname = _pathname === '/' ? '' : _pathname;
+
   return (
     <div className={styles.urlPartsContainer}>
       {protocol && (
@@ -39,14 +50,14 @@ export const UriPartsRenderer = ({ parsedUrl }) => {
           :<span className={styles.urlPart}>{port}</span>
         </span>
       )}
-      {pathname && <span className={styles.urlPart}>{pathname}</span>}
+      {pathname && <span>{pathname}</span>}
       {searchParams && !!searchParams.length && (
         <span>
           ?
-          <span className={styles.urlPart}>
+          <span>
             {searchParams.map((p, i, list) => (
               <React.Fragment key={i}>
-                <span>
+                <span className={styles.urlPart}>
                   {p[0]}
                   {p[1] && '='}
                   {p[1]}

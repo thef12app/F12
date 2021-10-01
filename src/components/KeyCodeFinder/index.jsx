@@ -18,7 +18,7 @@ export const KeyCodeFinder = () => {
   }, []);
 
   const captureKey = (event) => {
-    const { metaKey, location, code } = event;
+    const { metaKey, location, code, key, altKey } = event;
     const keyLocations = {
       0: 'General keys',
       1: 'Left-side modifier keys',
@@ -26,22 +26,32 @@ export const KeyCodeFinder = () => {
       3: 'Numpad',
     };
     if (event.isComposing || event.keyCode === 229) return;
-    if (!metaKey) {
-      event.preventDefault();
-    }
-    setKeyCode({
+
+    event.preventDefault();
+
+    const keyCode = {
       location: location,
       renderedLocation: keyLocations[location],
+      renderedCode: `${code} `,
       code,
-    });
+      key,
+      metaKey,
+    };
+    if (metaKey) {
+      keyCode.renderedCode = `${code} (Command ⌘ / Windows Key ⊞)`;
+    }
+    if (altKey) {
+      keyCode.renderedCode = `${code} ( Option / Alt) `;
+    }
+    setKeyCode(keyCode);
   };
   return (
     <div className={style.keycodeContainer}>
       {keyCode && (
         <div className={style.keycodeCard}>
           <div>
-            <span style={{ color: '#444', fontWeight: 900 }} title="event.code">
-              {keyCode.code}
+            <span style={{ color: '#444', fontWeight: 900 }}>
+              {keyCode.renderedCode}
             </span>
           </div>
 
@@ -54,12 +64,19 @@ export const KeyCodeFinder = () => {
 
       {keyCode && (
         <div className={style.jsonObject}>
-          <code>
-            {JSON.stringify({
-              code: keyCode.code,
-              location: keyCode.location,
-            })}
-          </code>
+          <pre>
+            event:{' '}
+            {JSON.stringify(
+              {
+                key: keyCode.key,
+                code: keyCode.code,
+                location: keyCode.location,
+                metaKey: keyCode.metaKey,
+              },
+              null,
+              2
+            )}
+          </pre>
         </div>
       )}
     </div>

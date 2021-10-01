@@ -31,6 +31,11 @@ export const JsonFormat = () => {
           enabled: false,
         },
       });
+      monaco.setValue(`
+        {
+          action: "Hit format to format this JSON or paste JSON here"
+        }
+      `);
       setEditor(monaco);
 
       return () => monaco.dispose();

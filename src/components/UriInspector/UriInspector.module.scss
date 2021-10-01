@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+}
+
+.pageWrapper {
+  width: 800px;
+  max-width: 100%;
+  margin: auto;
+  padding-bottom: 400px;
+  padding-top: 40px;
+}
+
+.uriInputWrapper {
+  text-align: center;
+}
+
+.uriInput {
+  width: 100%;
+  resize: none;
+  background-color: #f0f0f0;
+  outline-color: #ccc;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.urlPartsContainer {
+  font-size: 16px;
+  color: #666;
+  margin: 16px 0;
+  line-height: 24px;
+}
+
+.urlPart {
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s ease padding;
+
+  &:hover {
+    padding: 4px;
+    background-color: #efefef;
+  }
+}
+
+.parseError {
+  color: red;
+}
+
+.parseBtn {
+  padding: 8px 16px;
+  margin-top: 16px;
+}
+
+.urlEditSectionHeader {
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #555;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.editableField {
+  padding: 8px;
+  width: 100%;
+  border: 0;
+  background-color: #fafafa;
+  font-size: 14px;
+  outline: none;
+  border-radius: 4px;
+  transition: 0.4s ease background-color;
+
+  &:focus {
+    background-color: #eee;
+  }
+}
+
+.label {
+  font-weight: 600;
+  color: #777;
+  text-transform: uppercase;
+}
+
+.column {
+  width: 50%;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+
+  & + & {
+    margin-top: 16px;
+  }
+}

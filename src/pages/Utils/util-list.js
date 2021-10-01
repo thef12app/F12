@@ -1,7 +1,8 @@
-export const utilList = [
+const utilList = [
   {
     name: 'JSON Formatter',
     path: 'json-formatter',
+    componentName: 'JsonFormat',
   },
   {
     name: 'JWT Encoder / Decoder',
@@ -10,6 +11,12 @@ export const utilList = [
   {
     name: 'Keycode Finder',
     path: 'keycode-finder',
+    componentName: 'KeyCodeFinder',
+  },
+  {
+    name: 'URL Inspector',
+    path: 'url-inspector',
+    componentName: 'UriInspector',
   },
   {
     name: 'Unix Time Converter',
@@ -20,3 +27,7 @@ export const utilList = [
     path: 'base64-encoder',
   },
 ];
+
+module.exports = {
+  utilList,
+};

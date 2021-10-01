@@ -6,6 +6,29 @@ var webpack = require('webpack'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   TerserPlugin = require('terser-webpack-plugin');
+const { utilList } = require('./src/pages/Utils/util-list');
+const { fromPairs } = require('lodash');
+
+const utilChunks = utilList
+  .filter((util) => util.componentName)
+  .map((util) => {
+    return [
+      util.componentName,
+      path.join(__dirname, `src/components/${util.componentName}/renderer.js`),
+    ];
+  });
+
+const utilPages = utilList
+  .filter((util) => util.componentName)
+  .map((util) => {
+    return new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src/template.html'),
+      filename: `${util.path}.html`,
+      chunks: [util.componentName],
+      cache: false,
+      title: 'JSON Formatter | DevApp',
+    });
+  });
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -42,6 +65,7 @@ var options = {
     contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.js'),
     devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
     panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
+    ...fromPairs(utilChunks),
 
     // Monaco from here: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
     // Package each language's worker and give these filenames in `getWorkerUrl`
@@ -173,6 +197,7 @@ var options = {
         },
       ],
     }),
+    ...utilPages,
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
       filename: 'newtab.html',

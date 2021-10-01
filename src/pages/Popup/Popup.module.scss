@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+.popupContainer {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+}
+.menuList {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.menuList:hover {
+  .menuItem.selectedMenu {
+    background-color: #fafaff;
+  }
+}
+
+.menuItem {
+  padding: 8px;
+  background-color: #fafaff;
+  cursor: pointer;
+  transition: 0.4s ease all;
+  border-radius: 4px;
+
+  & + & {
+    margin-top: 4px;
+  }
+
+  &.selectedMenu,
+  &:hover {
+    background-color: #ccc;
+  }
+}
+
+.menuTitle {
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.menuSearchContainer {
+  padding: 8px 0;
+  flex-shrink: 0;
+}
+
+.menuSearch {
+  padding: 8px;
+  width: 100%;
+}

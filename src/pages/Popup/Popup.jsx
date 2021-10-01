@@ -68,6 +68,14 @@ const Popup = () => {
           </div>
         ))}
       </div>
+      <div className={styles.footer}>
+        <a
+          href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
+          target="_blank"
+        >
+          Request for a feature
+        </a>
+      </div>
     </div>
   );
 };

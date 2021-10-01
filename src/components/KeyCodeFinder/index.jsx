@@ -18,7 +18,7 @@ export const KeyCodeFinder = () => {
   }, []);
 
   const captureKey = (event) => {
-    const { metaKey, location, code } = event;
+    const { metaKey, location, code, key } = event;
     const keyLocations = {
       0: 'General keys',
       1: 'Left-side modifier keys',
@@ -33,6 +33,8 @@ export const KeyCodeFinder = () => {
       location: location,
       renderedLocation: keyLocations[location],
       code,
+      key,
+      metaKey,
     });
   };
   return (
@@ -55,9 +57,12 @@ export const KeyCodeFinder = () => {
       {keyCode && (
         <div className={style.jsonObject}>
           <code>
+            event:{' '}
             {JSON.stringify({
+              key: keyCode.key,
               code: keyCode.code,
               location: keyCode.location,
+              metaKey: keyCode.metaKey,
             })}
           </code>
         </div>

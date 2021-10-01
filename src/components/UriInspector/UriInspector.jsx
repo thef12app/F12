@@ -14,12 +14,14 @@ export const UriInspector = () => {
   const parseUrl = (_url = url, silent = false) => {
     setParseError(null);
     setParsedUrl(null);
-    console.log('url', _url);
 
     if (_url) {
       try {
+        if (!/^[a-z]+:\/\//.test(_url)) {
+          throw new Error('Invalid URL');
+        }
+
         const parsed = new URL(_url);
-        console.log(parsed);
 
         const { protocol, username, password, hostname, port, pathname, hash } =
           parsed;

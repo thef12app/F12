@@ -8,7 +8,6 @@ export const FormField = ({ name, children, ...restProps }) => {
     <>
       <Field {...restProps} name={name}>
         {(control, meta, form) => {
-          console.log(control, '<<<<');
           const childNode =
             typeof children === 'function'
               ? children(control, meta, form)

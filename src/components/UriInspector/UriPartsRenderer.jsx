@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
+import copyToClipboard from 'copy-to-clipboard';
 import styles from './UriInspector.module.scss';
+import { composeURL } from '../../utils';
 
 export const UriPartsRenderer = ({ parsedUrl }) => {
   const {
@@ -11,21 +13,48 @@ export const UriPartsRenderer = ({ parsedUrl }) => {
     hostname,
     port,
 
-    pathname: _pathname,
+    pathname,
 
-    searchParams: _searchParams,
+    searchParams,
     hash,
-  } = parsedUrl;
+  } = useMemo(() => {
+    return {
+      ...parsedUrl,
+      pathname:
+        parsedUrl.pathname === '/'
+          ? ''
+          : parsedUrl.pathname
+              .split('/')
+              .map((p) => encodeURIComponent(p))
+              .join('/'),
+      username: parsedUrl.username && encodeURIComponent(parsedUrl.username),
+      password: parsedUrl.password && encodeURIComponent(parsedUrl.password),
+      searchParams:
+        parsedUrl.searchParams &&
+        !!parsedUrl.searchParams.length &&
+        parsedUrl.searchParams
+          .filter(([k]) => k)
+          .map(([k, v]) => [encodeURIComponent(k), encodeURIComponent(v)]),
+    };
+  }, [parsedUrl]);
 
-  const searchParams = useMemo(
-    () =>
-      _searchParams &&
-      !!_searchParams.length &&
-      _searchParams.filter(([k]) => k),
-    [_searchParams]
-  );
-
-  const pathname = _pathname === '/' ? '' : _pathname;
+  const _copyToClipboard = () => {
+    copyToClipboard(
+      composeURL({
+        protocol,
+        username,
+        password,
+        hostname,
+        port,
+        pathname,
+        search:
+          searchParams &&
+          searchParams.length &&
+          '?' + searchParams.map(([k, v]) => `${k}${v && '=' + v}`).join('&'),
+        hash,
+      })
+    );
+  };
 
   return (
     <div className={styles.urlPartsContainer}>
@@ -70,6 +99,14 @@ export const UriPartsRenderer = ({ parsedUrl }) => {
       )}
 
       {hash && <span className={styles.urlPart}>{hash}</span>}
+      <div>
+        <button
+          onClick={_copyToClipboard}
+          className={styles.copyToClipboardBtn}
+        >
+          Copy to Clipboard
+        </button>
+      </div>
     </div>
   );
 };

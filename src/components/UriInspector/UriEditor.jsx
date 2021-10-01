@@ -7,21 +7,7 @@ import styles from './UriInspector.module.scss';
 import { FormField } from '../core/FormField';
 import { iteratorToArray } from '../../utils';
 
-// const urlValidationSchema = Yup.object().shape({
-//   protocol: Yup.string()
-//     .matches(/^[a-z,A-Z,0-9,\.,\-]*$/, 'Invalid protocol')
-//     .matches()
-//     .required('Missing protocol'),
-//   hostname: Yup.string()
-//     .required()
-//     .matches(/^[a-z]/, 'Hostname should start with a-z')
-//     .matches(/^[a-z][a-z,0-9,\-]*(\.[a-z][a-z,0-9,\-]*)*$/, 'Invalid Hostname'),
-//   port: Yup.number(),
-//   pathname: Yup.string().matches(/^\//, 'Pathname should start with /'),
-// });
-
 const u = new URL('h://test.com');
-console.log(u);
 
 export const UriEditor = ({ parsedUrl, onChange }) => {
   const [form] = useForm();
@@ -30,14 +16,14 @@ export const UriEditor = ({ parsedUrl, onChange }) => {
     form.setFieldsValue(parsedUrl);
   }, [parsedUrl]);
 
-  const onFormChange = () => {
+  const onFormChange = async () => {
     const values = form.getFieldsValue();
     const errors = form.getFieldsError();
     const hasErrors = errors.some((e) => e.errors.length);
+
     try {
       if (!hasErrors) {
         const url = new URL('test://test.com');
-        console.log({ values });
 
         const searchParams = values.searchParams;
         let validatedSearchParams = [];
@@ -68,6 +54,8 @@ export const UriEditor = ({ parsedUrl, onChange }) => {
           hash,
           searchParams: validatedSearchParams,
         });
+      } else {
+        console.log('ignored');
       }
     } catch (ex) {
       console.log('ignored', ex);
@@ -76,7 +64,11 @@ export const UriEditor = ({ parsedUrl, onChange }) => {
 
   return (
     <div>
-      <Form form={form} onFieldsChange={onFormChange}>
+      <Form
+        form={form}
+        onBlur={onFormChange}
+        onKeyDown={(e) => e.key === 'Enter' && onFormChange()}
+      >
         <div className={styles.urlEditSectionHeader}>Protocol</div>
         <FormField
           name="protocol"
@@ -142,6 +134,10 @@ export const UriEditor = ({ parsedUrl, onChange }) => {
             name="pathname"
             rules={[
               { pattern: /^\//, message: 'Pathname should start with /' },
+              {
+                pattern: /^[^\s]*$/,
+                message: 'Pathname cannot contain spaces',
+              },
             ]}
           >
             <input className={styles.editableField} />
@@ -170,7 +166,9 @@ export const UriEditor = ({ parsedUrl, onChange }) => {
                   ))}
 
                   <div>
-                    <button onClick={() => add(['', ''])}>Add Param</button>
+                    <button type="button" onClick={() => add(['', ''])}>
+                      Add Param
+                    </button>
                   </div>
                 </>
               );
@@ -180,121 +178,20 @@ export const UriEditor = ({ parsedUrl, onChange }) => {
 
         <div className={styles.urlEditSectionHeader}>Hash</div>
         <div>
-          <FormField name="hash">
+          <FormField
+            name="hash"
+            rules={[
+              {
+                whitespace: true,
+                pattern: /^[^\s]*$/,
+                message: 'Hash cannot contain spaces',
+              },
+            ]}
+          >
             <input className={styles.editableField} />
           </FormField>
         </div>
       </Form>
-      {/* <Formik
-        onSubmit={(e) => console.log(e)}
-        validationSchema={urlValidationSchema}
-        initialValues={{
-          protocol,
-          username,
-          password,
-          hostname,
-          pathname,
-          hash,
-          port,
-          searchParams,
-        }}
-        enableReinitialize
-      >
-        {({ values }) => {
-          return (
-            <Form>
-              {protocol && (
-                <>
-                  <div className={styles.urlEditSectionHeader}>Protocol</div>
-                  <div>
-                    <FormikField
-                      name="protocol"
-                      className={styles.editableField}
-                    />
-                  </div>
-                </>
-              )}
-
-              <div className={styles.urlEditSectionHeader}>Authentication</div>
-              <div className={styles.row}>
-                <div className={styles.column}>
-                  <div className={styles.label}>Username</div>
-                  <FormikField
-                    name="username"
-                    className={styles.editableField}
-                  />
-                </div>
-                <div className={styles.column}>
-                  <div className={styles.label}>Password</div>
-                  <FormikField
-                    name="password"
-                    className={styles.editableField}
-                  />
-                </div>
-              </div>
-
-              <div className={styles.urlEditSectionHeader}>Host</div>
-              <div className={styles.row}>
-                <div className={styles.column}>
-                  <div className={styles.label}>Hostname</div>
-                  <FormikField
-                    name="hostname"
-                    className={styles.editableField}
-                  />
-                </div>
-                <div className={styles.column}>
-                  <div className={styles.label}>Port</div>
-                  <FormikField name="port" className={styles.editableField} />
-                </div>
-              </div>
-
-              <div className={styles.urlEditSectionHeader}>Pathname</div>
-              <div>
-                <FormikField name="pathname" className={styles.editableField} />
-              </div>
-
-              <div className={styles.urlEditSectionHeader}>Search Params</div>
-              <FieldArray name="searchParams">
-                {({ push }) => {
-                  {
-                    return (
-                      <>
-                        {values.searchParams.map((s, i) => (
-                          <div className={styles.row} key={i}>
-                            <div className={styles.column}>
-                              <FormikField
-                                name={`searchParams.${i}.0`}
-                                className={styles.editableField}
-                              />
-                            </div>
-                            <div className={styles.column}>
-                              <FormikField
-                                name={`searchParams.${i}.1`}
-                                className={styles.editableField}
-                              />
-                            </div>
-                          </div>
-                        ))}
-
-                        <div>
-                          <button onClick={() => push(['', ''])}>
-                            Add Param
-                          </button>
-                        </div>
-                      </>
-                    );
-                  }
-                }}
-              </FieldArray>
-
-              <div className={styles.urlEditSectionHeader}>Hash</div>
-              <div>
-                <FormikField className={styles.editableField} name="hash" />
-              </div>
-            </Form>
-          );
-        }}
-      </Formik> */}
     </div>
   );
 };

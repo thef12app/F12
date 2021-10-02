@@ -6,7 +6,8 @@ const utilList = [
   },
   {
     name: 'JWT Encoder / Decoder',
-    path: 'jwt-encoder',
+    path: 'jwt-decoder',
+    componentName: 'JwtEncoderDecoder',
   },
   {
     name: 'Keycode Finder',

@@ -1,0 +1,35 @@
+.pageContainer {
+  width: 800px;
+  max-width: 100%;
+  margin: auto;
+}
+.timeInputWrapper {
+  text-align: center;
+  padding: 18px 0;
+
+  input {
+    padding: 8px;
+    width: 200px;
+    font-size: 18px;
+    text-align: center;
+  }
+}
+.mainTimeZonesContainer {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+
+.titleBar {
+  background-color: #555;
+  color: #eee;
+  padding: 8px;
+  border-radius: 4px 4px 0 0;
+}
+
+.time {
+  border: 1px solid #eee;
+  border-top: 0;
+  padding: 8px;
+  border-radius: 0 0 4px 4px;
+}

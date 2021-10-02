@@ -22,6 +22,7 @@ const utilList = [
   {
     name: 'Unix Time Converter',
     path: 'unix-time-converter',
+    componentName: 'UnixTimeConverter',
   },
   {
     name: 'Base64 Encoder / Decoder',

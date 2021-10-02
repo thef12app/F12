@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Layout.module.scss';
+import { utilList } from '../../pages/Utils/util-list';
+import arrowIcon from '../../assets/icons/arrow.png';
 
 export const Layout = ({ children, actions }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggle = () => setMenuOpen(!menuOpen);
+
   return (
     <div>
       <div className={styles.header}>
-        <div className={styles.title}>F12</div>
+        <div className={styles.title}>
+          F12
+          <span className={styles.dropdownArrow} onClick={toggle}>
+            <img src={arrowIcon} />
+          </span>
+          {menuOpen && (
+            <div className={styles.menu}>
+              {utilList
+                .filter((u) => u.componentName)
+                .map((u) => (
+                  <a href={`${u.path}.html`}>{u.name}</a>
+                ))}
+            </div>
+          )}
+        </div>
         <div>{actions}</div>
       </div>
       <div className={styles.content}>{children}</div>

@@ -5,6 +5,45 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 8px;
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  z-index: 9;
+  background: white;
+  border-radius: 8px;
+  left: 0;
+  top: 100%;
+  padding: 8px 0;
+  transform: translate(15px, 5px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  animation: 0.4s fade-in;
+
+  a {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #303030;
+    transition: 0.4s ease all;
+    letter-spacing: normal;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+}
+
+.dropdownArrow {
+  margin-left: 8px;
+  opacity: 0.8;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .title {
@@ -27,4 +66,14 @@
   padding: 5px 16px;
   text-align: center;
   background-color: #303030;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

@@ -53,6 +53,13 @@ export const Layout = ({ children, actions }) => {
         <a href="https://www.buymeacoffee.com/thef12app" target="_blank">
           <img src="https://img.buymeacoffee.com/button-api/?text=Buy us a coffee&emoji=&slug=thef12app&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" />
         </a>
+        <a
+          href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
+          target="_blank"
+          className={styles.featureRequestLink}
+        >
+          Request for a feature
+        </a>
       </div>
     </div>
   );

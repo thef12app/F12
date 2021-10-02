@@ -84,6 +84,14 @@
   background-color: #303030;
 }
 
+.featureRequestLink {
+  color: white;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0.5;

@@ -5,7 +5,7 @@ const utilList = [
     componentName: 'JsonFormat',
   },
   {
-    name: 'JWT Encoder / Decoder',
+    name: 'JWT Decoder',
     path: 'jwt-decoder',
     componentName: 'JwtEncoderDecoder',
   },

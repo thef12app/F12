@@ -25,7 +25,8 @@ const utilList = [
   },
   {
     name: 'Base64 Encoder / Decoder',
-    path: 'base64-encoder',
+    path: 'base64',
+    componentName: 'Base64',
   },
 ];
 

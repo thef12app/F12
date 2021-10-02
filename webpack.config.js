@@ -26,7 +26,7 @@ const utilPages = utilList
       filename: `${util.path}.html`,
       chunks: [util.componentName],
       cache: false,
-      title: 'JSON Formatter | DevApp',
+      title: `${util.name} | F12`,
     });
   });
 
@@ -114,11 +114,6 @@ var options = {
       {
         test: /\.svg$/,
         loader: '@svgr/webpack',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.html$/,
-        loader: 'html-loader',
         exclude: /node_modules/,
       },
       { test: /\.(ts|tsx)$/, loader: 'ts-loader', exclude: /node_modules/ },

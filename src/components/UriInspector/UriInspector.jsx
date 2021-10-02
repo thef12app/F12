@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import URL from 'url-parse';
 
 import { iteratorToArray } from '../../utils';
+import { Layout } from '../Layout/Layout';
 import styles from './UriInspector.module.scss';
 import { UriPartsRenderer } from './UriPartsRenderer';
 import { UriEditor } from './UriEditor';
@@ -17,7 +18,7 @@ export const UriInspector = () => {
 
     if (_url) {
       try {
-        if (!/^[a-z]+:\/\//.test(_url)) {
+        if (!/^[a-z][a-z,\-,\.]*:\/\//.test(_url)) {
           throw new Error('Invalid URL');
         }
 
@@ -58,32 +59,34 @@ export const UriInspector = () => {
   useEffect(() => parseUrl(url, true), [url]);
 
   return (
-    <div className={styles.pageWrapper}>
-      <div className={styles.uriInputWrapper}>
-        <textarea
-          name="url-input"
-          className={styles.uriInput}
-          rows={4}
-          placeholder="Paste your URL here..."
-          autoFocus
-          onChange={(e) => setUrl(e.target.value)}
-          onKeyDown={onKeyDown}
-        ></textarea>
+    <Layout>
+      <div className={styles.pageWrapper}>
+        <div className={styles.uriInputWrapper}>
+          <textarea
+            name="url-input"
+            className={styles.uriInput}
+            rows={4}
+            placeholder="Paste your URL here..."
+            autoFocus
+            onChange={(e) => setUrl(e.target.value)}
+            onKeyDown={onKeyDown}
+          ></textarea>
+        </div>
+        <button className={styles.parseBtn} onClick={() => parseUrl()}>
+          Inspect [Enter]
+        </button>
+
+        {parseError && <div className={styles.parseError}>{parseError}</div>}
+
+        {parsedUrl && <UriPartsRenderer parsedUrl={parsedUrl} />}
+
+        {parsedUrl && (
+          <UriEditor
+            parsedUrl={parsedUrl}
+            onChange={(val) => setParsedUrl(val)}
+          />
+        )}
       </div>
-      <button className={styles.parseBtn} onClick={() => parseUrl()}>
-        Inspect [Enter]
-      </button>
-
-      {parseError && <div className={styles.parseError}>{parseError}</div>}
-
-      {parsedUrl && <UriPartsRenderer parsedUrl={parsedUrl} />}
-
-      {parsedUrl && (
-        <UriEditor
-          parsedUrl={parsedUrl}
-          onChange={(val) => setParsedUrl(val)}
-        />
-      )}
-    </div>
+    </Layout>
   );
 };

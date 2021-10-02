@@ -165,7 +165,7 @@ export const UriEditor = ({ parsedUrl, onChange }) => {
                     </div>
                   ))}
 
-                  <div>
+                  <div className={styles.addParamBtnContainer}>
                     <button type="button" onClick={() => add(['', ''])}>
                       Add Param
                     </button>

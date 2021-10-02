@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "DevApp",
+  "name": "F12",
   "options_page": "options.html",
   "action": {
     "default_popup": "popup.html",
@@ -11,7 +11,11 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["content.styles.css", "icon-128.png", "icon-34.png"],
+      "resources": [
+        "content.styles.css",
+        "icon-128.png",
+        "icon-34.png"
+      ],
       "matches": []
     }
   ]

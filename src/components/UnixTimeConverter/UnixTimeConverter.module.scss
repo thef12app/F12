@@ -3,21 +3,58 @@
   max-width: 100%;
   margin: auto;
 }
+
 .timeInputWrapper {
   text-align: center;
   padding: 18px 0;
+  width: 220px;
+  margin: auto;
 
   input {
     padding: 8px;
-    width: 200px;
+    width: 100%;
     font-size: 18px;
     text-align: center;
   }
 }
-.mainTimeZonesContainer {
+
+.tzInput {
+  padding: 8px;
+  width: 100%;
+}
+
+.tzMenuItem {
+  padding: 16px;
+  cursor: pointer;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #ddd;
+
+  &:hover {
+    background-color: #eee;
+  }
+}
+
+.timeZonesContainer {
   display: flex;
   gap: 18px;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+.divider {
+  border: 1px solid #f6f6f6;
+  margin: 18px;
+}
+
+.removeBtn {
+  padding: 2px;
+  font-size: 10px;
+  display: none;
+  float: right;
+}
+
+.titleBar:hover .removeBtn {
+  display: inline;
 }
 
 .titleBar {

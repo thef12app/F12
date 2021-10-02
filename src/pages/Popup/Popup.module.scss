@@ -12,12 +12,6 @@
   overflow: auto;
 }
 
-.menuList:hover {
-  .menuItem.selectedMenu {
-    background-color: #fafaff;
-  }
-}
-
 .menuItem {
   padding: 8px;
   background-color: #fafaff;
@@ -37,7 +31,17 @@
 
 .menuTitle {
   font-size: 18px;
-  font-weight: 100;
+  background-color: #303030;
+  margin: -16px;
+  margin-bottom: 0;
+  padding: 4px 16px;
+  color: #f0f0f0;
+  font-weight: 300;
+}
+
+.subTitle {
+  font-size: 12px;
+  color: #bbb;
 }
 
 .menuSearchContainer {
@@ -59,4 +63,9 @@
   left: 0;
   padding: 0 16px;
   text-align: center;
+}
+
+.twelve {
+  color: #8c8cff;
+  font-weight: 400;
 }

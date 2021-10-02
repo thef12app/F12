@@ -47,9 +47,9 @@ const Popup = () => {
     <div className={styles.popupContainer}>
       <div className={styles.menuTitle}>
         <div>
-          F<span>12</span>
+          F<span className={styles.twelve}>12</span>
         </div>
-        <div>The all in one Dev Toolbox</div>
+        <div className={styles.subTitle}>The all in one Dev Toolbox</div>
       </div>
       <div className={styles.menuSearchContainer}>
         <input

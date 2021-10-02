@@ -8,7 +8,6 @@ export const JwtEncoderDecoder = () => {
   const [errDecoding, setErrDecoding] = useState(false);
 
   const decodeJWT = (token) => {
-    console.log('decoding');
     try {
       const decoded = jwt_decode(token);
       const decodedHeader = jwt_decode(token, { header: true });
@@ -25,18 +24,24 @@ export const JwtEncoderDecoder = () => {
   };
 
   return (
-    <div className={style.row}>
-      <textarea
-        style={{ background: errDecoding ? '#ffc0ca' : '', marginLeft: '15px' }}
-        placeholder="Enter JWT Token to Decode"
-        onChange={(e) => decodeJWT(e.target.value)}
-        defaultValue=""
-      ></textarea>
-      <textarea
-        readOnly
-        value={!errDecoding ? decode : 'Enter Valid JWT Decoding'}
-        defaultValue=""
-      ></textarea>
-    </div>
+    <>
+      <span className={style.heading}>JWT Decoder</span>
+      <div className={style.row}>
+        <textarea
+          style={{
+            background: errDecoding ? '#ffc0ca' : '',
+            marginLeft: '15px',
+          }}
+          placeholder="Enter JWT Token to Decode"
+          onChange={(e) => decodeJWT(e.target.value)}
+          defaultValue=""
+        ></textarea>
+        <textarea
+          readOnly
+          value={!errDecoding ? decode : 'Invalid JWT! Enter Valid JWT'}
+          defaultValue=""
+        ></textarea>
+      </div>
+    </>
   );
 };

@@ -45,7 +45,12 @@ const Popup = () => {
 
   return (
     <div className={styles.popupContainer}>
-      <div className={styles.menuTitle}>DevApp</div>
+      <div className={styles.menuTitle}>
+        <div>
+          F<span>12</span>
+        </div>
+        <div>The all in one Dev Toolbox</div>
+      </div>
       <div className={styles.menuSearchContainer}>
         <input
           autoFocus

@@ -6,6 +6,7 @@ import { useRef, useEffect } from 'react';
 import { editor as monacoEditor } from 'monaco-editor';
 import styles from './JsonFormat.module.scss';
 import copy from 'copy-to-clipboard';
+import { Layout } from '../Layout/Layout';
 
 export const JsonFormat = () => {
   const editorRoot = useRef(null);
@@ -30,6 +31,7 @@ export const JsonFormat = () => {
         minimap: {
           enabled: false,
         },
+        automaticLayout: true,
       });
       monaco.setValue(`
         {
@@ -55,12 +57,17 @@ export const JsonFormat = () => {
     }
   };
   return (
-    <div className={styles.jsonEditor}>
-      <div className={styles.actionBtnContainer}>
-        <button onClick={copyToClipboard}>Copy to Clipboard</button>
-        <button onClick={format}>Format</button>
+    <Layout
+      actions={
+        <div className={styles.actionBtnContainer}>
+          <button onClick={copyToClipboard}>Copy to Clipboard</button>
+          <button onClick={format}>Format</button>
+        </div>
+      }
+    >
+      <div className={styles.jsonEditor}>
+        <div ref={editorRoot} className={styles.editorRoot}></div>
       </div>
-      <div ref={editorRoot} className={styles.editorRoot}></div>
-    </div>
+    </Layout>
   );
 };

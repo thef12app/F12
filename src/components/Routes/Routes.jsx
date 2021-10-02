@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { JsonFormat } from '../JsonFormat/JsonFormat';
 import { KeyCodeFinder } from '../KeyCodeFinder';
 import { UriInspector } from '../UriInspector/UriInspector';
+import { JwtEncoderDecoder } from '../JwtEncoderDecoder/JwtEncoderDecoder';
 
 export const Routes = () => {
   return (
@@ -11,6 +12,7 @@ export const Routes = () => {
       <Route path="/json-formatter" component={JsonFormat} />
       <Route path="/keycode-finder" component={KeyCodeFinder} />
       <Route path="/url-inspector" component={UriInspector} />
+      <Route path="/jwt-decoder" component={JwtEncoderDecoder} />
       <Route render={() => <div>Coming soon...</div>} />
     </Switch>
   );

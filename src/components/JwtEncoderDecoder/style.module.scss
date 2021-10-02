@@ -1,0 +1,18 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 75%;
+  align-items: center;
+
+  textarea {
+    width: 85%;
+    margin-right: 5%;
+    min-height: 45vh;
+    padding: 10px;
+    font-size: 16px;
+    border-color: #ccc;
+  }
+}

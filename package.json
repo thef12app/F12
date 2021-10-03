@@ -1,8 +1,7 @@
 {
-  "name": "dev-app",
-  "version": "4.0.1",
+  "name": "f12",
+  "version": "1.0.0",
   "description": "A chrome extension to help a developer's life tab bit easier",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": ""
@@ -32,8 +31,7 @@
     "react-dom": "^17.0.1",
     "react-hot-loader": "^4.13.0",
     "react-router-dom": "^5.3.0",
-    "url-parse": "^1.5.3",
-    "yup": "^0.32.9"
+    "url-parse": "^1.5.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.17",

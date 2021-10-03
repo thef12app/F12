@@ -1,7 +1,6 @@
 {
   "manifest_version": 3,
   "name": "F12",
-  "options_page": "options.html",
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon-34.png"

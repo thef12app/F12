@@ -1,4 +1,5 @@
 import React, { createRef, useState, useEffect } from 'react';
+import { Layout } from '../Layout/Layout';
 import style from './style.module.scss';
 
 export const Base64 = () => {
@@ -29,8 +30,7 @@ export const Base64 = () => {
     setResult(encodedValue);
   };
   return (
-    <>
-      <span className={style.heading}>Base64 Encoder Decoder</span>
+    <Layout title={'Base64 Encoder Decoder'}>
       <div style={{ marginTop: '25px' }}>
         <div className={style.buttonGroup}>
           <button
@@ -61,6 +61,6 @@ export const Base64 = () => {
         />
         <textarea placeholder="" value={result} readOnly />
       </div>
-    </>
+    </Layout>
   );
 };

@@ -89,7 +89,7 @@ export const UnixTimeConverter = () => {
   };
 
   return (
-    <Layout>
+    <Layout title={'Unix Time Converter'}>
       <div className={styles.pageContainer}>
         <div className={styles.timeInputWrapper}>
           <h5>Enter Unix Time String</h5>

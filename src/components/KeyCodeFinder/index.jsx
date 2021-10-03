@@ -47,7 +47,7 @@ export const KeyCodeFinder = () => {
     setKeyCode(keyCode);
   };
   return (
-    <Layout>
+    <Layout title={'Keycode Finder'}>
       <div className={style.keycodeContainer}>
         {keyCode && (
           <div className={style.keycodeCard}>

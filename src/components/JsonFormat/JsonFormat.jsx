@@ -64,6 +64,7 @@ export const JsonFormat = () => {
           <button onClick={format}>Format</button>
         </div>
       }
+      title={'JSON Formatter'}
     >
       <div className={styles.jsonEditor}>
         <div ref={editorRoot} className={styles.editorRoot}></div>

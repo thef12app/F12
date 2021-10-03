@@ -4,7 +4,7 @@ import { utilList as _utilList } from '../../pages/Utils/util-list';
 
 const utilList = _utilList.filter((u) => u.componentName);
 
-export const Layout = ({ children, actions }) => {
+export const Layout = ({ children, actions, title }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setTextSearch] = useState('');
 
@@ -28,7 +28,9 @@ export const Layout = ({ children, actions }) => {
   return (
     <div>
       <div className={styles.header}>
-        <div className={styles.title}>F12</div>
+        <div className={styles.title}>
+          F12 {title && <span className={styles.appTitle}>{title}</span>}
+        </div>
         <div className={styles.searchContainer}>
           <input
             type="text"
@@ -41,7 +43,9 @@ export const Layout = ({ children, actions }) => {
           {menuOpen && (
             <div className={styles.menu}>
               {filteredMenu.map((u) => (
-                <a href={`${u.path}.html`}>{u.name}</a>
+                <a href={`${u.path}.html`} key={u.path}>
+                  {u.name}
+                </a>
               ))}
             </div>
           )}

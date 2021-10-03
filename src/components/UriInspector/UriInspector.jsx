@@ -59,7 +59,7 @@ export const UriInspector = () => {
   useEffect(() => parseUrl(url, true), [url]);
 
   return (
-    <Layout>
+    <Layout title={'URI Inspector'}>
       <div className={styles.pageWrapper}>
         <div className={styles.uriInputWrapper}>
           <textarea

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import jwt_decode from 'jwt-decode';
 
+import { Layout } from '../Layout/Layout';
 import style from './style.module.scss';
 
 export const JwtEncoderDecoder = () => {
@@ -24,8 +25,7 @@ export const JwtEncoderDecoder = () => {
   };
 
   return (
-    <>
-      <span className={style.heading}>JWT Decoder</span>
+    <Layout title={'JWT Decoder'}>
       <div className={style.row}>
         <textarea
           style={{
@@ -42,6 +42,6 @@ export const JwtEncoderDecoder = () => {
           defaultValue=""
         ></textarea>
       </div>
-    </>
+    </Layout>
   );
 };

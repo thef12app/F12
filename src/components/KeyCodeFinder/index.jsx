@@ -28,8 +28,6 @@ export const KeyCodeFinder = () => {
     };
     if (event.isComposing || event.keyCode === 229) return;
 
-    event.preventDefault();
-
     const keyCode = {
       location: location,
       renderedLocation: keyLocations[location],

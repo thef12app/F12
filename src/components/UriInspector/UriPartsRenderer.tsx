@@ -3,7 +3,10 @@ import copyToClipboard from 'copy-to-clipboard';
 import styles from './UriInspector.module.scss';
 import { composeURL } from '../../utils';
 
-export const UriPartsRenderer = ({ parsedUrl }) => {
+export interface UriPartsRendererProps {
+  parsedUrl: any
+}
+export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({ parsedUrl }) => {
   const {
     protocol,
 
@@ -25,7 +28,7 @@ export const UriPartsRenderer = ({ parsedUrl }) => {
           ? ''
           : parsedUrl.pathname
               .split('/')
-              .map((p) => encodeURIComponent(p))
+              .map((p: string) => encodeURIComponent(p))
               .join('/'),
       username: parsedUrl.username && encodeURIComponent(parsedUrl.username),
       password: parsedUrl.password && encodeURIComponent(parsedUrl.password),
@@ -33,8 +36,8 @@ export const UriPartsRenderer = ({ parsedUrl }) => {
         parsedUrl.searchParams &&
         !!parsedUrl.searchParams.length &&
         parsedUrl.searchParams
-          .filter(([k]) => k)
-          .map(([k, v]) => [encodeURIComponent(k), encodeURIComponent(v)]),
+          .filter(([k]: [string]) => k)
+          .map(([k, v]: [string, string]) => [encodeURIComponent(k), encodeURIComponent(v)]),
     };
   }, [parsedUrl]);
 
@@ -50,7 +53,7 @@ export const UriPartsRenderer = ({ parsedUrl }) => {
         search:
           searchParams &&
           searchParams.length &&
-          '?' + searchParams.map(([k, v]) => `${k}${v && '=' + v}`).join('&'),
+          '?' + searchParams.map(([k, v]: [string, string]) => `${k}${v && '=' + v}`).join('&'),
         hash,
       })
     );
@@ -84,7 +87,7 @@ export const UriPartsRenderer = ({ parsedUrl }) => {
         <span>
           ?
           <span>
-            {searchParams.map((p, i, list) => (
+            {(searchParams as [string, string][]).map((p, i, list) => (
               <React.Fragment key={i}>
                 <span className={styles.urlPart}>
                   {p[0]}

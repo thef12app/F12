@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { Field } from 'rc-field-form';
 
 import styles from './FormField.module.scss';
+import { FieldProps } from 'rc-field-form/es/Field';
 
-export const FormField = ({ name, children, ...restProps }) => {
+export interface FormFieldProps extends FieldProps {
+}
+
+export const FormField: React.FC<FormFieldProps> = ({ name, children, ...restProps }) => {
   return (
     <>
       <Field {...restProps} name={name}>
@@ -11,7 +15,7 @@ export const FormField = ({ name, children, ...restProps }) => {
           const childNode =
             typeof children === 'function'
               ? children(control, meta, form)
-              : React.cloneElement(children, {
+              : React.cloneElement(children as React.ReactElement, {
                   ...control,
                 });
 

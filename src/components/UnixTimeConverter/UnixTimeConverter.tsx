@@ -7,9 +7,9 @@ import { timeZones } from './timezones';
 
 const dateFormat = 'dd-MM-yyyy HH:mm:ss z';
 export const UnixTimeConverter = () => {
-  const [unixTime, setUnixTime] = useState();
+  const [unixTime, setUnixTime] = useState<string>('');
   const [tzSearchText, setTzSearchText] = useState('');
-  const [pinnedTimezones, setPinnedTimezones] = useState([]);
+  const [pinnedTimezones, setPinnedTimezones] = useState<any[]>([]);
 
   useEffect(() => {
     const pinned = localStorage.getItem('pinned_timezones');
@@ -68,7 +68,7 @@ export const UnixTimeConverter = () => {
     }
   }, [unixTime, pinnedTimezones]);
 
-  const addTZ = (tz) => {
+  const addTZ = (tz: string) => {
     if (pinnedTimezones.includes(tz)) {
       return;
     }
@@ -78,7 +78,7 @@ export const UnixTimeConverter = () => {
     localStorage.setItem('pinned_timezones', JSON.stringify(pinned));
   };
 
-  const removeTz = (tz) => {
+  const removeTz = (tz: string) => {
     if (!pinnedTimezones.includes(tz)) {
       return;
     }

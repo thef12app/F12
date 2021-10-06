@@ -13,16 +13,16 @@ const Popup = () => {
         ),
     [searchTerm]
   );
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
 
-  const openApp = (file) => {
+  const openApp = (file: string) => {
     chrome.tabs.create({
       url: `${file}.html`,
     });
   };
 
-  const onSearchChange = (evt) => {
-    setSearchTerm(evt.target.value);
+  const onSearchChange: React.KeyboardEventHandler<HTMLInputElement> = (evt) => {
+    setSearchTerm((evt.target as any).value);
 
     if (evt.key === 'Enter' && selectedItem < list.length) {
       openApp(list[selectedItem].path);

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import styles from './Layout.module.scss';
 import { utilList as _utilList } from '../../pages/Utils/util-list';
 
@@ -6,7 +6,12 @@ import ratingIcon from '../../assets/img/ratings.png';
 
 const utilList = _utilList.filter((u) => u.componentName);
 
-export const Layout = ({ children, actions, title }) => {
+export interface LayoutProps {
+  actions?: React.ReactNode;
+  title?: string;
+}
+
+export const Layout: React.FC<LayoutProps> = ({ children, actions, title }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchText, setTextSearch] = useState('');
 
@@ -20,12 +25,12 @@ export const Layout = ({ children, actions, title }) => {
 
   const openMenu = useCallback(() => {
     setMenuOpen(true);
-  });
+  }, []);
   const closeMenu = useCallback(() => {
     setTimeout(() => {
       setMenuOpen(false);
     }, 300);
-  });
+  }, []);
 
   return (
     <div>

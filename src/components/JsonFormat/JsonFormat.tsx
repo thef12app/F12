@@ -10,19 +10,23 @@ import { Layout } from '../Layout/Layout';
 
 export const JsonFormat = () => {
   const editorRoot = useRef(null);
-  const [editor, setEditor] = useState();
+  const [editor, setEditor] = useState<monacoEditor.IStandaloneCodeEditor>();
 
   const format = () => {
-    const value = editor.getValue().trim();
-    const formatted = formatWithPrettier(value);
-    if (value != formatted) {
-      editor.setValue(formatted);
+    if (editor) {
+      const value = editor.getValue().trim();
+      const formatted = formatWithPrettier(value);
+      if (value != formatted) {
+        editor.setValue(formatted);
+      }
     }
   };
 
   const copyToClipboard = () => {
-    const value = editor.getValue();
-    copy(value);
+    if (editor) {
+      const value = editor.getValue();
+      copy(value);
+    }
   };
 
   useEffect(() => {
@@ -44,7 +48,7 @@ export const JsonFormat = () => {
     }
   }, []);
 
-  const formatWithPrettier = (value) => {
+  const formatWithPrettier = (value: string) => {
     try {
       const formatted = prettier.format(value, {
         parser: 'json',

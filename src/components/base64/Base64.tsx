@@ -7,20 +7,20 @@ export const Base64 = () => {
   const [value, setValue] = useState('');
   const [result, setResult] = useState('');
   const [error, setError] = useState(false);
-  const ref = createRef();
+  // const ref = createRef();
 
   useEffect(() => {
-    ref.current.focus();
+    // ref.current.focus();
   }, []);
 
-  const encodeDecode = (value) => {
+  const encodeDecode = (value: string) => {
     let encodedValue;
     if (encode) {
-      encodedValue = btoa(value);
+      encodedValue = window.btoa(value);
       setError(false);
     } else {
       try {
-        encodedValue = atob(value);
+        encodedValue = window.atob(value);
         setError(false);
       } catch (er) {
         encodedValue = 'Invalid Base64 String';
@@ -49,7 +49,7 @@ export const Base64 = () => {
       </div>
       <div className={style.row}>
         <textarea
-          ref={ref}
+          autoFocus
           style={{
             background: error ? '#ffc0ca' : 'white',
             marginLeft: '10px',

@@ -9,7 +9,11 @@ import { iteratorToArray } from '../../utils';
 
 const u = new URL('h://test.com');
 
-export const UriEditor = ({ parsedUrl, onChange }) => {
+export interface UriEditorProps {
+  parsedUrl: any;
+  onChange: (val: any) => void;
+}
+export const UriEditor: React.FC<UriEditorProps> = ({ parsedUrl, onChange }) => {
   const [form] = useForm();
 
   useEffect(() => {
@@ -29,7 +33,7 @@ export const UriEditor = ({ parsedUrl, onChange }) => {
         let validatedSearchParams = [];
         if (searchParams?.length) {
           const parsedSearchParams = new URLSearchParams();
-          searchParams.forEach((p) => parsedSearchParams.append(p[0], p[1]));
+          searchParams.forEach((p: [k: string, v: string]) => parsedSearchParams.append(p[0], p[1]));
           validatedSearchParams = iteratorToArray(parsedSearchParams.entries());
         }
 

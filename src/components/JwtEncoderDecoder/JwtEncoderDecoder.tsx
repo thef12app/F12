@@ -8,7 +8,7 @@ export const JwtEncoderDecoder = () => {
   const [decode, setDecode] = useState('');
   const [errDecoding, setErrDecoding] = useState(false);
 
-  const decodeJWT = (token) => {
+  const decodeJWT = (token: string) => {
     try {
       const decoded = jwt_decode(token);
       const decodedHeader = jwt_decode(token, { header: true });

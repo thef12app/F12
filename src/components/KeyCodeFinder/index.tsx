@@ -4,7 +4,7 @@ import { Layout } from '../Layout/Layout';
 
 export const KeyCodeFinder = () => {
   const containerRef = createRef();
-  const [keyCode, setKeyCode] = useState(null);
+  const [keyCode, setKeyCode] = useState<any>(null);
 
   useEffect(() => {
     document.body.onkeydown = (e) => captureKey(e);
@@ -18,7 +18,7 @@ export const KeyCodeFinder = () => {
     };
   }, []);
 
-  const captureKey = (event) => {
+  const captureKey = (event: KeyboardEvent) => {
     const { metaKey, location, code, key, altKey } = event;
     const keyLocations = {
       0: 'General keys',
@@ -30,7 +30,7 @@ export const KeyCodeFinder = () => {
 
     const keyCode = {
       location: location,
-      renderedLocation: keyLocations[location],
+      renderedLocation: keyLocations[location as 1 | 2 | 3 | 0],
       renderedCode: `${code} `,
       code,
       key,

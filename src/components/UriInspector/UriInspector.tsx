@@ -10,7 +10,7 @@ import { UriEditor } from './UriEditor';
 export const UriInspector = () => {
   const [url, setUrl] = useState('');
   const [parseError, setParseError] = useState(null);
-  const [parsedUrl, setParsedUrl] = useState(null);
+  const [parsedUrl, setParsedUrl] = useState<any>(null);
 
   const parseUrl = (_url = url, silent = false) => {
     setParseError(null);
@@ -26,7 +26,7 @@ export const UriInspector = () => {
 
         const { protocol, username, password, hostname, port, pathname, hash } =
           parsed;
-        const searchParamsObject = new URLSearchParams(parsed.query || '');
+        const searchParamsObject = new URLSearchParams((parsed.query as any) || '');
         const searchParams = iteratorToArray(searchParamsObject.entries());
         setParsedUrl({
           protocol: protocol.replace(/\:$/, ''),
@@ -42,17 +42,17 @@ export const UriInspector = () => {
           searchParams,
           hash,
         });
-      } catch (ex) {
+      } catch (ex: any) {
         console.error(ex);
         if (!silent) setParseError(ex.message);
       }
     }
   };
 
-  const onKeyDown = (e) => {
+  const onKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      parseUrl(e.target.value);
+      parseUrl((e.target as any).value);
     }
   };
 

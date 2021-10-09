@@ -11,6 +11,8 @@ export const UnixTimeConverter = () => {
   const [tzSearchText, setTzSearchText] = useState('');
   const [pinnedTimezones, setPinnedTimezones] = useState<any[]>([]);
 
+  const setCurrentTime = () => setUnixTime('' + Date.now());
+
   useEffect(() => {
     const pinned = localStorage.getItem('pinned_timezones');
     if (pinned) {
@@ -98,7 +100,11 @@ export const UnixTimeConverter = () => {
             placeholder="E.g. 1633197049977"
             autoFocus
             onChange={(e) => setUnixTime(e.target.value)}
+            value={unixTime}
           />
+          <button onClick={setCurrentTime} style={{ marginTop: 8 }}>
+            Use Current Time
+          </button>
         </div>
         {localTime && utcTime && (
           <>

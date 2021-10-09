@@ -1,0 +1,41 @@
+.content {
+  margin: 16px;
+}
+
+.result {
+  height: 400px;
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+  position: relative;
+
+  .imageContainer {
+    width: 50%;
+    height: 100%;
+    background-color: #eee;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      border-radius: 8px;
+    }
+  }
+
+  textarea {
+    width: 50%;
+    height: 100%;
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  .copyButton {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+  }
+}

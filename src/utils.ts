@@ -1,4 +1,4 @@
-export const iteratorToArray = (it) => {
+export const iteratorToArray = (it: Iterator<any, any, any>) => {
   const arr = [];
 
   let result = it.next();
@@ -10,7 +10,7 @@ export const iteratorToArray = (it) => {
   return arr;
 };
 
-export const composeURL = (url) => {
+export const composeURL = (url: any) => {
   const urlConstructed = [
     url.protocol,
     '://',
@@ -29,4 +29,33 @@ export const composeURL = (url) => {
     .join('');
 
   return urlConstructed;
+};
+
+export const fileToDataURI = (file: File) => {
+  const reader = new FileReader();
+
+  return new Promise<string>((resolve, reject) => {
+    const removeHandlers = () => {
+      reader.removeEventListener('load', progressHandler);
+      reader.removeEventListener('error', progressHandler);
+    };
+
+    const progressHandler = (evt: ProgressEvent<FileReader>) => {
+      if (evt.type === 'load') {
+        resolve(reader.result as string);
+      }
+
+      if (evt.type === 'error') {
+        reject(new Error(reader.error?.message || 'Unknown error'));
+      }
+
+      if (evt.type === 'load' || evt.type === 'error') {
+        removeHandlers();
+      }
+    };
+
+    reader.addEventListener('load', progressHandler);
+    reader.addEventListener('error', progressHandler);
+    reader.readAsDataURL(file);
+  });
 };

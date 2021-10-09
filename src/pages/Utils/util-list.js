@@ -29,6 +29,11 @@ const utilList = [
     path: 'base64',
     componentName: 'Base64',
   },
+  {
+    name: 'Image to Data URI',
+    path: 'image2DataUri',
+    componentName: 'ImageToDataURI',
+  },
 ];
 
 module.exports = {

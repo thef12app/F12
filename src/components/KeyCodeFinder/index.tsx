@@ -60,7 +60,11 @@ export const KeyCodeFinder = () => {
             </span>
           </div>
         )}
-        {!keyCode && <h3>Start pressing keys to get more info.</h3>}
+        {!keyCode && (
+          <h3 style={{ fontWeight: 600 }}>
+            Start pressing keys to get more info.
+          </h3>
+        )}
 
         {keyCode && (
           <div className={style.jsonObject}>

@@ -6,6 +6,7 @@ import { Layout } from '../Layout/Layout';
 import styles from './UriInspector.module.scss';
 import { UriPartsRenderer } from './UriPartsRenderer';
 import { UriEditor } from './UriEditor';
+import { Button } from 'antd';
 
 export const UriInspector = () => {
   const [url, setUrl] = useState('');
@@ -26,7 +27,9 @@ export const UriInspector = () => {
 
         const { protocol, username, password, hostname, port, pathname, hash } =
           parsed;
-        const searchParamsObject = new URLSearchParams((parsed.query as any) || '');
+        const searchParamsObject = new URLSearchParams(
+          (parsed.query as any) || ''
+        );
         const searchParams = iteratorToArray(searchParamsObject.entries());
         setParsedUrl({
           protocol: protocol.replace(/\:$/, ''),
@@ -72,9 +75,9 @@ export const UriInspector = () => {
             onKeyDown={onKeyDown}
           ></textarea>
         </div>
-        <button className={styles.parseBtn} onClick={() => parseUrl()}>
+        <Button type="primary" onClick={() => parseUrl()}>
           Inspect [Enter]
-        </button>
+        </Button>
 
         {parseError && <div className={styles.parseError}>{parseError}</div>}
 

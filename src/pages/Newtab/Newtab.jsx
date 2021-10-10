@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { MemoryRouter } from 'react-router-dom';
 import { random } from 'lodash';
+import { Button } from 'antd';
+
 import cn from 'classnames';
 import images from '../../../utils/pexels/image-cache.json';
 
@@ -37,9 +39,9 @@ const Newtab = () => {
       >
         {showUtils && (
           <>
-            <button className="close-btn" onClick={closeUtils}>
+            <Button className="close-btn" onClick={closeUtils}>
               <CloseIcon />
-            </button>
+            </Button>
             <div className="utils-wrapper">
               <Utils />
             </div>

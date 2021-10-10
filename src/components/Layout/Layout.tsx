@@ -40,29 +40,27 @@ export const Layout: React.FC<LayoutProps> = ({ children, actions, title }) => {
         title={<div className={styles.title}>F12</div>}
         subTitle={title && <span className={styles.appTitle}>{title}</span>}
         extra={[
-          <>
-            <div className={styles.searchContainer}>
-              <Input
-                allowClear
-                type="search"
-                placeholder="Search"
-                className={styles.search}
-                onFocus={openMenu}
-                onBlur={closeMenu}
-                onChange={(e) => setTextSearch(e.target.value)}
-              />
-              {menuOpen && (
-                <div className={styles.menu}>
-                  {filteredMenu.map((u) => (
-                    <a href={`${u.path}.html`} key={u.path}>
-                      {u.name}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div>{actions}</div>
-          </>,
+          <div>{actions}</div>,
+          <div className={styles.searchContainer}>
+            <Input
+              allowClear
+              type="search"
+              placeholder="Search"
+              className={styles.search}
+              onFocus={openMenu}
+              onBlur={closeMenu}
+              onChange={(e) => setTextSearch(e.target.value)}
+            />
+            {menuOpen && (
+              <div className={styles.menu}>
+                {filteredMenu.map((u) => (
+                  <a href={`${u.path}.html`} key={u.path}>
+                    {u.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>,
         ]}
       ></PageHeader>
       {/* <div className={styles.header}>

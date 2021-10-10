@@ -1,7 +1,8 @@
 const antdCustomTheme = {
-  'primary-color': '#742d74eb',
+  'primary-color': 'teal',
   'link-color': '#742d74eb',
   'border-radius-base': '4px',
+  'font-family': 'Poppins',
 };
 
 module.exports = antdCustomTheme;

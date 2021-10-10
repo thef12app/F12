@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import React, { createRef, useState, useEffect } from 'react';
 import { Layout } from '../Layout/Layout';
 import style from './style.module.scss';
@@ -33,18 +34,22 @@ export const Base64 = () => {
     <Layout title={'Base64 Encoder Decoder'}>
       <div style={{ marginTop: '25px' }}>
         <div className={style.buttonGroup}>
-          <button
+          <Button
+            size="large"
+            type="primary"
             className={encode ? 'enabled' : style.disabled}
             onClick={() => setEncode(true)}
           >
             Encode
-          </button>
-          <button
+          </Button>
+          <Button
+            size="large"
+            type="primary"
             className={!encode ? 'enabled' : style.disabled}
             onClick={() => setEncode(false)}
           >
             Decode
-          </button>
+          </Button>
         </div>
       </div>
       <div className={style.row}>

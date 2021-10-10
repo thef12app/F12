@@ -4,6 +4,7 @@ import { utcToZonedTime, format } from 'date-fns-tz';
 import { Layout } from '../Layout/Layout';
 import styles from './UnixTimeConverter.module.scss';
 import { timeZones } from './timezones';
+import { Button } from 'antd';
 
 const dateFormat = 'dd-MM-yyyy HH:mm:ss z';
 export const UnixTimeConverter = () => {
@@ -102,9 +103,13 @@ export const UnixTimeConverter = () => {
             onChange={(e) => setUnixTime(e.target.value)}
             value={unixTime}
           />
-          <button onClick={setCurrentTime} style={{ marginTop: 8 }}>
+          <Button
+            type="primary"
+            onClick={setCurrentTime}
+            style={{ marginTop: 8 }}
+          >
             Use Current Time
-          </button>
+          </Button>
         </div>
         {localTime && utcTime && (
           <>

@@ -6,6 +6,7 @@ import URL from 'url-parse';
 import styles from './UriInspector.module.scss';
 import { FormField } from '../core/FormField';
 import { iteratorToArray } from '../../utils';
+import { Button } from 'antd';
 
 const u = new URL('h://test.com');
 
@@ -13,7 +14,10 @@ export interface UriEditorProps {
   parsedUrl: any;
   onChange: (val: any) => void;
 }
-export const UriEditor: React.FC<UriEditorProps> = ({ parsedUrl, onChange }) => {
+export const UriEditor: React.FC<UriEditorProps> = ({
+  parsedUrl,
+  onChange,
+}) => {
   const [form] = useForm();
 
   useEffect(() => {
@@ -33,7 +37,9 @@ export const UriEditor: React.FC<UriEditorProps> = ({ parsedUrl, onChange }) => 
         let validatedSearchParams = [];
         if (searchParams?.length) {
           const parsedSearchParams = new URLSearchParams();
-          searchParams.forEach((p: [k: string, v: string]) => parsedSearchParams.append(p[0], p[1]));
+          searchParams.forEach((p: [k: string, v: string]) =>
+            parsedSearchParams.append(p[0], p[1])
+          );
           validatedSearchParams = iteratorToArray(parsedSearchParams.entries());
         }
 
@@ -170,9 +176,9 @@ export const UriEditor: React.FC<UriEditorProps> = ({ parsedUrl, onChange }) => 
                   ))}
 
                   <div className={styles.addParamBtnContainer}>
-                    <button type="button" onClick={() => add(['', ''])}>
+                    <Button type="primary" onClick={() => add(['', ''])}>
                       Add Param
-                    </button>
+                    </Button>
                   </div>
                 </>
               );

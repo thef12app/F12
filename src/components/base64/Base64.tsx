@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import React, { createRef, useState, useEffect } from 'react';
 import { Layout } from '../Layout/Layout';
 import style from './style.module.scss';
@@ -53,7 +53,7 @@ export const Base64 = () => {
         </div>
       </div>
       <div className={style.row}>
-        <textarea
+        <Input.TextArea
           autoFocus
           style={{
             background: error ? '#ffc0ca' : 'white',
@@ -64,7 +64,7 @@ export const Base64 = () => {
             encode ? 'encode to' : 'decode from'
           } Base64`}
         />
-        <textarea placeholder="" value={result} readOnly />
+        <Input.TextArea placeholder="" value={result} readOnly />
       </div>
     </Layout>
   );

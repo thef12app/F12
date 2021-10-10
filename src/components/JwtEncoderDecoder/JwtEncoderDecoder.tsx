@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 
 import { Layout } from '../Layout/Layout';
 import style from './style.module.scss';
+import { Input } from 'antd';
 
 export const JwtEncoderDecoder = () => {
   const [decode, setDecode] = useState('');
@@ -27,7 +28,8 @@ export const JwtEncoderDecoder = () => {
   return (
     <Layout title={'JWT Decoder'}>
       <div className={style.row}>
-        <textarea
+        <Input.TextArea
+          autoFocus
           style={{
             background: errDecoding ? '#ffc0ca' : '',
             marginLeft: '15px',
@@ -35,12 +37,12 @@ export const JwtEncoderDecoder = () => {
           placeholder="Enter JWT Token to Decode"
           onChange={(e) => decodeJWT(e.target.value)}
           defaultValue=""
-        ></textarea>
-        <textarea
+        ></Input.TextArea>
+        <Input.TextArea
           readOnly
           value={!errDecoding ? decode : 'Invalid JWT! Enter Valid JWT'}
           defaultValue=""
-        ></textarea>
+        ></Input.TextArea>
       </div>
     </Layout>
   );

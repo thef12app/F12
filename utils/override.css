@@ -1,0 +1,10 @@
+.ant-page-header-heading {
+  width: 100%;
+}
+
+.ant-page-header-heading-sub-title {
+  font-size: 18px;
+  color: #999;
+  font-weight: 300;
+  letter-spacing: 2px;
+}

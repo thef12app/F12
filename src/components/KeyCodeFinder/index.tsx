@@ -1,9 +1,9 @@
 import React, { createRef, useEffect, useState } from 'react';
 import style from './keycode.module.scss';
 import { Layout } from '../Layout/Layout';
+import { Button } from 'antd';
 
 export const KeyCodeFinder = () => {
-  const containerRef = createRef();
   const [keyCode, setKeyCode] = useState<any>(null);
 
   useEffect(() => {

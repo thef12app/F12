@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import URL from 'url-parse';
 
 import { iteratorToArray } from '../../utils';
-import { Layout } from '../Layout/Layout';
 import styles from './UriInspector.module.scss';
 import { UriPartsRenderer } from './UriPartsRenderer';
 import { UriEditor } from './UriEditor';
@@ -62,7 +61,7 @@ export const UriInspector = () => {
   useEffect(() => parseUrl(url, true), [url]);
 
   return (
-    <Layout title={'URI Inspector'}>
+    <>
       <div className={styles.pageWrapper}>
         <div className={styles.uriInputWrapper}>
           <Input.TextArea
@@ -90,6 +89,6 @@ export const UriInspector = () => {
           />
         )}
       </div>
-    </Layout>
+    </>
   );
 };

@@ -7,19 +7,30 @@ var webpack = require('webpack'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   TerserPlugin = require('terser-webpack-plugin');
-const { utilList } = require('./src/pages/Utils/util-list');
 const { fromPairs } = require('lodash');
 
-const utilChunks = utilList
+const utilChunks = [
+  {
+    name: 'F12',
+    path: 'index',
+    componentName: 'container',
+  },
+]
   .filter((util) => util.componentName)
   .map((util) => {
     return [
       util.componentName,
-      path.join(__dirname, `src/components/${util.componentName}/renderer.ts`),
+      path.join(__dirname, `src/components/${util.componentName}/index.tsx`),
     ];
   });
 
-const utilPages = utilList
+const utilPages = [
+  {
+    name: 'F12',
+    path: 'index',
+    componentName: 'container',
+  },
+]
   .filter((util) => util.componentName)
   .map((util) => {
     return new HtmlWebpackPlugin({

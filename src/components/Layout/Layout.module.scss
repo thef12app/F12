@@ -1,9 +1,15 @@
 .header {
-  background-color: #303030;
+  background-color: #303030 !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 8px;
+}
+
+.container {
+  height: calc(100vh - 56px);
+  background: white;
+  overflow: scroll;
 }
 
 .appTitle {

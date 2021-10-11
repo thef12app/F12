@@ -1,6 +1,5 @@
 import React, { createRef, useEffect, useState } from 'react';
 import style from './keycode.module.scss';
-import { Layout } from '../Layout/Layout';
 import { Button } from 'antd';
 
 export const KeyCodeFinder = () => {
@@ -45,7 +44,7 @@ export const KeyCodeFinder = () => {
     setKeyCode(keyCode);
   };
   return (
-    <Layout title={'Keycode Finder'}>
+    <>
       <div className={style.keycodeContainer}>
         {keyCode && (
           <div className={style.keycodeCard}>
@@ -84,6 +83,6 @@ export const KeyCodeFinder = () => {
           </div>
         )}
       </div>
-    </Layout>
+    </>
   );
 };

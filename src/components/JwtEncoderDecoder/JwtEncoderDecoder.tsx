@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import jwt_decode from 'jwt-decode';
-
-import { Layout } from '../Layout/Layout';
 import style from './style.module.scss';
 import { Input } from 'antd';
 
@@ -26,7 +24,7 @@ export const JwtEncoderDecoder = () => {
   };
 
   return (
-    <Layout title={'JWT Decoder'}>
+    <>
       <div className={style.row}>
         <Input.TextArea
           autoFocus
@@ -44,6 +42,6 @@ export const JwtEncoderDecoder = () => {
           defaultValue=""
         ></Input.TextArea>
       </div>
-    </Layout>
+    </>
   );
 };

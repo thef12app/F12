@@ -15,13 +15,15 @@ const Popup = () => {
   );
   const [selectedItem, setSelectedItem] = useState<any>(null);
 
-  const openApp = (file: string) => {
+  const openApp = (route: string) => {
     chrome.tabs.create({
-      url: `${file}.html`,
+      url: `index.html/#/${route}`,
     });
   };
 
-  const onSearchChange: React.KeyboardEventHandler<HTMLInputElement> = (evt) => {
+  const onSearchChange: React.KeyboardEventHandler<HTMLInputElement> = (
+    evt
+  ) => {
     setSearchTerm((evt.target as any).value);
 
     if (evt.key === 'Enter' && selectedItem < list.length) {

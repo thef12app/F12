@@ -6,7 +6,6 @@ import { useRef, useEffect } from 'react';
 import { editor as monacoEditor } from 'monaco-editor';
 import styles from './JsonFormat.module.scss';
 import copy from 'copy-to-clipboard';
-import { Layout } from '../Layout/Layout';
 import { Button } from 'antd';
 
 export const JsonFormat = () => {
@@ -62,22 +61,18 @@ export const JsonFormat = () => {
     }
   };
   return (
-    <Layout
-      actions={
-        <div className={styles.actionBtnContainer}>
-          <Button type="primary" onClick={copyToClipboard}>
-            Copy to Clipboard
-          </Button>
-          <Button type="primary" onClick={format}>
-            Format
-          </Button>
-        </div>
-      }
-      title={'JSON Formatter'}
-    >
+    <>
+      <div className={styles.actionBtnContainer}>
+        <Button type="primary" onClick={copyToClipboard}>
+          Copy to Clipboard
+        </Button>
+        <Button type="primary" onClick={format}>
+          Format
+        </Button>
+      </div>
       <div className={styles.jsonEditor}>
         <div ref={editorRoot} className={styles.editorRoot}></div>
       </div>
-    </Layout>
+    </>
   );
 };

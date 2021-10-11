@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { fileToDataURI } from '../../utils';
 import { DropZone } from '../Dropzone/DropZone';
-import { Layout } from '../Layout/Layout';
 import styles from './ImageToDataURI.module.scss';
 import copy from 'copy-to-clipboard';
 import { Button, Image, Input } from 'antd';
@@ -38,7 +37,7 @@ export const ImageToDataURI: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <>
       <div className={styles.content}>
         <DropZone onSelect={(files) => onFileSelect(files)} />
         <div className={styles.result}>
@@ -67,6 +66,6 @@ export const ImageToDataURI: React.FC = () => {
           )}
         </div>
       </div>
-    </Layout>
+    </>
   );
 };

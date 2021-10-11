@@ -1,6 +1,5 @@
 import { Button, Input } from 'antd';
 import React, { createRef, useState, useEffect } from 'react';
-import { Layout } from '../Layout/Layout';
 import style from './style.module.scss';
 
 export const Base64 = () => {
@@ -31,7 +30,7 @@ export const Base64 = () => {
     setResult(encodedValue);
   };
   return (
-    <Layout title={'Base64 Encoder Decoder'}>
+    <>
       <div style={{ marginTop: '25px' }}>
         <div className={style.buttonGroup}>
           <Button
@@ -66,6 +65,6 @@ export const Base64 = () => {
         />
         <Input.TextArea placeholder="" value={result} readOnly />
       </div>
-    </Layout>
+    </>
   );
 };

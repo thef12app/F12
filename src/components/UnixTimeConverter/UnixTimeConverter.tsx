@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { utcToZonedTime, format } from 'date-fns-tz';
-
-import { Layout } from '../Layout/Layout';
 import styles from './UnixTimeConverter.module.scss';
 import { timeZones } from './timezones';
 import { Button } from 'antd';
@@ -92,7 +90,7 @@ export const UnixTimeConverter = () => {
   };
 
   return (
-    <Layout title={'Unix Time Converter'}>
+    <>
       <div className={styles.pageContainer}>
         <div className={styles.timeInputWrapper}>
           <h5>Enter Unix Time String</h5>
@@ -164,6 +162,6 @@ export const UnixTimeConverter = () => {
           </>
         )}
       </div>
-    </Layout>
+    </>
   );
 };

@@ -7,6 +7,7 @@ import { editor as monacoEditor } from 'monaco-editor';
 import styles from './JsonFormat.module.scss';
 import copy from 'copy-to-clipboard';
 import { Layout } from '../Layout/Layout';
+import { Button } from 'antd';
 
 export const JsonFormat = () => {
   const editorRoot = useRef(null);
@@ -64,8 +65,12 @@ export const JsonFormat = () => {
     <Layout
       actions={
         <div className={styles.actionBtnContainer}>
-          <button onClick={copyToClipboard}>Copy to Clipboard</button>
-          <button onClick={format}>Format</button>
+          <Button type="primary" onClick={copyToClipboard}>
+            Copy to Clipboard
+          </Button>
+          <Button type="primary" onClick={format}>
+            Format
+          </Button>
         </div>
       }
       title={'JSON Formatter'}

@@ -2,11 +2,14 @@ import React, { useMemo } from 'react';
 import copyToClipboard from 'copy-to-clipboard';
 import styles from './UriInspector.module.scss';
 import { composeURL } from '../../utils';
+import { Button } from 'antd';
 
 export interface UriPartsRendererProps {
-  parsedUrl: any
+  parsedUrl: any;
 }
-export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({ parsedUrl }) => {
+export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({
+  parsedUrl,
+}) => {
   const {
     protocol,
 
@@ -37,7 +40,10 @@ export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({ parsedUrl })
         !!parsedUrl.searchParams.length &&
         parsedUrl.searchParams
           .filter(([k]: [string]) => k)
-          .map(([k, v]: [string, string]) => [encodeURIComponent(k), encodeURIComponent(v)]),
+          .map(([k, v]: [string, string]) => [
+            encodeURIComponent(k),
+            encodeURIComponent(v),
+          ]),
     };
   }, [parsedUrl]);
 
@@ -53,7 +59,10 @@ export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({ parsedUrl })
         search:
           searchParams &&
           searchParams.length &&
-          '?' + searchParams.map(([k, v]: [string, string]) => `${k}${v && '=' + v}`).join('&'),
+          '?' +
+            searchParams
+              .map(([k, v]: [string, string]) => `${k}${v && '=' + v}`)
+              .join('&'),
         hash,
       })
     );
@@ -103,12 +112,13 @@ export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({ parsedUrl })
 
       {hash && <span className={styles.urlPart}>{hash}</span>}
       <div>
-        <button
+        <Button
+          type="default"
           onClick={_copyToClipboard}
           className={styles.copyToClipboardBtn}
         >
           Copy to Clipboard
-        </button>
+        </Button>
       </div>
     </div>
   );

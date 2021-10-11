@@ -4,6 +4,7 @@ import { DropZone } from '../Dropzone/DropZone';
 import { Layout } from '../Layout/Layout';
 import styles from './ImageToDataURI.module.scss';
 import copy from 'copy-to-clipboard';
+import { Button, Image, Input } from 'antd';
 
 export const ImageToDataURI: React.FC = () => {
   const [dataURI, setDataURI] = useState('');
@@ -43,22 +44,26 @@ export const ImageToDataURI: React.FC = () => {
         <div className={styles.result}>
           <div className={styles.imageContainer}>
             {isImage ? (
-              <img src={dataURI} alt="Result image" />
+              <Image src={dataURI} alt="Result image" />
             ) : dataURI ? (
               <div>Not an image</div>
             ) : (
               <div>Image Preview</div>
             )}
           </div>
-          <textarea
+          <Input.TextArea
             placeholder="Data URI..."
             value={dataURI}
             onChange={(e) => onDataUriChange(e.target.value)}
-          ></textarea>
+          ></Input.TextArea>
           {dataURI && (
-            <button onClick={() => copy(dataURI)} className={styles.copyButton}>
+            <Button
+              type="primary"
+              onClick={() => copy(dataURI)}
+              className={styles.copyButton}
+            >
               Copy
-            </button>
+            </Button>
           )}
         </div>
       </div>

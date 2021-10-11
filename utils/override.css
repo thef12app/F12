@@ -1,0 +1,17 @@
+.ant-page-header-heading {
+  width: 100%;
+}
+
+.ant-page-header-heading-sub-title {
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.ant-page-header-heading-extra {
+  margin: 4px 0;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

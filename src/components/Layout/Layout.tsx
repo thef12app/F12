@@ -3,6 +3,7 @@ import styles from './Layout.module.scss';
 import { utilList as _utilList } from '../../pages/Utils/util-list';
 
 import ratingIcon from '../../assets/img/ratings.png';
+import { Input, PageHeader } from 'antd';
 
 const utilList = _utilList.filter((u) => u.componentName);
 
@@ -33,32 +34,39 @@ export const Layout: React.FC<LayoutProps> = ({ children, actions, title }) => {
   }, []);
 
   return (
-    <div>
-      <div className={styles.header}>
-        <div className={styles.title}>
-          F12 {title && <span className={styles.appTitle}>{title}</span>}
-        </div>
-        <div className={styles.searchContainer}>
-          <input
-            type="text"
-            placeholder="Search"
-            className={styles.search}
-            onFocus={openMenu}
-            onBlur={closeMenu}
-            onChange={(e) => setTextSearch(e.target.value)}
-          />
-          {menuOpen && (
-            <div className={styles.menu}>
-              {filteredMenu.map((u) => (
-                <a href={`${u.path}.html`} key={u.path}>
-                  {u.name}
-                </a>
-              ))}
-            </div>
-          )}
-        </div>
-        <div>{actions}</div>
-      </div>
+    <>
+      <PageHeader
+        className={styles.header}
+        title={<div className={styles.title}>F12</div>}
+        subTitle={title && <span className={styles.appTitle}>{title}</span>}
+        extra={[
+          <div>{actions}</div>,
+          <div className={styles.searchContainer}>
+            <Input
+              allowClear
+              type="search"
+              placeholder="Search"
+              className={styles.search}
+              onFocus={openMenu}
+              onBlur={closeMenu}
+              onChange={(e) => setTextSearch(e.target.value)}
+            />
+            {menuOpen && (
+              <div className={styles.menu}>
+                {filteredMenu.map((u) => (
+                  <a href={`${u.path}.html`} key={u.path}>
+                    {u.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>,
+        ]}
+      ></PageHeader>
+      {/* <div className={styles.header}>
+       
+       
+      </div> */}
       <div className={styles.content}>{children}</div>
       <div className={styles.footer}>
         <a
@@ -84,6 +92,6 @@ export const Layout: React.FC<LayoutProps> = ({ children, actions, title }) => {
           Request for a feature
         </a>
       </div>
-    </div>
+    </>
   );
 };

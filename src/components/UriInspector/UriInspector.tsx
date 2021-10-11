@@ -6,6 +6,7 @@ import { Layout } from '../Layout/Layout';
 import styles from './UriInspector.module.scss';
 import { UriPartsRenderer } from './UriPartsRenderer';
 import { UriEditor } from './UriEditor';
+import { Button, Input } from 'antd';
 
 export const UriInspector = () => {
   const [url, setUrl] = useState('');
@@ -26,7 +27,9 @@ export const UriInspector = () => {
 
         const { protocol, username, password, hostname, port, pathname, hash } =
           parsed;
-        const searchParamsObject = new URLSearchParams((parsed.query as any) || '');
+        const searchParamsObject = new URLSearchParams(
+          (parsed.query as any) || ''
+        );
         const searchParams = iteratorToArray(searchParamsObject.entries());
         setParsedUrl({
           protocol: protocol.replace(/\:$/, ''),
@@ -62,7 +65,7 @@ export const UriInspector = () => {
     <Layout title={'URI Inspector'}>
       <div className={styles.pageWrapper}>
         <div className={styles.uriInputWrapper}>
-          <textarea
+          <Input.TextArea
             name="url-input"
             className={styles.uriInput}
             rows={4}
@@ -70,11 +73,11 @@ export const UriInspector = () => {
             autoFocus
             onChange={(e) => setUrl(e.target.value)}
             onKeyDown={onKeyDown}
-          ></textarea>
+          ></Input.TextArea>
         </div>
-        <button className={styles.parseBtn} onClick={() => parseUrl()}>
+        <Button type="primary" onClick={() => parseUrl()}>
           Inspect [Enter]
-        </button>
+        </Button>
 
         {parseError && <div className={styles.parseError}>{parseError}</div>}
 

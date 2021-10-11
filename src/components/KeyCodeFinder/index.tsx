@@ -1,9 +1,9 @@
 import React, { createRef, useEffect, useState } from 'react';
 import style from './keycode.module.scss';
 import { Layout } from '../Layout/Layout';
+import { Button } from 'antd';
 
 export const KeyCodeFinder = () => {
-  const containerRef = createRef();
   const [keyCode, setKeyCode] = useState<any>(null);
 
   useEffect(() => {
@@ -60,7 +60,11 @@ export const KeyCodeFinder = () => {
             </span>
           </div>
         )}
-        {!keyCode && <h3>Start pressing keys to get more info.</h3>}
+        {!keyCode && (
+          <h3 style={{ fontWeight: 600 }}>
+            Start pressing keys to get more info.
+          </h3>
+        )}
 
         {keyCode && (
           <div className={style.jsonObject}>

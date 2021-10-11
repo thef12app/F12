@@ -1,5 +1,4 @@
 .header {
-  height: 40px;
   background-color: #303030;
   display: flex;
   justify-content: space-between;
@@ -11,13 +10,13 @@
   padding-left: 12px;
   margin-left: 8px;
   border-left: 1px solid #999;
+  color: #999;
 }
 
 .menu {
   position: absolute;
   z-index: 9;
   background: white;
-  border-radius: 8px;
   left: 0;
   top: 100%;
   width: 100%;
@@ -49,12 +48,6 @@
   width: 300px;
   padding: 4px;
   border: none;
-  background-color: #ddd;
-  border-radius: 4px;
-
-  &:focus {
-    outline: 1px solid #4d74e3;
-  }
 }
 
 .dropdownArrow {

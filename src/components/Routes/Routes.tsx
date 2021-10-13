@@ -6,6 +6,8 @@ import { KeyCodeFinder } from '../KeyCodeFinder';
 import { UriInspector } from '../UriInspector/UriInspector';
 import { JwtEncoderDecoder } from '../JwtEncoderDecoder/JwtEncoderDecoder';
 import { Base64 } from '../base64/Base64';
+import { ImageToDataURI } from '../ImageToDataURI/ImageToDataURI';
+import { UnixTimeConverter } from '../UnixTimeConverter/UnixTimeConverter';
 
 export const Routes = () => {
   return (
@@ -15,6 +17,8 @@ export const Routes = () => {
       <Route path="/url-inspector" component={UriInspector} />
       <Route path="/base64" component={Base64} />
       <Route path="/jwt-decoder" component={JwtEncoderDecoder} />
+      <Route path="/image2DataUri" component={ImageToDataURI} />
+      <Route path="/unix-time-converter" component={UnixTimeConverter} />
       <Route render={() => <div>Coming soon...</div>} />
     </Switch>
   );

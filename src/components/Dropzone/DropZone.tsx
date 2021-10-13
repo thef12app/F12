@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import styles from './DropZone.module.scss';
+import { Typography } from 'antd';
 
 export interface DropZoneProps {
   onSelect: (files: FileList) => void;
@@ -12,7 +13,7 @@ export const DropZone: React.FC<DropZoneProps> = ({ onSelect }) => {
 
   const onDrop: React.DragEventHandler<HTMLDivElement> = (evt) => {
     evt.preventDefault();
-    setDraggedOver(false)
+    setDraggedOver(false);
 
     if (evt.dataTransfer.files.length) {
       onSelect(evt.dataTransfer.files);
@@ -44,7 +45,7 @@ export const DropZone: React.FC<DropZoneProps> = ({ onSelect }) => {
             className={styles.fileInput}
             onChange={onFileSelect}
           />{' '}
-          Browse
+          <Typography.Link>Browse</Typography.Link>
         </label>
       </span>
     </div>

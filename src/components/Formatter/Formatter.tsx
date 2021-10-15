@@ -11,10 +11,10 @@ import { formatWithPrettier } from '../../utils/prettier';
 export const Formatter = () => {
   const [editor, setEditor] = useState<monacoEditor.IStandaloneCodeEditor>();
 
-  const format = () => {
+  const format = async () => {
     if (editor) {
       const value = editor.getValue().trim();
-      const formatted = formatWithPrettier(value);
+      const formatted = await formatWithPrettier(value);
       if (formatted && formatted.formatted !== value) {
         editor.setValue(formatted.formatted);
         monacoEditor.setModelLanguage(editor.getModel()!, formatted.fileType);

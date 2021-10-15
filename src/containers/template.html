@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;900&display=swap"
-      rel="stylesheet"
-    />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
 
-      body {
-        margin: 0;
-      }
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;900&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-      #app-container {
-        height: 100vh;
-      }
-    </style>
-  </head>
+    body {
+      margin: 0;
+    }
 
-  <body>
-    <div id="app-container"></div>
-  </body>
+    #app-container {
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app-container"></div>
+  <iframe src="/sandbox.html" frameborder="0" id="f12-sandbox"></iframe>
+</body>
+
 </html>

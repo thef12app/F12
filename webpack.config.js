@@ -8,40 +8,6 @@ var webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   TerserPlugin = require('terser-webpack-plugin'),
   MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-const { fromPairs } = require('lodash');
-
-const utilChunks = [
-  {
-    name: 'F12',
-    path: 'index',
-    componentName: 'container',
-  },
-]
-  .filter((util) => util.componentName)
-  .map((util) => {
-    return [
-      util.componentName,
-      path.join(__dirname, `src/components/${util.componentName}/index.tsx`),
-    ];
-  });
-
-const utilPages = [
-  {
-    name: 'F12',
-    path: 'index',
-    componentName: 'container',
-  },
-]
-  .filter((util) => util.componentName)
-  .map((util) => {
-    return new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/template.html'),
-      filename: `${util.path}.html`,
-      chunks: [util.componentName],
-      cache: false,
-      title: `${util.name} | F12`,
-    });
-  });
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -71,14 +37,9 @@ if (fileSystem.existsSync(secretsPath)) {
 var options = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
-    // newtab: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.jsx'),
-    // options: path.join(__dirname, 'src', 'pages', 'Options', 'index.jsx'),
     popup: path.join(__dirname, 'src', 'pages', 'Popup', 'index.tsx'),
-    // background: path.join(__dirname, 'src', 'pages', 'Background', 'index.js'),
-    // contentScript: path.join(__dirname, 'src', 'pages', 'Content', 'index.js'),
-    // devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
-    // panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
-    ...fromPairs(utilChunks),
+    container: path.join(__dirname, 'src/components/container/index.tsx'),
+    sandbox: path.join(__dirname, 'src/utils/sandbox.ts'),
   },
   chromeExtensionBoilerplate: {
     notHotReload: ['contentScript', 'devtools'],
@@ -192,15 +153,6 @@ var options = {
         },
       ],
     }),
-    // new CopyWebpackPlugin({
-    //   patterns: [
-    //     {
-    //       from: 'src/pages/Content/content.styles.css',
-    //       to: path.join(__dirname, 'build'),
-    //       force: true,
-    //     },
-    //   ],
-    // }),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -219,18 +171,12 @@ var options = {
         },
       ],
     }),
-    ...utilPages,
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.html'),
-      filename: 'newtab.html',
-      chunks: ['newtab'],
+      template: path.join(__dirname, 'src/containers/template.html'),
+      filename: 'index.html',
+      chunks: ['container'],
       cache: false,
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src', 'pages', 'Options', 'index.html'),
-      filename: 'options.html',
-      chunks: ['options'],
-      cache: false,
+      title: 'F12',
     }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'pages', 'Popup', 'index.html'),
@@ -238,18 +184,11 @@ var options = {
       chunks: ['popup'],
       cache: false,
     }),
-    // new HtmlWebpackPlugin({
-    //   template: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.html'),
-    //   filename: 'devtools.html',
-    //   chunks: ['devtools'],
-    //   cache: false,
-    // }),
-    // new HtmlWebpackPlugin({
-    //   template: path.join(__dirname, 'src', 'pages', 'Panel', 'index.html'),
-    //   filename: 'panel.html',
-    //   chunks: ['panel'],
-    //   cache: false,
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'sandbox.html',
+      chunks: ['sandbox'],
+      cache: false,
+    }),
   ],
   infrastructureLogging: {
     level: 'info',

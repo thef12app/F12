@@ -59,3 +59,11 @@ export const fileToDataURI = (file: File) => {
     reader.readAsDataURL(file);
   });
 };
+
+export function tryJsonParse(json: string) {
+  try {
+    return JSON.parse(json);
+  } catch (ex) {
+    return null;
+  }
+}

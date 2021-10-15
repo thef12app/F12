@@ -13,6 +13,7 @@
     "update:images": "node utils/pexels/getImages"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@hot-loader/react-dom": "^17.0.1",
     "@svgr/webpack": "^5.5.0",
     "@types/chrome": "0.0.132",

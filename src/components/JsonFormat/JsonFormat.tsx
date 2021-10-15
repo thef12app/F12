@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 
 import prettier from 'prettier';
 import JSONParser from 'prettier/parser-babel';
-import { useRef, useEffect } from 'react';
 import { editor as monacoEditor } from 'monaco-editor';
 import styles from './JsonFormat.module.scss';
 import copy from 'copy-to-clipboard';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import { MonacoEditor } from '../MonacoEditor/MonacoEditor';
+import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 
 export const JsonFormat = () => {
-  const editorRoot = useRef(null);
   const [editor, setEditor] = useState<monacoEditor.IStandaloneCodeEditor>();
 
   const format = () => {
@@ -26,27 +26,18 @@ export const JsonFormat = () => {
     if (editor) {
       const value = editor.getValue();
       copy(value);
+      message.success('Copied!');
     }
   };
 
-  useEffect(() => {
-    if (editorRoot.current) {
-      const monaco = monacoEditor.create(editorRoot.current, {
-        minimap: {
-          enabled: false,
-        },
-        automaticLayout: true,
-      });
-      monaco.setValue(`
+  const onEditorCreate = (monaco: monacoEditor.IStandaloneCodeEditor) => {
+    monaco.setValue(`
         {
           action: "Hit format to format this JSON or paste JSON here"
         }
       `);
-      setEditor(monaco);
-
-      return () => monaco.dispose();
-    }
-  }, []);
+    setEditor(monaco);
+  };
 
   const formatWithPrettier = (value: string) => {
     try {
@@ -54,24 +45,40 @@ export const JsonFormat = () => {
         parser: 'json',
         plugins: [JSONParser],
       });
+      message.success('Formatted!');
       return formatted;
-    } catch (ex) {
+    } catch (ex: any) {
       console.error(ex);
       return value;
     }
   };
+
   return (
     <>
-      <div className={styles.actionBtnContainer}>
-        <Button type="primary" onClick={copyToClipboard}>
-          Copy to Clipboard
-        </Button>
-        <Button type="primary" onClick={format}>
-          Format
-        </Button>
-      </div>
       <div className={styles.jsonEditor}>
-        <div ref={editorRoot} className={styles.editorRoot}></div>
+        <div className={styles.actionBtnContainer}>
+          <Button
+            type="primary"
+            ghost
+            onClick={format}
+            icon={<CheckOutlined />}
+            size="middle"
+          >
+            Format
+          </Button>
+          <Button
+            type="default"
+            onClick={copyToClipboard}
+            icon={<CopyOutlined />}
+            size="middle"
+          >
+            Copy
+          </Button>
+        </div>
+        <MonacoEditor
+          onEditorCreate={onEditorCreate}
+          wrapperClass={styles.editorRoot}
+        />
       </div>
     </>
   );

@@ -6,7 +6,8 @@ var webpack = require('webpack'),
   { CleanWebpackPlugin } = require('clean-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
-  TerserPlugin = require('terser-webpack-plugin');
+  TerserPlugin = require('terser-webpack-plugin'),
+  MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const { fromPairs } = require('lodash');
 
 const utilChunks = [
@@ -78,14 +79,6 @@ var options = {
     // devtools: path.join(__dirname, 'src', 'pages', 'Devtools', 'index.js'),
     // panel: path.join(__dirname, 'src', 'pages', 'Panel', 'index.jsx'),
     ...fromPairs(utilChunks),
-
-    // Monaco from here: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
-    // Package each language's worker and give these filenames in `getWorkerUrl`
-    'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
-    'json.worker': 'monaco-editor/esm/vs/language/json/json.worker',
-    'css.worker': 'monaco-editor/esm/vs/language/css/css.worker',
-    'html.worker': 'monaco-editor/esm/vs/language/html/html.worker',
-    'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker',
   },
   chromeExtensionBoilerplate: {
     notHotReload: ['contentScript', 'devtools'],
@@ -170,6 +163,8 @@ var options = {
       .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
   },
   plugins: [
+    // Monaco from here: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
+    new MonacoWebpackPlugin(),
     new webpack.ProgressPlugin(),
     // clean the build folder
     new CleanWebpackPlugin({

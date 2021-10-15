@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-import prettier from 'prettier';
-import JSONParser from 'prettier/parser-babel';
 import { editor as monacoEditor } from 'monaco-editor';
 import styles from './Formatter.module.scss';
 import copy from 'copy-to-clipboard';
 import { Button, message } from 'antd';
 import { MonacoEditor } from '../MonacoEditor/MonacoEditor';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
+import { formatWithPrettier } from '../../utils/prettier';
 
 export const Formatter = () => {
   const [editor, setEditor] = useState<monacoEditor.IStandaloneCodeEditor>();
@@ -16,8 +15,9 @@ export const Formatter = () => {
     if (editor) {
       const value = editor.getValue().trim();
       const formatted = formatWithPrettier(value);
-      if (value != formatted) {
-        editor.setValue(formatted);
+      if (formatted && formatted.formatted !== value) {
+        editor.setValue(formatted.formatted);
+        monacoEditor.setModelLanguage(editor.getModel()!, formatted.fileType);
       }
     }
   };
@@ -37,20 +37,6 @@ export const Formatter = () => {
         }
       `);
     setEditor(monaco);
-  };
-
-  const formatWithPrettier = (value: string) => {
-    try {
-      const formatted = prettier.format(value, {
-        parser: 'json',
-        plugins: [JSONParser],
-      });
-      message.success('Formatted!');
-      return formatted;
-    } catch (ex: any) {
-      console.error(ex);
-      return value;
-    }
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { editor as monacoEditor } from 'monaco-editor';
 
 export interface MonacoEditorProps {
@@ -23,6 +23,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = ({
           top: 16,
           bottom: 16,
         },
+        language: 'javascript',
       });
       monaco.setValue(`
         {

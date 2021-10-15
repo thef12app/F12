@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import prettier from 'prettier';
 import JSONParser from 'prettier/parser-babel';
 import { editor as monacoEditor } from 'monaco-editor';
-import styles from './JsonFormat.module.scss';
+import styles from './Formatter.module.scss';
 import copy from 'copy-to-clipboard';
 import { Button, message } from 'antd';
 import { MonacoEditor } from '../MonacoEditor/MonacoEditor';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
 
-export const JsonFormat = () => {
+export const Formatter = () => {
   const [editor, setEditor] = useState<monacoEditor.IStandaloneCodeEditor>();
 
   const format = () => {

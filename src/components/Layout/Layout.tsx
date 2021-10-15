@@ -40,32 +40,34 @@ export const App: React.FC<LayoutProps> = ({ children, actions, title }) => {
   }, []);
 
   return (
-    <AntDLayout>
-      <PageHeader
-        style={{ paddingTop: '8px', paddingBottom: '8px' }}
-        className={styles.header}
-        title={<div className={styles.title}>F12</div>}
-        subTitle={title && <span className={styles.appTitle}>{title}</span>}
-        extra={[
-          <span className={styles.appTitle}>The All in One Dev Toolbox</span>,
-        ]}
-      ></PageHeader>
-
+    <HashRouter>
       <AntDLayout>
-        <SideMenu></SideMenu>
-        <Content>
-          <div
-            className="site-layout-background"
-            style={{ padding: '0px 5px', minHeight: 360 }}
-          >
-            <div className={styles.container}>
-              <HashRouter>
+        <PageHeader
+          style={{ paddingTop: '8px', paddingBottom: '8px' }}
+          className={styles.header}
+          title={<div className={styles.title}>F12</div>}
+          subTitle={title && <span className={styles.appTitle}>{title}</span>}
+          extra={[
+            <span className={styles.appTitle} key={'sub-title'}>
+              The All in One Dev Toolbox
+            </span>,
+          ]}
+        ></PageHeader>
+
+        <AntDLayout>
+          <SideMenu></SideMenu>
+          <Content>
+            <div
+              className="site-layout-background"
+              style={{ padding: '0px 5px', minHeight: 360 }}
+            >
+              <div className={styles.container}>
                 <Routes></Routes>
-              </HashRouter>
+              </div>
             </div>
-          </div>
-        </Content>
+          </Content>
+        </AntDLayout>
       </AntDLayout>
-    </AntDLayout>
+    </HashRouter>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Route, Switch } from 'react-router-dom';
-import { JsonFormat } from '../JsonFormat/JsonFormat';
+import { Formatter } from '../Formatter/Formatter';
 import { KeyCodeFinder } from '../KeyCodeFinder';
 import { UriInspector } from '../UriInspector/UriInspector';
 import { JwtEncoderDecoder } from '../JwtEncoderDecoder/JwtEncoderDecoder';
@@ -12,7 +12,7 @@ import { UnixTimeConverter } from '../UnixTimeConverter/UnixTimeConverter';
 export const Routes = () => {
   return (
     <Switch>
-      <Route path="/json-formatter" component={JsonFormat} />
+      <Route path="/formatter" component={Formatter} />
       <Route path="/keycode-finder" component={KeyCodeFinder} />
       <Route path="/url-inspector" component={UriInspector} />
       <Route path="/base64" component={Base64} />

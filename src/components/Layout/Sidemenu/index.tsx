@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Input, Layout, Menu, Typography } from 'antd';
 import { utilList } from '../../../pages/Utils/util-list';
-import { useHistory } from 'react-router';
-
-import style from '../Layout.module.scss';
+import { useLocation } from 'react-router';
 
 const { Sider } = Layout;
 const SideMenu = () => {
+  const location = useLocation();
+
   return (
     <Sider width={'340px'}>
       <div className="logo" />
@@ -19,9 +19,13 @@ const SideMenu = () => {
           allowClear
         ></Input>
       </div>
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={[location.pathname]}
+      >
         {utilList.map((li, index) => (
-          <Menu.Item key={index}>
+          <Menu.Item key={`/${li.path}`}>
             <Typography.Link href={`#/${li.path}`}>{li.name}</Typography.Link>
           </Menu.Item>
         ))}

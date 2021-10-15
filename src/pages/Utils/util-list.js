@@ -1,7 +1,7 @@
 const utilList = [
   {
-    name: 'JSON Formatter',
-    path: 'json-formatter',
+    name: 'Code Formatter',
+    path: 'formatter',
     componentName: 'JsonFormat',
   },
   {

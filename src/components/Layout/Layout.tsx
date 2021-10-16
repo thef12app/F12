@@ -21,15 +21,6 @@ export interface LayoutProps {
 
 export const App: React.FC<LayoutProps> = ({ children, actions, title }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchText, setTextSearch] = useState('');
-  const filteredMenu = useMemo(() => {
-    return searchText
-      ? utilList.filter((u) =>
-          u.name.toLowerCase().includes(searchText.toLowerCase())
-        )
-      : utilList;
-  }, [searchText]);
-
   const openMenu = useCallback(() => {
     setMenuOpen(true);
   }, []);

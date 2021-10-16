@@ -62,7 +62,7 @@ const Popup = () => {
         />
       </div>
       <div className={styles.menuList}>
-        {list.map((util, i) => (
+        {list.map((util: any, i: number) => (
           <div
             className={
               styles.menuItem +

@@ -14,7 +14,6 @@ type EventData = {
 
 window.addEventListener('message', (evt) => {
   const data: EventData = tryJsonParse(evt.data);
-  console.log('in child', evt, data);
 
   if (!data || !eventProcessors[data.eventType]) {
     return;
@@ -37,12 +36,12 @@ window.addEventListener('message', (evt) => {
   });
 });
 
-function formatCss(content: string) {
+function formatCss(content: string, parser: 'css' | 'scss' | 'less') {
   try {
     return {
       error: false,
       formatted: prettier.format(content, {
-        parser: 'css',
+        parser,
         plugins: [CSSParser],
       }),
     };

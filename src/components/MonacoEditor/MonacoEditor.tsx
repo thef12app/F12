@@ -1,5 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import { editor as monacoEditor } from 'monaco-editor';
+import {
+  editor as monacoEditor,
+  languages as monacoLanguages,
+} from 'monaco-editor';
+
+monacoLanguages.css.cssDefaults.setOptions({
+  validate: false,
+});
+monacoLanguages.typescript.typescriptDefaults.setDiagnosticsOptions({
+  noSemanticValidation: true,
+  noSyntaxValidation: true,
+});
 
 export interface MonacoEditorProps {
   onEditorCreate: (editor: monacoEditor.IStandaloneCodeEditor) => void;

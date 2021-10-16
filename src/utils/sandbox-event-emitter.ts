@@ -4,21 +4,19 @@ const $sandbox: HTMLIFrameElement = document.getElementById(
   'f12-sandbox'
 ) as HTMLIFrameElement;
 
-export function formatCss(content: string) {
+export function formatCss(content: string, parser: 'css' | 'scss' | 'less') {
   const state = Date.now();
   const event = {
     eventType: 'formatCss',
-    inputs: [content],
+    inputs: [content, parser],
     state,
   };
-  console.log('css');
 
   return new Promise<string>((resolve, reject) => {
     const listener = (evt: MessageEvent) => {
       const data = tryJsonParse(evt.data);
-      console.log('data in parent', data, evt.data);
 
-      if (data.state !== state) {
+      if (!data || data.state !== state) {
         return;
       }
 

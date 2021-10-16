@@ -1,14 +1,14 @@
 import prettier from 'prettier';
-import JSONParser from 'prettier/parser-babel';
+import BabelParser from 'prettier/parser-babel';
 import HtmlParser from 'prettier/parser-html';
 import { formatCss } from './sandbox-event-emitter';
 
 type Formatter = {
-  fileType: 'json' | 'javascript' | 'typescript' | 'css' | 'html';
+  fileType: Languages;
   format: (content: string) => string | Promise<string>;
 };
 
-const formatters: Formatter[] = [
+export const formatters: Formatter[] = [
   {
     fileType: 'json',
     format: (content) => formatWithBabel(content, 'json'),
@@ -23,7 +23,15 @@ const formatters: Formatter[] = [
   },
   {
     fileType: 'css',
-    format: tryCSSFormat,
+    format: (content) => tryCSSFormat(content, 'css'),
+  },
+  {
+    fileType: 'scss',
+    format: (content) => tryCSSFormat(content, 'scss'),
+  },
+  {
+    fileType: 'less',
+    format: (content) => tryCSSFormat(content, 'less'),
   },
   {
     fileType: 'html',
@@ -31,8 +39,18 @@ const formatters: Formatter[] = [
   },
 ];
 
-export const formatWithPrettier = async (value: string) => {
-  for (let formatter of formatters) {
+export const supportedLanguages = formatters.map((f) => f.fileType);
+
+export const formatWithPrettier = async (
+  value: string,
+  lang: Languages | 'auto'
+) => {
+  const selectedFormatters =
+    lang === 'auto'
+      ? formatters
+      : formatters.filter((f) => f.fileType === lang);
+
+  for (let formatter of selectedFormatters) {
     try {
       const result = await formatter.format(value);
       console.log('lang', formatter.fileType);
@@ -41,23 +59,25 @@ export const formatWithPrettier = async (value: string) => {
         formatted: result,
         fileType: formatter.fileType,
       };
-    } catch (ex) {}
+    } catch (ex) {
+      // ignore
+    }
   }
   return null;
 };
 
 function formatWithBabel(
   content: string,
-  parser: keyof typeof JSONParser.parsers
+  parser: keyof typeof BabelParser.parsers
 ) {
   return prettier.format(content, {
     parser: parser,
-    plugins: [JSONParser],
+    plugins: [BabelParser],
   });
 }
 
-function tryCSSFormat(content: string) {
-  return formatCss(content);
+function tryCSSFormat(content: string, parser: 'css' | 'scss' | 'less') {
+  return formatCss(content, parser);
 }
 
 function formatHtml(content: string) {
@@ -66,3 +86,28 @@ function formatHtml(content: string) {
     plugins: [HtmlParser],
   });
 }
+
+export async function detectLanguage(
+  content: string
+): Promise<Languages | null> {
+  for (let lang of formatters) {
+    try {
+      const langDetected = !!lang.format(content);
+      if (langDetected) {
+        return lang.fileType;
+      }
+    } catch (ex) {
+      // ignore
+    }
+  }
+
+  return null;
+}
+export type Languages =
+  | 'json'
+  | 'javascript'
+  | 'typescript'
+  | 'css'
+  | 'html'
+  | 'scss'
+  | 'less';

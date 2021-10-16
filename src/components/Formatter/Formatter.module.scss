@@ -19,3 +19,11 @@
   width: 100%;
   height: 100%;
 }
+
+.languageSelectWrapper {
+  position: absolute;
+  z-index: 1;
+  right: 36px;
+  bottom: 16px;
+  font-size: 12px;
+}

@@ -10,6 +10,7 @@ import { HashRouter } from 'react-router-dom';
 import 'antd/dist/antd.less';
 import '../../../utils/override.css';
 import SideMenu from './Sidemenu';
+import { MenuOutlined } from '@ant-design/icons';
 
 const utilList = _utilList.filter((u) => u.componentName);
 
@@ -21,6 +22,7 @@ export interface LayoutProps {
 
 export const App: React.FC<LayoutProps> = ({ children, actions, title }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [sideMenuCollapsed, setSideMenuCollapsed] = useState(false);
   const openMenu = useCallback(() => {
     setMenuOpen(true);
   }, []);
@@ -36,7 +38,15 @@ export const App: React.FC<LayoutProps> = ({ children, actions, title }) => {
         <PageHeader
           style={{ paddingTop: '8px', paddingBottom: '8px' }}
           className={styles.header}
-          title={<div className={styles.title}>F12</div>}
+          title={
+            <div className={styles.title}>
+              {' '}
+              <MenuOutlined
+                onClick={() => setSideMenuCollapsed(!sideMenuCollapsed)}
+              />{' '}
+              F12
+            </div>
+          }
           subTitle={title && <span className={styles.appTitle}>{title}</span>}
           extra={[
             <span className={styles.appTitle} key={'sub-title'}>
@@ -46,7 +56,7 @@ export const App: React.FC<LayoutProps> = ({ children, actions, title }) => {
         ></PageHeader>
 
         <AntDLayout>
-          <SideMenu></SideMenu>
+          <SideMenu isCollapsed={sideMenuCollapsed}></SideMenu>
           <Content>
             <div
               className="site-layout-background"

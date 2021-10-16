@@ -1,12 +1,14 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import { Input, Layout, Menu, Typography } from 'antd';
+import { Input, Layout, Menu, Typography, Divider, Button } from 'antd';
 import { utilList } from '../../../pages/Utils/util-list';
 import { useLocation } from 'react-router';
+import style from './style.module.scss';
 
 const { Sider } = Layout;
-const SideMenu = () => {
+const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
   const [searchText, setTextSearch] = useState('');
+  const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
   const filteredMenu = useMemo(() => {
@@ -17,8 +19,17 @@ const SideMenu = () => {
       : utilList;
   }, [searchText]);
 
+  useEffect(() => {
+    if (isCollapsed) {
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
+    }
+  }, [isCollapsed]);
+
   return (
     <Sider
+      collapsed={collapsed}
       width={'340px'}
       style={{
         borderRight: '3px solid #f0f2f5',
@@ -45,10 +56,20 @@ const SideMenu = () => {
         {filteredMenu.map((li, index) => (
           <Menu.Item key={`/${li.path}`}>
             <Typography.Link href={`#/${li.path}`} style={{ fontSize: 18 }}>
-              {<li.icon style={{ fontSize: 18 }} />} {li.name}
+              {<li.icon style={{ fontSize: 18 }} />}
+              {!collapsed && <span>{li.name}</span>}
             </Typography.Link>
           </Menu.Item>
         ))}
+        <div className={style.menuBottomOptions}>
+          <Divider />
+          <div style={{ paddingLeft: 24 }}>
+            <Button size={'large'}>Rate us - 5 Stars</Button>
+          </div>
+          <div style={{ paddingLeft: 24 }}>
+            <Button size={'large'}>Submit an Idea</Button>
+          </div>
+        </div>
       </Menu>
     </Sider>
   );

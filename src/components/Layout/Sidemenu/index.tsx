@@ -9,7 +9,7 @@ const SideMenu = () => {
   const location = useLocation();
 
   return (
-    <Sider width={'340px'}>
+    <Sider width={'340px'} theme="light">
       <div className="logo" />
       <div style={{ width: '100%', padding: 10 }}>
         <Input
@@ -20,7 +20,7 @@ const SideMenu = () => {
         ></Input>
       </div>
       <Menu
-        theme="dark"
+        theme="light"
         mode="inline"
         defaultSelectedKeys={[location.pathname]}
       >

@@ -74,7 +74,11 @@ export const UriInspector = () => {
             onKeyDown={onKeyDown}
           ></Input.TextArea>
         </div>
-        <Button type="primary" onClick={() => parseUrl()}>
+        <Button
+          type="primary"
+          style={{ marginTop: 5 }}
+          onClick={() => parseUrl()}
+        >
           Inspect [Enter]
         </Button>
 

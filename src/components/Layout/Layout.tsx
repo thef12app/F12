@@ -59,7 +59,7 @@ export const App: React.FC<LayoutProps> = ({ children, actions, title }) => {
           <Content>
             <div
               className="site-layout-background"
-              style={{ padding: '0px 5px', minHeight: 360 }}
+              style={{ padding: '2px 5px', minHeight: 360 }}
             >
               <div className={styles.container}>
                 <Routes></Routes>

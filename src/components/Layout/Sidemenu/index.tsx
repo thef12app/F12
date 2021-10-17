@@ -86,6 +86,10 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
               type="link"
               size={'large'}
               icon={<StarOutlined style={{ fontSize: 24 }} />}
+              href={
+                'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf'
+              }
+              target="_blank"
             >
               Rate us - 5 Stars
             </Button>
@@ -93,7 +97,12 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
         )}
         {collapsed && (
           <div className={style.menuIcons}>
-            <Typography.Link>
+            <Typography.Link
+              href={
+                'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf'
+              }
+              target="_blank"
+            >
               <StarOutlined />
             </Typography.Link>
           </div>

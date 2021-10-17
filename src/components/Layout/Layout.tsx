@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { Suspense, useCallback, useMemo, useState } from 'react';
 import styles from './Layout.module.scss';
 import { utilList as _utilList } from '../../pages/Utils/util-list';
 
@@ -9,7 +9,7 @@ import { HashRouter } from 'react-router-dom';
 import 'antd/dist/antd.less';
 import '../../../utils/override.css';
 import SideMenu from './Sidemenu';
-import { MenuOutlined } from '@ant-design/icons';
+import { LoadingOutlined, MenuOutlined } from '@ant-design/icons';
 
 const utilList = _utilList.filter((u) => u.componentName);
 
@@ -62,7 +62,15 @@ export const App: React.FC<LayoutProps> = ({ children, actions, title }) => {
               style={{ padding: '2px 5px', minHeight: 360 }}
             >
               <div className={styles.container}>
-                <Routes></Routes>
+                <Suspense
+                  fallback={
+                    <div>
+                      <LoadingOutlined />
+                    </div>
+                  }
+                >
+                  <Routes></Routes>
+                </Suspense>
               </div>
             </div>
           </Content>

@@ -1,13 +1,42 @@
-import React from 'react';
+import React, { lazy } from 'react';
 
 import { Route, Switch } from 'react-router-dom';
-import { Formatter } from '../Formatter/Formatter';
-import { KeyCodeFinder } from '../KeyCodeFinder';
-import { UriInspector } from '../UriInspector/UriInspector';
-import { JwtEncoderDecoder } from '../JwtEncoderDecoder/JwtEncoderDecoder';
-import { Base64 } from '../base64/Base64';
-import { ImageToDataURI } from '../ImageToDataURI/ImageToDataURI';
-import { UnixTimeConverter } from '../UnixTimeConverter/UnixTimeConverter';
+
+const KeyCodeFinder = lazy(() =>
+  import('../KeyCodeFinder').then((module) => ({
+    default: module.KeyCodeFinder,
+  }))
+);
+const Formatter = lazy(() =>
+  import('../Formatter/Formatter').then((module) => ({
+    default: module.Formatter,
+  }))
+);
+const UriInspector = lazy(() =>
+  import('../UriInspector/UriInspector').then((module) => ({
+    default: module.UriInspector,
+  }))
+);
+const Base64 = lazy(() =>
+  import('../base64/Base64').then((module) => ({
+    default: module.Base64,
+  }))
+);
+const JwtEncoderDecoder = lazy(() =>
+  import('../JwtEncoderDecoder/JwtEncoderDecoder').then((module) => ({
+    default: module.JwtEncoderDecoder,
+  }))
+);
+const ImageToDataURI = lazy(() =>
+  import('../ImageToDataURI/ImageToDataURI').then((module) => ({
+    default: module.ImageToDataURI,
+  }))
+);
+const UnixTimeConverter = lazy(() =>
+  import('../UnixTimeConverter/UnixTimeConverter').then((module) => ({
+    default: module.UnixTimeConverter,
+  }))
+);
 
 export const Routes = () => {
   return (

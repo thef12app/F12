@@ -1,10 +1,11 @@
 {
   "manifest_version": 3,
   "name": "F12",
-  "sandbox": {
-    "pages": [
-      "sandbox.html"
-    ]
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "sandbox": {
+      "pages": ["sandbox.html"]
+    }
   },
   "action": {
     "default_popup": "popup.html",

@@ -60,6 +60,35 @@ export const fileToDataURI = (file: File) => {
   });
 };
 
+export const fileToBuffer = (file: File) => {
+  const reader = new FileReader();
+
+  return new Promise<ArrayBuffer>((resolve, reject) => {
+    const removeHandlers = () => {
+      reader.removeEventListener('load', progressHandler);
+      reader.removeEventListener('error', progressHandler);
+    };
+
+    const progressHandler = (evt: ProgressEvent<FileReader>) => {
+      if (evt.type === 'load') {
+        resolve(reader.result as ArrayBuffer);
+      }
+
+      if (evt.type === 'error') {
+        reject(new Error(reader.error?.message || 'Unknown error'));
+      }
+
+      if (evt.type === 'load' || evt.type === 'error') {
+        removeHandlers();
+      }
+    };
+
+    reader.addEventListener('load', progressHandler);
+    reader.addEventListener('error', progressHandler);
+    reader.readAsArrayBuffer(file);
+  });
+};
+
 export function tryJsonParse(json: string) {
   try {
     return JSON.parse(json);

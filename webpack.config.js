@@ -7,7 +7,8 @@ var webpack = require('webpack'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   TerserPlugin = require('terser-webpack-plugin'),
-  MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+  MonacoWebpackPlugin = require('monaco-editor-webpack-plugin'),
+  NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -122,8 +123,15 @@ var options = {
     extensions: fileExtensions
       .map((extension) => '.' + extension)
       .concat(['.js', '.jsx', '.ts', '.tsx', '.css']),
+    fallback: {
+      fs: false,
+    },
   },
   plugins: [
+    new NodePolyfillPlugin(),
+    new webpack.DefinePlugin({
+      'process.browser': 'true',
+    }),
     // Monaco from here: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
     new MonacoWebpackPlugin(),
     new webpack.ProgressPlugin(),

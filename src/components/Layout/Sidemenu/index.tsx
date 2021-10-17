@@ -77,55 +77,55 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
             </Typography.Link>
           </Menu.Item>
         ))}
-        <div className={style.menuBottomOptions}>
-          <Divider />
-          {!collapsed && (
-            <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
-              <Button
-                type="link"
-                size={'large'}
-                icon={<StarOutlined style={{ fontSize: 24 }} />}
-                href={
-                  'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf'
-                }
-                target="_blank"
-              >
-                Rate us - 5 Stars
-              </Button>
-            </div>
-          )}
-          {collapsed && (
-            <div className={style.menuIcons}>
-              <Typography.Link>
-                <StarOutlined />
-              </Typography.Link>
-            </div>
-          )}
-          {!collapsed && (
-            <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
-              <Button
-                type="link"
-                href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
-                target="_blank"
-                size={'large'}
-                icon={<BulbOutlined style={{ fontSize: 24 }} />}
-              >
-                Submit an Idea
-              </Button>
-            </div>
-          )}
-          {collapsed && (
-            <div className={style.menuIcons}>
-              <Typography.Link
-                href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
-                target="_blank"
-              >
-                <BulbOutlined />
-              </Typography.Link>
-            </div>
-          )}
-        </div>
       </Menu>
+      <div className={style.menuBottomOptions}>
+        <Divider />
+        {!collapsed && (
+          <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
+            <Button
+              type="link"
+              size={'large'}
+              icon={<StarOutlined style={{ fontSize: 24 }} />}
+              href={
+                'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf'
+              }
+              target="_blank"
+            >
+              Rate us - 5 Stars
+            </Button>
+          </div>
+        )}
+        {collapsed && (
+          <div className={style.menuIcons}>
+            <Typography.Link>
+              <StarOutlined />
+            </Typography.Link>
+          </div>
+        )}
+        {!collapsed && (
+          <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
+            <Button
+              type="link"
+              href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
+              target="_blank"
+              size={'large'}
+              icon={<BulbOutlined style={{ fontSize: 24 }} />}
+            >
+              Submit an Idea
+            </Button>
+          </div>
+        )}
+        {collapsed && (
+          <div className={style.menuIcons}>
+            <Typography.Link
+              href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
+              target="_blank"
+            >
+              <BulbOutlined />
+            </Typography.Link>
+          </div>
+        )}
+      </div>
     </Sider>
   );
 };

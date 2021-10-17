@@ -1,0 +1,36 @@
+.pageContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 4px;
+  position: relative;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.dupImgContainer,
+.originalImgContainer {
+  width: 50%;
+  height: 100%;
+}
+
+.originalSize,
+.compressedSize {
+  position: absolute;
+  bottom: 16px;
+  border-radius: 8px;
+  background-color: #303030;
+  border: 1px solid #fff;
+  color: white;
+}
+
+.originalSize {
+  left: 16px;
+}
+
+.compressedSize {
+  right: 16px;
+}

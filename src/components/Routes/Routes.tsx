@@ -37,6 +37,11 @@ const UnixTimeConverter = lazy(() =>
     default: module.UnixTimeConverter,
   }))
 );
+const DiffEditor = lazy(() =>
+  import('../DiffEditor/DiffEditor').then((module) => ({
+    default: module.DiffEditor,
+  }))
+);
 
 export const Routes = () => {
   return (
@@ -48,6 +53,8 @@ export const Routes = () => {
       <Route path="/jwt-decoder" component={JwtEncoderDecoder} />
       <Route path="/image2DataUri" component={ImageToDataURI} />
       <Route path="/unix-time-converter" component={UnixTimeConverter} />
+      <Route path="/DiffTool" component={DiffEditor} />
+      {/* <Route path="/imageOptimizer" component={ImageOptimizer} /> */}
       <Route render={() => <div>Coming soon...</div>} />
     </Switch>
   );

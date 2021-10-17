@@ -1,8 +1,7 @@
-import React, { Suspense, useCallback, useMemo, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import styles from './Layout.module.scss';
-import { utilList as _utilList } from '../../pages/Utils/util-list';
 
-import { Input, Layout as AntDLayout, Menu, PageHeader } from 'antd';
+import { Layout as AntDLayout, PageHeader } from 'antd';
 import { Routes } from '../Routes/Routes';
 import { HashRouter } from 'react-router-dom';
 
@@ -11,25 +10,14 @@ import '../../../utils/override.css';
 import SideMenu from './Sidemenu';
 import { LoadingOutlined, MenuOutlined } from '@ant-design/icons';
 
-const utilList = _utilList.filter((u) => u.componentName);
-
-const { Content, Footer } = AntDLayout;
+const { Content } = AntDLayout;
 export interface LayoutProps {
   actions?: React.ReactNode;
   title?: string;
 }
 
-export const App: React.FC<LayoutProps> = ({ children, actions, title }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+export const App: React.FC<LayoutProps> = ({ title }) => {
   const [sideMenuCollapsed, setSideMenuCollapsed] = useState(false);
-  const openMenu = useCallback(() => {
-    setMenuOpen(true);
-  }, []);
-  const closeMenu = useCallback(() => {
-    setTimeout(() => {
-      setMenuOpen(false);
-    }, 300);
-  }, []);
 
   return (
     <HashRouter>

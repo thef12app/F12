@@ -6,11 +6,9 @@ const Popup = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const list = useMemo(
     () =>
-      utilList
-        .filter((u) => u.componentName)
-        .filter(
-          (u) => !searchTerm || u.name.toLowerCase().includes(searchTerm)
-        ),
+      utilList.filter(
+        (u) => !searchTerm || u.name.toLowerCase().includes(searchTerm)
+      ),
     [searchTerm]
   );
   const [selectedItem, setSelectedItem] = useState<any>(null);

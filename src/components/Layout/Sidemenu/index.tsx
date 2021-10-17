@@ -85,6 +85,10 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
                 type="link"
                 size={'large'}
                 icon={<StarOutlined style={{ fontSize: 24 }} />}
+                href={
+                  'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf'
+                }
+                target="_blank"
               >
                 Rate us - 5 Stars
               </Button>

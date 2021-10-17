@@ -2,7 +2,6 @@ import React, { useCallback, useMemo, useState } from 'react';
 import styles from './Layout.module.scss';
 import { utilList as _utilList } from '../../pages/Utils/util-list';
 
-import ratingIcon from '../../assets/img/ratings.png';
 import { Input, Layout as AntDLayout, Menu, PageHeader } from 'antd';
 import { Routes } from '../Routes/Routes';
 import { HashRouter } from 'react-router-dom';

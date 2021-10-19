@@ -87,7 +87,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
               size={'large'}
               icon={<StarOutlined style={{ fontSize: 24 }} />}
               href={
-                'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf'
+                'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf/reviews'
               }
               target="_blank"
             >
@@ -99,7 +99,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
           <div className={style.menuIcons}>
             <Typography.Link
               href={
-                'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf'
+                'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf/reviews'
               }
               target="_blank"
             >
@@ -111,7 +111,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
           <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
             <Button
               type="link"
-              href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
+              href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas/idea/new"
               target="_blank"
               size={'large'}
               icon={<BulbOutlined style={{ fontSize: 24 }} />}
@@ -123,7 +123,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
         {collapsed && (
           <div className={style.menuIcons}>
             <Typography.Link
-              href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
+              href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas/idea/new"
               target="_blank"
             >
               <BulbOutlined />

@@ -1,3 +1,5 @@
+import { BulbOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 import React, { useMemo, useState } from 'react';
 import { utilList } from '../Utils/util-list';
 import styles from './Popup.module.scss';
@@ -46,9 +48,7 @@ const Popup = () => {
   return (
     <div className={styles.popupContainer}>
       <div className={styles.menuTitle}>
-        <div>
-          F<span className={styles.twelve}>12</span>
-        </div>
+        <div>F12</div>
         <div className={styles.subTitle}>The all in one Dev Toolbox</div>
       </div>
       <div className={styles.menuSearchContainer}>
@@ -74,12 +74,16 @@ const Popup = () => {
         ))}
       </div>
       <div className={styles.footer}>
-        <a
-          href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas"
+        <Button
+          type="link"
+          href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas/idea/new"
           target="_blank"
+          size={'large'}
+          icon={<BulbOutlined style={{ fontSize: 24 }} />}
+          style={{ color: 'black' }}
         >
-          Request for a feature
-        </a>
+          Submit an Idea
+        </Button>
       </div>
     </div>
   );

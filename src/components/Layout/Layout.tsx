@@ -21,7 +21,7 @@ export const App: React.FC<LayoutProps> = ({ title }) => {
 
   return (
     <HashRouter>
-      <AntDLayout>
+      <AntDLayout style={{ height: '100vh' }}>
         <PageHeader
           style={{ paddingTop: '8px', paddingBottom: '8px' }}
           className={styles.header}

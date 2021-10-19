@@ -14,34 +14,34 @@
 
 .menuItem {
   padding: 8px;
-  background-color: #fafaff;
   cursor: pointer;
-  transition: 0.4s ease all;
+  transition: 0.1s ease all;
   border-radius: 4px;
+  font-size: 14px;
 
-  & + & {
-    margin-top: 4px;
+  &:hover {
+    background-color: #f0f0f0;
   }
 
-  &.selectedMenu,
-  &:hover {
-    background-color: #ccc;
+  &.selectedMenu {
+    background-color: #dde9eb;
   }
 }
 
 .menuTitle {
-  font-size: 18px;
-  background-color: #303030;
+  font-size: 20px;
+  background-color: #fff;
   margin: -16px;
   margin-bottom: 0;
   padding: 4px 16px;
-  color: #f0f0f0;
+  color: #000;
   font-weight: 300;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .subTitle {
   font-size: 12px;
-  color: #bbb;
+  color: #999;
 }
 
 .menuSearchContainer {
@@ -56,16 +56,11 @@
 
 .footer {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
   position: fixed;
   bottom: 0;
   left: 0;
-  padding: 0 16px;
+  padding: 8px 16px;
   text-align: center;
-}
-
-.twelve {
-  color: #8c8cff;
-  font-weight: 400;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 14px;
 }

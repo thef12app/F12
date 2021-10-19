@@ -1,10 +1,36 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import { Input, Layout, Menu, Typography, Divider, Button } from 'antd';
+import {
+  Input,
+  Layout,
+  Menu as AntMenu,
+  Typography,
+  Divider,
+  Button,
+} from 'antd';
+import styled from 'styled-components';
 import { utilList } from '../../../pages/Utils/util-list';
 import { useLocation } from 'react-router';
 import style from './style.module.scss';
 import { BulbOutlined, SearchOutlined, StarOutlined } from '@ant-design/icons';
+
+const Menu = styled(AntMenu)`
+  .ant-menu-item::after {
+    content: none;
+  }
+
+  .ant-menu-item:not(:last-child),
+  .ant-menu-item {
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .ant-menu-item:hover {
+    background-color: #f5f5f5;
+  }
+`;
 
 const { Sider } = Layout;
 const SideMenu: React.FC<{

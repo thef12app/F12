@@ -7,9 +7,11 @@ import style from './style.module.scss';
 import { BulbOutlined, SearchOutlined, StarOutlined } from '@ant-design/icons';
 
 const { Sider } = Layout;
-const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
+const SideMenu: React.FC<{
+  isCollapsed: boolean;
+  setCollapsed: (param: boolean) => void;
+}> = ({ isCollapsed, setCollapsed }) => {
   const [searchText, setTextSearch] = useState('');
-  const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
   const filteredMenu = useMemo(() => {
@@ -30,7 +32,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
 
   return (
     <Sider
-      collapsed={collapsed}
+      collapsed={isCollapsed}
       width={'340px'}
       style={{
         borderRight: '3px solid #f0f2f5',
@@ -39,7 +41,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
     >
       <div className="logo" />
       <div style={{ width: '100%', padding: 10 }}>
-        {!collapsed && (
+        {!isCollapsed && (
           <Input
             onChange={(event: any) => {
               setTextSearch(event.target.value);
@@ -50,7 +52,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
             allowClear
           ></Input>
         )}{' '}
-        {collapsed && (
+        {isCollapsed && (
           <SearchOutlined
             onClick={() => setCollapsed(false)}
             style={{
@@ -80,7 +82,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
       </Menu>
       <div className={style.menuBottomOptions}>
         <Divider />
-        {!collapsed && (
+        {!isCollapsed && (
           <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
             <Button
               type="link"
@@ -95,7 +97,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
             </Button>
           </div>
         )}
-        {collapsed && (
+        {isCollapsed && (
           <div className={style.menuIcons}>
             <Typography.Link
               href={
@@ -107,7 +109,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
             </Typography.Link>
           </div>
         )}
-        {!collapsed && (
+        {!isCollapsed && (
           <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
             <Button
               type="link"
@@ -120,7 +122,7 @@ const SideMenu: React.FC<{ isCollapsed: boolean }> = ({ isCollapsed }) => {
             </Button>
           </div>
         )}
-        {collapsed && (
+        {isCollapsed && (
           <div className={style.menuIcons}>
             <Typography.Link
               href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas/idea/new"

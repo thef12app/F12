@@ -43,7 +43,10 @@ export const App: React.FC<LayoutProps> = ({ title }) => {
         ></PageHeader>
 
         <AntDLayout>
-          <SideMenu isCollapsed={sideMenuCollapsed}></SideMenu>
+          <SideMenu
+            isCollapsed={sideMenuCollapsed}
+            setCollapsed={setSideMenuCollapsed}
+          ></SideMenu>
           <Content>
             <div
               className="site-layout-background"

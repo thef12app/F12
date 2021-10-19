@@ -18,7 +18,7 @@ export const KeyCodeFinder = () => {
   }, []);
 
   const captureKey = (event: KeyboardEvent) => {
-    const { metaKey, location, code, key, altKey } = event;
+    const { metaKey, location, code, key, altKey, which } = event;
     const keyLocations = {
       0: 'General keys',
       1: 'Left-side modifier keys',
@@ -34,6 +34,7 @@ export const KeyCodeFinder = () => {
       code,
       key,
       metaKey,
+      which,
     };
     if (metaKey) {
       keyCode.renderedCode = `${code} (Command ⌘ / Windows Key ⊞)`;
@@ -75,6 +76,7 @@ export const KeyCodeFinder = () => {
                   code: keyCode.code,
                   location: keyCode.location,
                   metaKey: keyCode.metaKey,
+                  'which (deprecated)': keyCode.which,
                 },
                 null,
                 2

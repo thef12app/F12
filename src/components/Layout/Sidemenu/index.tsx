@@ -62,6 +62,7 @@ const SideMenu: React.FC<{
       width={'340px'}
       style={{
         borderRight: '3px solid #f0f2f5',
+        paddingBottom: 135,
       }}
       theme="light"
     >
@@ -93,7 +94,11 @@ const SideMenu: React.FC<{
         theme="light"
         mode="inline"
         defaultSelectedKeys={[location.pathname]}
-        style={{ borderRight: 'none' }}
+        style={{
+          borderRight: 'none',
+          overflow: 'auto',
+          height: 'calc(100% - 64px)',
+        }}
       >
         {filteredMenu.map((li, index) => (
           <Menu.Item
@@ -107,7 +112,7 @@ const SideMenu: React.FC<{
         ))}
       </Menu>
       <div className={style.menuBottomOptions}>
-        <Divider />
+        <Divider style={{ marginTop: 8 }} />
         {!isCollapsed && (
           <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
             <Button

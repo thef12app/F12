@@ -44,9 +44,14 @@ export const Formatter = () => {
     if (editor) {
       const value = editor.getValue().trim();
       const formatted = await formatWithPrettier(value, language);
-      if (formatted && formatted.formatted !== value) {
+      if (formatted && formatted.formatted.trim() !== value.trim()) {
+        console.log(`'${formatted.formatted}'`, `'${value}'`);
+
         editor.setValue(formatted.formatted);
         setDetectedLanguage(formatted.fileType);
+        message.success('Formatted!');
+      } else {
+        message.info('Code Already formatted');
       }
     }
   };
@@ -89,26 +94,10 @@ export const Formatter = () => {
   return (
     <>
       <div className={styles.jsonEditor}>
-        <div className={styles.actionBtnContainer}>
-          <Button
-            type="primary"
-            ghost
-            onClick={format}
-            icon={<CheckOutlined />}
-            size="middle"
-          >
-            Format
-          </Button>
-          <Button
-            type="default"
-            onClick={copyToClipboard}
-            icon={<CopyOutlined />}
-            size="middle"
-          >
-            Copy
-          </Button>
-        </div>
-
+        <MonacoEditor
+          onEditorCreate={onEditorCreate}
+          wrapperClass={styles.editorRoot}
+        />
         <div className={styles.languageSelectWrapper}>
           <Dropdown overlay={menu} placement="topRight">
             <Button size="small" style={{ fontSize: 12 }}>
@@ -120,10 +109,20 @@ export const Formatter = () => {
             </Button>
           </Dropdown>
         </div>
-        <MonacoEditor
-          onEditorCreate={onEditorCreate}
-          wrapperClass={styles.editorRoot}
-        />
+        <div className={styles.actionBtnContainer}>
+          <Button
+            title="Format"
+            onClick={format}
+            icon={<CheckOutlined />}
+            type="text"
+          ></Button>
+          <Button
+            title="Copy to Clipboard"
+            onClick={copyToClipboard}
+            icon={<CopyOutlined />}
+            type="text"
+          ></Button>
+        </div>
       </div>
     </>
   );

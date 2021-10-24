@@ -1,18 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 
-import {
-  Input,
-  Layout,
-  Menu as AntMenu,
-  Typography,
-  Divider,
-  Button,
-} from 'antd';
+import { Input, Layout, Menu as AntMenu, Typography, Divider } from 'antd';
 import styled from 'styled-components';
 import { utilList } from '../../../pages/Utils/util-list';
 import { useLocation } from 'react-router';
 import style from './style.module.scss';
 import { BulbOutlined, SearchOutlined, StarOutlined } from '@ant-design/icons';
+import { GradientButton } from '../../core/GradientButton';
 
 const Menu = styled(AntMenu)`
   .ant-menu-item::after {
@@ -62,7 +56,7 @@ const SideMenu: React.FC<{
       width={'340px'}
       style={{
         borderRight: '3px solid #f0f2f5',
-        paddingBottom: 135,
+        paddingBottom: 154,
       }}
       theme="light"
     >
@@ -96,7 +90,8 @@ const SideMenu: React.FC<{
         defaultSelectedKeys={[location.pathname]}
         style={{
           borderRight: 'none',
-          overflow: 'auto',
+          overflowY: 'auto',
+          overflowX: 'hidden',
           height: 'calc(100% - 64px)',
         }}
       >
@@ -112,20 +107,33 @@ const SideMenu: React.FC<{
         ))}
       </Menu>
       <div className={style.menuBottomOptions}>
-        <Divider style={{ marginTop: 8 }} />
+        <Divider style={{ marginTop: 8, marginBottom: 20 }} />
         {!isCollapsed && (
-          <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
-            <Button
-              type="link"
-              size={'large'}
-              icon={<StarOutlined style={{ fontSize: 24 }} />}
+          // <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
+          //   <Button
+          //     type="link"
+          //     size={'large'}
+          //     icon={<StarOutlined style={{ fontSize: 24 }} />}
+          //     href={
+          //       'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf/reviews'
+          //     }
+          //     target="_blank"
+          //   >
+          //     Rate us - 5 Stars
+          //   </Button>
+          // </div>
+          <div style={{ marginBottom: 20 }}>
+            <GradientButton
+              icon={<StarOutlined />}
+              gradient={'linear-gradient(to right, #005484, #B02091)'}
               href={
                 'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf/reviews'
               }
               target="_blank"
+              style={{ width: 254 }}
             >
               Rate us - 5 Stars
-            </Button>
+            </GradientButton>
           </div>
         )}
         {isCollapsed && (
@@ -141,16 +149,27 @@ const SideMenu: React.FC<{
           </div>
         )}
         {!isCollapsed && (
-          <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
-            <Button
-              type="link"
+          // <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
+          //   <Button
+          //     type="link"
+          //     href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas/idea/new"
+          //     target="_blank"
+          //     size={'large'}
+          //     icon={<BulbOutlined style={{ fontSize: 24 }} />}
+          //   >
+          //     Submit an Idea
+          //   </Button>
+          // </div>
+          <div style={{ marginBottom: 20 }}>
+            <GradientButton
               href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas/idea/new"
               target="_blank"
-              size={'large'}
-              icon={<BulbOutlined style={{ fontSize: 24 }} />}
+              gradient="linear-gradient(to right, #AB0000, #0085FF)"
+              icon={<BulbOutlined />}
+              style={{ width: 254 }}
             >
               Submit an Idea
-            </Button>
+            </GradientButton>
           </div>
         )}
         {isCollapsed && (

@@ -13,6 +13,19 @@ const Menu = styled(AntMenu)`
     content: none;
   }
 
+  .ant-menu-item {
+    display: flex;
+    align-items: center;
+  }
+
+  &.ant-menu-inline-collapsed > .ant-menu-item .ant-menu-item-icon {
+    line-height: 0;
+  }
+
+  .ant-menu-item-icon + span {
+    margin-left: 16px;
+  }
+
   .ant-menu-item:not(:last-child),
   .ant-menu-item {
     margin-top: 0;
@@ -98,7 +111,7 @@ const SideMenu: React.FC<{
         {filteredMenu.map((li, index) => (
           <Menu.Item
             key={`/${li.path}`}
-            icon={<li.icon style={{ fontSize: 24 }} />}
+            icon={<li.icon style={{ fontSize: 24, color: '#03577B' }} />}
           >
             <Typography.Link href={`#/${li.path}`} style={{ fontSize: 18 }}>
               {<span>{li.name}</span>}

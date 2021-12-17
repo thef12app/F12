@@ -17,7 +17,7 @@ const Popup = () => {
 
   const openApp = (route: string) => {
     chrome.tabs.create({
-      url: `index.html/#/${route}`,
+      url: `index.html#/${route}`,
     });
   };
 

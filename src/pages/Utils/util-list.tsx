@@ -7,6 +7,7 @@ import {
   PictureOutlined,
   SecurityScanOutlined,
   DiffOutlined,
+  FileUnknownOutlined,
   // CompressOutlined,
 } from '@ant-design/icons';
 
@@ -56,4 +57,10 @@ export const utilList = [
   //   path: 'imageOptimizer',
   //   icon: CompressOutlined,
   // },
+  {
+    name:'RegExp',
+    icon: FileUnknownOutlined,
+    path:'RegExp',
+  },
+  // end of list
 ];

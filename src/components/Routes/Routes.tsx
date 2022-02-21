@@ -43,6 +43,11 @@ const DiffEditor = lazy(() =>
   }))
 );
 
+const RegExp = lazy(() =>
+  import('../RegExp').then((module) => ({
+    default: module.RegExp,
+ }))
+);
 export const Routes = () => {
   return (
     <Switch>
@@ -55,6 +60,7 @@ export const Routes = () => {
       <Route path="/unix-time-converter" component={UnixTimeConverter} />
       <Route path="/DiffTool" component={DiffEditor} />
       {/* <Route path="/imageOptimizer" component={ImageOptimizer} /> */}
+      <Route path='/RegExp' component={RegExp} />
       <Route render={() => <div>Coming soon...</div>} />
     </Switch>
   );

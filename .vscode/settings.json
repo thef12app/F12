@@ -1,7 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "cSpell.words": [
-    "Formik",
-    "Sider"
-  ]
+  "cSpell.words": ["Formik", "Sider"],
+  "editor.renderWhitespace": "all"
 }

@@ -18,3 +18,7 @@
 .ant-tooltip-inner a {
   color: white;
 }
+
+.highlight-line {
+  background-color: yellow;
+}

@@ -62,5 +62,10 @@ export const utilList = [
     icon: FileUnknownOutlined,
     path:'RegExp',
   },
+  {
+    name:'test',
+    icon: FileUnknownOutlined,
+    path:'test',
+  },
   // end of list
 ];

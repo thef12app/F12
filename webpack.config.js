@@ -35,6 +35,7 @@ if (fileSystem.existsSync(secretsPath)) {
   alias['secrets'] = secretsPath;
 }
 
+/** @type { import('webpack').Configuration } */
 var options = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
@@ -83,15 +84,14 @@ var options = {
         loader: '@svgr/webpack',
         exclude: /node_modules/,
       },
-      { test: /\.(ts|tsx)$/, loader: 'ts-loader', exclude: /node_modules/ },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         use: [
           {
-            loader: 'source-map-loader',
-          },
-          {
             loader: 'babel-loader',
+            options: {
+              sourceMaps: 'inline',
+            },
           },
         ],
         exclude: /node_modules/,
@@ -204,7 +204,7 @@ var options = {
 };
 
 if (env.NODE_ENV === 'development') {
-  options.devtool = 'cheap-module-source-map';
+  options.devtool = 'inline-source-map';
 } else {
   options.optimization = {
     minimize: true,

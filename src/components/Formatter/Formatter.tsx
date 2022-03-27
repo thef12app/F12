@@ -4,7 +4,7 @@ import { startCase } from 'lodash';
 import { editor as monacoEditor } from 'monaco-editor';
 import styles from './Formatter.module.scss';
 import copy from 'copy-to-clipboard';
-import { Button, Dropdown, Menu, message } from 'antd';
+import { Button, Dropdown, Menu, message, Tooltip } from 'antd';
 import { MonacoEditor } from '../MonacoEditor/MonacoEditor';
 import { CheckOutlined, CopyOutlined, DownOutlined } from '@ant-design/icons';
 import {
@@ -110,18 +110,22 @@ export const Formatter = () => {
           </Dropdown>
         </div>
         <div className={styles.actionBtnContainer}>
-          <Button
-            title="Format"
-            onClick={format}
-            icon={<CheckOutlined />}
-            type="text"
-          ></Button>
-          <Button
-            title="Copy to Clipboard"
-            onClick={copyToClipboard}
-            icon={<CopyOutlined />}
-            type="text"
-          ></Button>
+          <Tooltip title="Format" placement="left">
+            <Button
+              title="Format"
+              onClick={format}
+              icon={<CheckOutlined />}
+              type="text"
+            ></Button>
+          </Tooltip>
+          <Tooltip title="Copy" placement="left">
+            <Button
+              title="Copy to Clipboard"
+              onClick={copyToClipboard}
+              icon={<CopyOutlined />}
+              type="text"
+            ></Button>
+          </Tooltip>
         </div>
       </div>
     </>

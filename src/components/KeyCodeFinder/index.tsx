@@ -1,6 +1,54 @@
-import React, { createRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { Tooltip, Typography } from 'antd';
+import { WindowsFilled, CheckCircleOutlined } from '@ant-design/icons';
+import copy from 'copy-to-clipboard';
+
 import style from './keycode.module.scss';
-import { Button } from 'antd';
+
+const CopyableEventProp: React.FC<{
+  keyName: string;
+  value: string;
+  keyDescription?: string;
+  comma?: boolean;
+}> = ({ keyName, value: _value, comma = false, keyDescription }) => {
+  const value = String(_value);
+  const [timeoutId, setTimeoutId] = useState<number>();
+  const [copied, setCopied] = useState(false);
+
+  const copyValue = () => {
+    if (timeoutId != null) {
+      clearTimeout(timeoutId);
+    }
+    const valueToCopy = typeof _value === 'string' ? `"${value}"` : value;
+
+    copy(`event.${keyName.trim()} === ${valueToCopy}`);
+    setCopied(true);
+
+    const id = window.setTimeout(() => {
+      setCopied(false);
+    }, 500);
+    setTimeoutId(id);
+  };
+  return (
+    <pre onClick={copyValue} className={style.codeLine}>
+      {keyName}
+      {keyDescription && ` (${keyDescription})`}:{' '}
+      <Tooltip
+        visible={copied}
+        title={
+          <span>
+            <CheckCircleOutlined /> Copied
+          </span>
+        }
+        placement="right"
+      >
+        <span>{value}</span>
+        {comma && ','}
+      </Tooltip>
+    </pre>
+  );
+};
 
 export const KeyCodeFinder = () => {
   const [keyCode, setKeyCode] = useState<any>(null);
@@ -18,7 +66,8 @@ export const KeyCodeFinder = () => {
   }, []);
 
   const captureKey = (event: KeyboardEvent) => {
-    const { metaKey, location, code, key, altKey, which } = event;
+    const { metaKey, location, code, key, altKey, which, shiftKey, ctrlKey } =
+      event;
     const keyLocations = {
       0: 'General keys',
       1: 'Left-side modifier keys',
@@ -27,21 +76,32 @@ export const KeyCodeFinder = () => {
     };
     if (event.isComposing || event.keyCode === 229) return;
 
+    event.preventDefault();
     const keyCode = {
-      location: location,
       renderedLocation: keyLocations[location as 1 | 2 | 3 | 0],
-      renderedCode: `${code} `,
+      renderedCode: <span>{code}</span>,
+      location,
       code,
       key,
       metaKey,
+      altKey,
       which,
+      ctrlKey,
+      shiftKey,
     };
+
     if (metaKey) {
-      keyCode.renderedCode = `${code} (Command ⌘ / Windows Key ⊞)`;
+      keyCode.renderedCode = (
+        <span>
+          {code} (Command ⌘ / Windows Key <WindowsFilled />)
+        </span>
+      );
     }
+
     if (altKey) {
-      keyCode.renderedCode = `${code} ( Option / Alt) `;
+      keyCode.renderedCode = <span>{code} (Option ⌥ / Alt)</span>;
     }
+
     setKeyCode(keyCode);
   };
   return (
@@ -68,20 +128,47 @@ export const KeyCodeFinder = () => {
 
         {keyCode && (
           <div className={style.jsonObject}>
-            <pre>
-              event:{' '}
-              {JSON.stringify(
-                {
-                  key: keyCode.key,
-                  code: keyCode.code,
-                  location: keyCode.location,
-                  metaKey: keyCode.metaKey,
-                  'which (deprecated)': keyCode.which,
-                },
-                null,
-                2
-              )}
+            <pre className={style.code}>
+              {'{'}
+              <CopyableEventProp value={keyCode.key} keyName={'  key'} comma />
+              <CopyableEventProp
+                value={keyCode.code}
+                keyName={'  code'}
+                comma
+              />
+              <CopyableEventProp
+                value={keyCode.location}
+                keyName={'  location'}
+                comma
+              />
+              <CopyableEventProp
+                value={keyCode.which}
+                keyName={'  which'}
+                keyDescription="deprecated"
+                comma
+              />
+              <pre className={style.codeLine}>{'\n  '}/* Modifier Keys */</pre>
+              <CopyableEventProp
+                value={keyCode.metaKey}
+                keyName={'  metaKey'}
+                comma
+              />
+              <CopyableEventProp
+                value={keyCode.shiftKey}
+                keyName={'  shiftKey'}
+                comma
+              />
+              <CopyableEventProp
+                value={keyCode.ctrlKey}
+                keyName={'  ctrlKey'}
+                comma
+              />
+              <CopyableEventProp value={keyCode.altKey} keyName={'  altKey'} />
+              {'}'}
             </pre>
+            <Typography.Text type="secondary" className={style.copyHint}>
+              Click fields to copy condition
+            </Typography.Text>
           </div>
         )}
       </div>

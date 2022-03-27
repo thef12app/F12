@@ -6,15 +6,35 @@
   color: #666;
   flex-direction: column;
   font-size: 32px;
+
   .keycodeCard {
     text-align: center;
   }
+
   .jsonObject {
     display: flex;
+    flex-direction: column;
     font-size: 16px;
     justify-self: end;
-    margin-top: 10%;
+    margin-top: 64px;
     font-size: 24px;
     color: #666;
+    background: linear-gradient(115.41deg, #efefef 0%, #e9fafa 100%);
+    border-radius: 8px;
+    padding: 20px;
   }
+}
+
+.codeLine {
+  margin: 0;
+  cursor: pointer;
+}
+
+.code {
+  margin: 0;
+}
+
+.copyHint {
+  font-size: 12px;
+  text-align: center;
 }

@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "node utils/build.js",
-    "start": "node utils/webserver.js",
+    "start": "NODE_ENV='development' node utils/webserver.js",
     "prettier": "prettier --write '**/*.{js,jsx,css,html}'",
     "update:images": "node utils/pexels/getImages"
   },
@@ -50,6 +50,7 @@
     "@types/prettier": "^2.4.1",
     "@types/react-router-dom": "^5.3.0",
     "@types/url-parse": "^1.4.4",
+    "@types/webpack": "^5.28.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-preset-react-app": "^10.0.0",

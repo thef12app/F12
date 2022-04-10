@@ -36,7 +36,7 @@ export const App: React.FC<LayoutProps> = ({ title }) => {
           }
           subTitle={title && <span className={styles.appTitle}>{title}</span>}
           extra={[
-            <span className={styles.appTitle} key={'sub-title'}>
+            <span className={styles.tagLine} key={'sub-title'}>
               The All in One Dev Toolbox
             </span>,
           ]}

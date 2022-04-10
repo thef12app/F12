@@ -30,8 +30,8 @@ const Menu = styled(AntMenu)`
   .ant-menu-item {
     margin-top: 0;
     margin-bottom: 0;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
   }
 
   .ant-menu-item:hover {
@@ -68,7 +68,7 @@ const SideMenu: React.FC<{
       collapsed={isCollapsed}
       width={'340px'}
       style={{
-        borderRight: '3px solid #f0f2f5',
+        borderRight: '1px solid #E9E9E9',
         paddingBottom: 154,
       }}
       theme="light"
@@ -82,7 +82,7 @@ const SideMenu: React.FC<{
             }}
             placeholder="Search"
             type="search"
-            style={{ padding: 10 }}
+            style={{ padding: 8 }}
             allowClear
           ></Input>
         )}{' '}
@@ -111,9 +111,9 @@ const SideMenu: React.FC<{
         {filteredMenu.map((li, index) => (
           <Menu.Item
             key={`/${li.path}`}
-            icon={<li.icon style={{ fontSize: 24, color: '#03577B' }} />}
+            icon={<li.icon style={{ fontSize: 18, color: '#03577B' }} />}
           >
-            <Typography.Link href={`#/${li.path}`} style={{ fontSize: 18 }}>
+            <Typography.Link href={`#/${li.path}`} style={{ fontSize: 14 }}>
               {<span>{li.name}</span>}
             </Typography.Link>
           </Menu.Item>

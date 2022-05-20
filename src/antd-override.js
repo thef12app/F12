@@ -1,11 +1,13 @@
 const antdCustomTheme = {
-  'primary-color': '#4C8EAB',
-  'layout-sider-background': '#303030',
-  'menu-dark-bg': '#303030',
-  'layout-body-background': 'white',
-  'link-color': '#03577B',
-  'border-radius-base': '4px',
-  'font-family': `'Poppins',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif`,
+  'ant-prefix': 'f12',
+  // 'primary-color': 'black',
+  // 'layout-sider-background': '#303030',
+  // 'menu-highlight-color': '',
+  // 'menu-dark-bg': '#303030',
+  // 'layout-body-background': 'white',
+  // 'link-color': '#03577B',
+  'border-radius-base': '0px',
+  'font-family': `-apple-system,system-ui,"Segoe UI", Ubuntu,Roboto,"Open Sans","Helvetica Neue"`,
 };
 
 module.exports = antdCustomTheme;

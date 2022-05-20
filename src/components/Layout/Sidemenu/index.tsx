@@ -9,32 +9,32 @@ import { BulbOutlined, SearchOutlined, StarOutlined } from '@ant-design/icons';
 import { GradientButton } from '../../core/GradientButton';
 
 const Menu = styled(AntMenu)`
-  .ant-menu-item::after {
+  .f12-menu-item::after {
     content: none;
   }
 
-  .ant-menu-item {
+  .f12-menu-item {
     display: flex;
     align-items: center;
   }
 
-  &.ant-menu-inline-collapsed > .ant-menu-item .ant-menu-item-icon {
+  &.f12-menu-inline-collapsed > .f12-menu-item .f12-menu-item-icon {
     line-height: 0;
   }
 
-  .ant-menu-item-icon + span {
+  .f12-menu-item-icon + span {
     margin-left: 16px;
   }
 
-  .ant-menu-item:not(:last-child),
-  .ant-menu-item {
+  .f12-menu-item:not(:last-child),
+  .f12-menu-item {
     margin-top: 0;
     margin-bottom: 0;
     height: 40px;
     line-height: 40px;
   }
 
-  .ant-menu-item:hover {
+  .f12-menu-item:hover {
     background-color: #f5f5f5;
   }
 `;
@@ -66,7 +66,7 @@ const SideMenu: React.FC<{
   return (
     <Sider
       collapsed={isCollapsed}
-      width={'340px'}
+      width={'260px'}
       style={{
         borderRight: '1px solid #E9E9E9',
         paddingBottom: 154,
@@ -111,9 +111,12 @@ const SideMenu: React.FC<{
         {filteredMenu.map((li, index) => (
           <Menu.Item
             key={`/${li.path}`}
-            icon={<li.icon style={{ fontSize: 18, color: '#03577B' }} />}
+            icon={<li.icon style={{ fontSize: 18 }} />}
           >
-            <Typography.Link href={`#/${li.path}`} style={{ fontSize: 14 }}>
+            <Typography.Link
+              href={`#/${li.path}`}
+              style={{ fontSize: 14, color: 'inherit' }}
+            >
               {<span>{li.name}</span>}
             </Typography.Link>
           </Menu.Item>

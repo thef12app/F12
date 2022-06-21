@@ -5,7 +5,7 @@ import { iteratorToArray } from '../../utils';
 import styles from './UriInspector.module.scss';
 import { UriPartsRenderer } from './UriPartsRenderer';
 import { UriEditor } from './UriEditor';
-import { Button, Input } from 'antd';
+import { Textarea, Button, Spacer } from '@nextui-org/react';
 
 export const UriInspector = () => {
   const [url, setUrl] = useState('');
@@ -64,18 +64,23 @@ export const UriInspector = () => {
     <>
       <div className={styles.pageWrapper}>
         <div className={styles.uriInputWrapper}>
-          <Input.TextArea
+          <Textarea
             name="url-input"
-            className={styles.uriInput}
             rows={4}
-            placeholder="Paste your URL here..."
+            labelPlaceholder="Paste your URL here"
+            placeholder="Paste your URL here"
             autoFocus
             onChange={(e) => setUrl(e.target.value)}
             onKeyDown={onKeyDown}
-          ></Input.TextArea>
+            style={{ width: '700px' }}
+            css={{ w: '100%' }}
+            bordered
+          ></Textarea>
         </div>
+        <Spacer y={1}></Spacer>
         <Button
-          type="primary"
+          flat
+          bordered
           style={{ marginTop: 5 }}
           onClick={() => parseUrl()}
         >

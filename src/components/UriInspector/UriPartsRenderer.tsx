@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import copyToClipboard from 'copy-to-clipboard';
 import styles from './UriInspector.module.scss';
 import { composeURL } from '../../utils';
-import { Button } from 'antd';
+import { Button, Spacer } from '@nextui-org/react';
 
 export interface UriPartsRendererProps {
   parsedUrl: any;
@@ -70,6 +70,7 @@ export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({
 
   return (
     <div className={styles.urlPartsContainer}>
+      <Spacer y={1}></Spacer>
       {protocol && (
         <span>
           <span className={styles.urlPart} title="Protocol">
@@ -113,7 +114,8 @@ export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({
       {hash && <span className={styles.urlPart}>{hash}</span>}
       <div>
         <Button
-          type="default"
+          bordered
+          size={'sm'}
           onClick={_copyToClipboard}
           className={styles.copyToClipboardBtn}
         >

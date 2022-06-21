@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { editor as monacoEditor } from 'monaco-editor';
 import styles from './DiffEditor.module.scss';
+import { useTheme } from '@nextui-org/react';
+import useDarkMode from 'use-dark-mode';
 
 const { createDiffEditor, createModel } = monacoEditor;
 
 export const DiffEditor = () => {
+  const { theme } = useTheme();
+  const darkMode = useDarkMode();
+
   const editorRef = useRef(null);
   useEffect(() => {
     if (editorRef.current) {
@@ -28,5 +33,16 @@ export const DiffEditor = () => {
       });
     }
   }, [editorRef.current]);
-  return <div className={styles.editorRoot} ref={editorRef}></div>;
+
+  return (
+    <div
+      className={styles.editorRoot}
+      style={{
+        borderWidth: theme?.borderWeights?.normal.value || 1,
+        borderStyle: 'solid',
+        borderColor: theme?.colors.primaryBorder.value || '#000',
+      }}
+      ref={editorRef}
+    ></div>
+  );
 };

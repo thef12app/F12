@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { Tooltip, Typography } from 'antd';
 import { WindowsFilled, CheckCircleOutlined } from '@ant-design/icons';
 import copy from 'copy-to-clipboard';
 
 import style from './keycode.module.scss';
+import { Button, Tooltip } from '@nextui-org/react';
 
 const CopyableEventProp: React.FC<{
   keyName: string;
@@ -36,7 +36,7 @@ const CopyableEventProp: React.FC<{
       {keyDescription && ` (${keyDescription})`}:{' '}
       <Tooltip
         visible={copied}
-        title={
+        content={
           <span>
             <CheckCircleOutlined /> Copied
           </span>
@@ -166,9 +166,9 @@ export const KeyCodeFinder = () => {
               <CopyableEventProp value={keyCode.altKey} keyName={'  altKey'} />
               {'}'}
             </pre>
-            <Typography.Text type="secondary" className={style.copyHint}>
+            <Button ghost className={style.copyHint}>
               Click fields to copy condition
-            </Typography.Text>
+            </Button>
           </div>
         )}
       </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import styles from './DropZone.module.scss';
-import { Typography } from 'antd';
+import { Button } from '@nextui-org/react';
 
 export interface DropZoneProps {
   onSelect: (files: FileList) => void;
@@ -45,7 +45,7 @@ export const DropZone: React.FC<DropZoneProps> = ({ onSelect }) => {
             className={styles.fileInput}
             onChange={onFileSelect}
           />{' '}
-          <Typography.Link>Browse</Typography.Link>
+          <Button ghost>Browse</Button>
         </label>
       </span>
     </div>

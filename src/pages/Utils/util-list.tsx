@@ -1,55 +1,53 @@
 import {
-  CheckOutlined,
-  ClockCircleOutlined,
-  FieldBinaryOutlined,
-  LinkOutlined,
-  NumberOutlined,
-  PictureOutlined,
-  SecurityScanOutlined,
-  DiffOutlined,
-  // CompressOutlined,
-} from '@ant-design/icons';
-
+  VscBracketDot,
+  VscSymbolNumeric,
+  VscLink,
+  VscWatch,
+  VscFileBinary,
+  VscDiff,
+  VscFileCode,
+  VscJson,
+} from 'react-icons/vsc';
 export const utilList = [
   {
     name: 'Code Formatter',
     path: 'formatter',
-    icon: CheckOutlined,
+    icon: VscFileCode,
   },
   {
     name: 'Diff Tool',
     path: 'diffTool',
-    icon: DiffOutlined,
+    icon: VscDiff,
   },
   {
     name: 'JWT Decoder',
     path: 'jwt-decoder',
-    icon: SecurityScanOutlined,
+    icon: VscBracketDot,
   },
   {
     name: 'Keycode Finder',
     path: 'keycode-finder',
-    icon: NumberOutlined,
+    icon: VscSymbolNumeric,
   },
   {
     name: 'URL Inspector',
     path: 'url-inspector',
-    icon: LinkOutlined,
+    icon: VscLink,
   },
   {
     name: 'Unix Time Converter',
     path: 'unix-time-converter',
-    icon: ClockCircleOutlined,
+    icon: VscWatch,
   },
   {
     name: 'Base64 Encoder / Decoder',
     path: 'base64',
-    icon: FieldBinaryOutlined,
+    icon: VscFileBinary,
   },
   {
     name: 'Image to Data URI',
     path: 'image2DataUri',
-    icon: PictureOutlined,
+    icon: VscJson,
   },
   // {
   //   name: 'Image Optimizer',

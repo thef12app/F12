@@ -15,6 +15,22 @@ import { Button, Dropdown, Tooltip } from '@nextui-org/react';
 import useDarkMode from 'use-dark-mode';
 import { VscCheck, VscCopy } from 'react-icons/vsc';
 
+const f12Dark = {
+  base: 'vs-dark',
+  inherit: true,
+  colors: {
+    'editor.background': '#16181a',
+  },
+};
+
+const f12Light = {
+  base: 'vs',
+  inherit: true,
+  colors: {
+    'editor.background': '#f0f3f5',
+  },
+};
+
 export const Formatter = () => {
   const darkMode = useDarkMode();
   const [editor, setEditor] = useState<monacoEditor.IStandaloneCodeEditor>();
@@ -22,7 +38,6 @@ export const Formatter = () => {
   const [detectedLanguage, setDetectedLanguage] = useState<Languages | null>(
     null
   );
-  const menu = <></>;
 
   const format = async () => {
     if (editor) {
@@ -56,8 +71,11 @@ export const Formatter = () => {
     if (!editor) {
       return;
     }
-
-    monacoEditor.setTheme(darkMode.value ? 'vs-dark' : 'vs');
+    if (darkMode.value) {
+      monacoEditor.setTheme('f12-dark');
+    } else {
+      monacoEditor.setTheme('f12-light');
+    }
   }, [darkMode]);
 
   const copyToClipboard = () => {

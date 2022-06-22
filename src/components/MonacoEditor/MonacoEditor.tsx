@@ -42,6 +42,22 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = ({
         }
       `);
       onEditorCreate(monaco);
+      monacoEditor.defineTheme('f12-dark', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [],
+        colors: {
+          'editor.background': '#16181a',
+        },
+      });
+      monacoEditor.defineTheme('f12-light', {
+        base: 'vs',
+        inherit: true,
+        rules: [],
+        colors: {
+          'editor.background': '#f0f3f5',
+        },
+      });
 
       return () => monaco.dispose();
     }

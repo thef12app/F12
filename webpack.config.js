@@ -3,7 +3,6 @@ var webpack = require('webpack'),
   path = require('path'),
   fileSystem = require('fs-extra'),
   env = require('./utils/env'),
-  antdCustomTheme = require('./src/antd-override.js'),
   { CleanWebpackPlugin } = require('clean-webpack-plugin'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
@@ -106,15 +105,6 @@ var options = {
           },
           {
             loader: 'css-loader', // translates CSS into CommonJS
-          },
-          {
-            loader: 'less-loader', // compiles Less to CSS
-            options: {
-              lessOptions: {
-                modifyVars: antdCustomTheme,
-                javascriptEnabled: true,
-              },
-            },
           },
         ],
       },

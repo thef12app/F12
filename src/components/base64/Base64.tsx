@@ -70,14 +70,12 @@ export const Base64 = () => {
           />
         </Grid>
         <Grid xs>
-          <Textarea
-            placeholder=""
-            value={result}
-            readOnly
-            css={{
-              w: '100%',
-            }}
-          />
+          <pre
+          // labelPlaceholder={`${encode ? 'Encoded' : 'Decoded'} Result`}
+          // bordered
+          >
+            {result}
+          </pre>
         </Grid>
       </Grid.Container>
     </>

@@ -1,3 +1,4 @@
+var chalk = require('chalk');
 var webpack = require('webpack'),
   path = require('path'),
   fileSystem = require('fs-extra'),
@@ -8,7 +9,8 @@ var webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   TerserPlugin = require('terser-webpack-plugin'),
   MonacoWebpackPlugin = require('monaco-editor-webpack-plugin'),
-  NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+  NodePolyfillPlugin = require('node-polyfill-webpack-plugin'),
+  ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/';
 
@@ -134,7 +136,13 @@ var options = {
     }),
     // Monaco from here: https://github.com/microsoft/monaco-editor/blob/main/docs/integrate-esm.md
     new MonacoWebpackPlugin(),
-    new webpack.ProgressPlugin(),
+    new ProgressBarPlugin({
+      format:
+        '  build [:bar] ' +
+        chalk.green.bold(':percent') +
+        ' (:elapsed seconds)',
+      clear: false,
+    }),
     // clean the build folder
     new CleanWebpackPlugin({
       verbose: true,

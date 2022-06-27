@@ -34,25 +34,5 @@ export const DiffEditor = () => {
     }
   }, [editorRef.current]);
 
-  useEffect(() => {
-    if (monacoEditor) {
-      if (darkMode.value) {
-        monacoEditor.setTheme('f12-dark');
-      } else {
-        monacoEditor.setTheme('f12-dark');
-      }
-    }
-  }, [darkMode]);
-
-  return (
-    <div
-      className={styles.editorRoot}
-      style={{
-        borderWidth: theme?.borderWeights?.normal.value || 1,
-        borderStyle: 'solid',
-        borderColor: theme?.colors.border.value || '#000',
-      }}
-      ref={editorRef}
-    ></div>
-  );
+  return <div className={styles.editorRoot} ref={editorRef}></div>;
 };

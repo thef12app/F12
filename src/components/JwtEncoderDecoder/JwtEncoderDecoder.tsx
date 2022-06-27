@@ -24,7 +24,11 @@ export const JwtEncoderDecoder = () => {
   };
 
   return (
-    <Grid.Container justify="flex-start" style={{ width: '100%' }} gap={1}>
+    <Grid.Container
+      justify="flex-start"
+      style={{ width: '100%', marginTop: 30 }}
+      gap={1}
+    >
       <Grid xs>
         <Textarea
           autoFocus

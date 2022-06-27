@@ -112,6 +112,7 @@ export const UriPartsRenderer: React.FC<UriPartsRendererProps> = ({
       )}
 
       {hash && <span className={styles.urlPart}>{hash}</span>}
+      <Spacer y={1}></Spacer>
       <div>
         <Button
           bordered

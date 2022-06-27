@@ -41,20 +41,21 @@ const SideMenu: React.FC<{
     }
   }, [isCollapsed]);
 
-  const MenuContainer = styled('button', {
+  const MenuButton = styled(Button, {
     cursor: 'pointer',
-    backgroundColor: theme.colors.accents4.value,
     borderRadius: theme.radii.md.value,
     borderColor: theme.colors.accents0.value,
     borderWidth: theme.radii.md.value,
     borderStyle: 'solid',
     height: '50',
     width: '50',
+    minWidth: 50,
+    minHeight: 50,
     fontSize: theme.fontSizes.lg.value,
     '&:hover': {
-      backgroundColor: theme.colors.accents8.value,
+      borderColor: theme.colors.accents4.value,
+      backgroundColor: theme.colors.accents2.value,
     },
-    padding: 10,
     borderWidth: theme.borderWeights.light.value,
   });
 
@@ -73,7 +74,7 @@ const SideMenu: React.FC<{
       }}
     >
       <div className="logo" />
-      <div style={{ width: '100%', padding: 10 }}>
+      <div style={{ width: '100%' }}>
         {!isCollapsed && (
           <Input
             animated={false}
@@ -110,9 +111,10 @@ const SideMenu: React.FC<{
         >
           {isCollapsed && (
             <Grid justify="center">
-              <MenuContainer
+              <MenuButton
                 style={{
                   width: !isCollapsed ? '100%' : 'auto',
+                  background: theme.colors.accents4.value,
                 }}
               >
                 <VscSearch
@@ -128,27 +130,29 @@ const SideMenu: React.FC<{
                     color: theme.colors.primary.value,
                   }}
                 />
-              </MenuContainer>
+              </MenuButton>
             </Grid>
           )}
           {filteredMenu.map((li, index) => (
             <Grid justify="center">
               {isCollapsed && (
-                <MenuContainer
+                <MenuButton
+                  auto
                   style={{
                     width: !isCollapsed ? '100%' : 'auto',
                     textAlign: 'center',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    padding: 10,
+                    background:
+                      li.path !== location.pathname.split('/')[1]
+                        ? theme.colors.accents2.value
+                        : theme.colors.accents4.value,
                     borderColor:
                       li.path !== location.pathname.split('/')[1]
-                        ? theme.colors.accents0.value
-                        : theme.colors.accents0.value,
-                    backgroundColor:
-                      li.path !== location.pathname.split('/')[1]
-                        ? theme.colors.accents0.value
-                        : theme.colors.accents3.value,
+                        ? theme.colors.accents4.value
+                        : theme.colors.accents2.value,
                   }}
                   key={`/${li.path}`}
                   onClick={() => {
@@ -161,9 +165,6 @@ const SideMenu: React.FC<{
                         cursor: 'pointer',
                         fontSize: '24px',
                         fontWeight: 800,
-                        backgroundImage: theme.colors.gradient.value,
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
                         color:
                           li.path !== location.pathname.split('/')[1]
                             ? theme.colors.primary.value
@@ -172,27 +173,34 @@ const SideMenu: React.FC<{
                     />{' '}
                   </Tooltip>
                   {/* {isCollapsed && } */}
-                </MenuContainer>
+                </MenuButton>
               )}
               {!isCollapsed && (
-                <Button
-                  auto
+                <MenuButton
                   ripple={false}
-                  bordered={li.path !== location.pathname.split('/')[1]}
                   onClick={() => {
                     history.push(`/${li.path}`);
                   }}
                   css={{
                     w: '100%',
                   }}
-                  color={
-                    li.path === location.pathname.split('/')[1]
-                      ? 'gradient'
-                      : 'default'
-                  }
+                  style={{
+                    background:
+                      li.path !== location.pathname.split('/')[1]
+                        ? theme.colors.accents2.value
+                        : theme.colors.accents4.value,
+                    borderColor:
+                      li.path !== location.pathname.split('/')[1]
+                        ? theme.colors.accents4.value
+                        : theme.colors.accents2.value,
+                    color:
+                      li.path !== location.pathname.split('/')[1]
+                        ? theme.colors.primary.value
+                        : theme.colors.text.value,
+                  }}
                 >
                   <span>{li.name}</span>
-                </Button>
+                </MenuButton>
               )}
             </Grid>
           ))}
@@ -200,19 +208,6 @@ const SideMenu: React.FC<{
         <div className={style.menuBottomOptions}>
           <Divider style={{ marginTop: 8, marginBottom: 20 }} />
           {!isCollapsed && (
-            // <div style={{ paddingBottom: '10px', paddingLeft: '10px' }}>
-            //   <Button
-            //     type="link"
-            //     size={'large'}
-            //     icon={<StarOutlined style={{ fontSize: 24 }} />}
-            //     href={
-            //       'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf/reviews'
-            //     }
-            //     target="_blank"
-            //   >
-            //     Rate us - 5 Stars
-            //   </Button>
-            // </div>
             <Grid.Container direction="column" gap={1}>
               <Grid>
                 <div style={{ marginBottom: 20 }}>
@@ -247,6 +242,7 @@ const SideMenu: React.FC<{
               <Grid>
                 <div className={style.menuIcons}>
                   <Button
+                    auto
                     ghost
                     href={
                       'https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf/reviews'
@@ -260,6 +256,7 @@ const SideMenu: React.FC<{
               <Grid>
                 <div className={style.menuIcons}>
                   <Button
+                    auto
                     ghost
                     href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas/idea/new"
                     target="_blank"

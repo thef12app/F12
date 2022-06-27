@@ -4,7 +4,7 @@ import { WindowsFilled, CheckCircleOutlined } from '@ant-design/icons';
 import copy from 'copy-to-clipboard';
 
 import style from './keycode.module.scss';
-import { Button, Tooltip } from '@nextui-org/react';
+import { Button, theme, Tooltip } from '@nextui-org/react';
 
 const CopyableEventProp: React.FC<{
   keyName: string;
@@ -121,7 +121,7 @@ export const KeyCodeFinder = () => {
           </div>
         )}
         {!keyCode && (
-          <h3 style={{ fontWeight: 600 }}>
+          <h3 style={{ fontWeight: 600, color: theme.colors.accents9.value }}>
             Start pressing keys to get more info.
           </h3>
         )}
@@ -166,7 +166,7 @@ export const KeyCodeFinder = () => {
               <CopyableEventProp value={keyCode.altKey} keyName={'  altKey'} />
               {'}'}
             </pre>
-            <Button ghost className={style.copyHint}>
+            <Button ghost size={'sm'} className={style.copyHint}>
               Click fields to copy condition
             </Button>
           </div>

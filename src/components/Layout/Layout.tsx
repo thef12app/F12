@@ -127,7 +127,12 @@ export const App: React.FC<LayoutProps> = ({ title }) => {
                     width: '100%',
                   }}
                 >
-                  <div className={styles.container} style={{ paddingTop: 25 }}>
+                  <div
+                    className={styles.container}
+                    style={{
+                      padding: '10px 10px',
+                    }}
+                  >
                     <Suspense
                       fallback={
                         <div>

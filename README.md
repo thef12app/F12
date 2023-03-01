@@ -1,6 +1,7 @@
 <img src="src/assets/img/icon-128.png" width="64"/>
 
-# Dev App
+# F12
+This is a chrome extension that helps in day-to-day activities of a software developer. You can download it here: https://chrome.google.com/webstore/detail/f12/mbnakamgdofpbfjpibdmcmjonhoncbgf
 
 ## Installing and Running
 

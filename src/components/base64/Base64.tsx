@@ -1,4 +1,4 @@
-import { Button, Input } from 'antd';
+import { Textarea, Button, Grid, Spacer } from '@nextui-org/react';
 import React, { createRef, useState, useEffect } from 'react';
 import style from './style.module.scss';
 
@@ -32,39 +32,52 @@ export const Base64 = () => {
   return (
     <>
       <div style={{ marginTop: '25px' }}>
-        <div className={style.buttonGroup}>
+        <Button.Group>
           <Button
-            size="large"
-            type="primary"
+            flat={!encode}
             className={encode ? 'enabled' : style.disabled}
             onClick={() => setEncode(true)}
           >
             Encode
           </Button>
           <Button
-            size="large"
-            type="primary"
+            flat={encode}
             className={!encode ? 'enabled' : style.disabled}
             onClick={() => setEncode(false)}
           >
             Decode
           </Button>
-        </div>
+        </Button.Group>
       </div>
-      <div className={style.row}>
-        <Input.TextArea
-          autoFocus
-          style={{
-            background: error ? '#ffc0ca' : 'white',
-            marginLeft: '10px',
-          }}
-          onChange={(event) => encodeDecode(event.target.value)}
-          placeholder={`Enter text to ${
-            encode ? 'encode to' : 'decode from'
-          } Base64`}
-        />
-        <Input.TextArea placeholder="" value={result} readOnly />
-      </div>
+      <Spacer y={2} />
+
+      <Grid.Container css={{ w: '100%' }} gap={1} direction="row">
+        <Grid xs>
+          <Textarea
+            css={{
+              w: '100%',
+            }}
+            autoFocus
+            bordered
+            style={{
+              background: error ? '#ffc0ca' : 'initial',
+              marginLeft: '10px',
+            }}
+            onChange={(event) => encodeDecode(event.target.value)}
+            labelPlaceholder={`Enter text to ${
+              encode ? 'encode to' : 'decode from'
+            } Base64`}
+          />
+        </Grid>
+        <Grid xs>
+          <pre
+          // labelPlaceholder={`${encode ? 'Encoded' : 'Decoded'} Result`}
+          // bordered
+          >
+            {result}
+          </pre>
+        </Grid>
+      </Grid.Container>
     </>
   );
 };

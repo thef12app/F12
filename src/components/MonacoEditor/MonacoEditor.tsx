@@ -3,6 +3,7 @@ import {
   editor as monacoEditor,
   languages as monacoLanguages,
 } from 'monaco-editor';
+import useDarkMode from 'use-dark-mode';
 
 monacoLanguages.css.cssDefaults.setOptions({
   validate: false,
@@ -22,6 +23,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = ({
   wrapperClass,
 }) => {
   const editorRoot = useRef(null);
+  const darkMode = useDarkMode();
 
   useEffect(() => {
     if (editorRoot.current) {
@@ -42,9 +44,33 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = ({
         }
       `);
       onEditorCreate(monaco);
+      monacoEditor.defineTheme('f12-dark', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [],
+        colors: {
+          'editor.background': '#16181a',
+        },
+      });
+      monacoEditor.defineTheme('f12-light', {
+        base: 'vs',
+        inherit: true,
+        rules: [],
+        colors: {
+          'editor.background': '#f0f3f5',
+        },
+      });
 
       return () => monaco.dispose();
     }
   }, []);
+
+  useEffect(() => {
+    if (darkMode.value) {
+      monacoEditor.setTheme('f12-dark');
+    } else {
+      monacoEditor.setTheme('f12-light');
+    }
+  }, [darkMode]);
   return <div ref={editorRoot} className={wrapperClass}></div>;
 };

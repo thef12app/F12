@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import { MemoryRouter } from 'react-router-dom';
 import { random } from 'lodash';
-import { Button } from 'antd';
 
 import cn from 'classnames';
 import images from '../../../utils/pexels/image-cache.json';
 
 import { Utils } from '../Utils/Utils';
 import './Newtab.scss';
+import { Button } from '@nextui-org/react'
 
 import CloseIcon from '../../assets/icons/close.svg';
 import ArrowIcon from '../../assets/icons/arrow.svg';

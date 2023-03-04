@@ -3,7 +3,7 @@ import { fileToDataURI } from '../../utils';
 import { DropZone } from '../Dropzone/DropZone';
 import styles from './ImageToDataURI.module.scss';
 import copy from 'copy-to-clipboard';
-import { Button, Image, Input } from 'antd';
+import { Button, Input, Image } from '@nextui-org/react';
 
 export const ImageToDataURI: React.FC = () => {
   const [dataURI, setDataURI] = useState('');
@@ -50,17 +50,17 @@ export const ImageToDataURI: React.FC = () => {
               <div>Image Preview</div>
             )}
           </div>
-          <Input.TextArea
+          <Input.Textarea
+            css={{
+              w: '100%',
+              h: '100%',
+            }}
             placeholder="Data URI..."
             value={dataURI}
             onChange={(e) => onDataUriChange(e.target.value)}
-          ></Input.TextArea>
+          ></Input.Textarea>
           {dataURI && (
-            <Button
-              type="primary"
-              onClick={() => copy(dataURI)}
-              className={styles.copyButton}
-            >
+            <Button onClick={() => copy(dataURI)} className={styles.copyButton}>
               Copy
             </Button>
           )}

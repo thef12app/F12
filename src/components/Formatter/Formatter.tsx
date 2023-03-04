@@ -4,40 +4,22 @@ import { startCase } from 'lodash';
 import { editor as monacoEditor } from 'monaco-editor';
 import styles from './Formatter.module.scss';
 import copy from 'copy-to-clipboard';
-import { Button, Dropdown, Menu, message, Tooltip } from 'antd';
 import { MonacoEditor } from '../MonacoEditor/MonacoEditor';
-import { CheckOutlined, CopyOutlined, DownOutlined } from '@ant-design/icons';
 import {
   detectLanguage,
   formatWithPrettier,
   Languages,
   supportedLanguages,
 } from '../../utils/prettier';
+import { Button, Dropdown, Tooltip } from '@nextui-org/react';
+import useDarkMode from 'use-dark-mode';
+import { VscCheck, VscCopy } from 'react-icons/vsc';
 
 export const Formatter = () => {
   const [editor, setEditor] = useState<monacoEditor.IStandaloneCodeEditor>();
   const [language, setLanguage] = useState<Languages | 'auto'>('auto');
   const [detectedLanguage, setDetectedLanguage] = useState<Languages | null>(
     null
-  );
-  const menu = (
-    <Menu
-      selectedKeys={[language]}
-      onClick={async (e) => {
-        setLanguage(e.key as Languages | 'auto');
-        if (e.key === 'auto' && editor) {
-          const lang = await detectLanguage(editor.getValue());
-          setDetectedLanguage(lang);
-        }
-      }}
-    >
-      {[
-        <Menu.Item key={'auto'}>Auto</Menu.Item>,
-        ...supportedLanguages.map((s) => (
-          <Menu.Item key={s}>{startCase(s)}</Menu.Item>
-        )),
-      ]}
-    </Menu>
   );
 
   const format = async () => {
@@ -49,9 +31,9 @@ export const Formatter = () => {
 
         editor.setValue(formatted.formatted);
         setDetectedLanguage(formatted.fileType);
-        message.success('Formatted!');
+        // message.success('Formatted!');
       } else {
-        message.info('Code Already formatted');
+        // message.info('Code Already formatted');
       }
     }
   };
@@ -72,7 +54,7 @@ export const Formatter = () => {
     if (editor) {
       const value = editor.getValue();
       copy(value);
-      message.success('Copied!');
+      // message.success('Copied!');
     }
   };
 
@@ -99,31 +81,41 @@ export const Formatter = () => {
           wrapperClass={styles.editorRoot}
         />
         <div className={styles.languageSelectWrapper}>
-          <Dropdown overlay={menu} placement="topRight">
-            <Button size="small" style={{ fontSize: 12 }}>
+          <Dropdown>
+            <Dropdown.Button style={{ fontSize: 12 }} ripple={false} bordered>
               Language: {language}{' '}
               {language === 'auto' &&
                 detectedLanguage &&
-                `(${detectedLanguage})`}{' '}
-              <DownOutlined />
-            </Button>
+                `(${detectedLanguage})`}
+            </Dropdown.Button>
+            <Dropdown.Menu
+              selectedKeys={[language]}
+              selectionMode="single"
+              onSelectionChange={async (e) => {
+                // @ts-ignore
+                setLanguage(e.currentKey as Languages | 'auto');
+                if (e.valueOf() === 'auto' && editor) {
+                  const lang = await detectLanguage(editor.getValue());
+                  setDetectedLanguage(lang);
+                }
+              }}
+            >
+              {['auto', ...supportedLanguages].map((s) => (
+                <Dropdown.Item key={s}>{startCase(s)}</Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
           </Dropdown>
         </div>
         <div className={styles.actionBtnContainer}>
-          <Tooltip title="Format" placement="left">
-            <Button
-              title="Format"
-              onClick={format}
-              icon={<CheckOutlined />}
-              type="text"
-            ></Button>
+          <Tooltip content="Format" placement="left">
+            <Button auto bordered onClick={format} icon={<VscCheck />}></Button>
           </Tooltip>
-          <Tooltip title="Copy" placement="left">
+          <Tooltip content="Copy" placement="left">
             <Button
-              title="Copy to Clipboard"
+              auto
+              bordered
               onClick={copyToClipboard}
-              icon={<CopyOutlined />}
-              type="text"
+              icon={<VscCopy />}
             ></Button>
           </Tooltip>
         </div>

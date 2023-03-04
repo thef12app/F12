@@ -1,5 +1,5 @@
 import { BulbOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button } from '@nextui-org/react';
 import React, { useMemo, useState } from 'react';
 import { utilList } from '../Utils/util-list';
 import styles from './Popup.module.scss';
@@ -75,10 +75,10 @@ const Popup = () => {
       </div>
       <div className={styles.footer}>
         <Button
-          type="link"
+          ghost
           href="https://thef12app.frill.co/b/n0o9qd06/feature-ideas/idea/new"
           target="_blank"
-          size={'large'}
+          size={'lg'}
           icon={<BulbOutlined style={{ fontSize: 24 }} />}
           style={{ color: 'black' }}
         >

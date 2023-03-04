@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { utcToZonedTime, format } from 'date-fns-tz';
 import styles from './UnixTimeConverter.module.scss';
 import { timeZones } from './timezones';
-import { Button } from 'antd';
+import { Card, Grid, Input, Button, Divider } from '@nextui-org/react';
 
 const dateFormat = 'dd-MM-yyyy HH:mm:ss z';
 export const UnixTimeConverter = () => {
@@ -92,26 +92,36 @@ export const UnixTimeConverter = () => {
   return (
     <>
       <div className={styles.pageContainer}>
-        <div className={styles.timeInputWrapper}>
-          <h5>Enter Unix Time String</h5>
-          <input
-            type="text"
-            placeholder="E.g. 1633197049977"
-            autoFocus
-            onChange={(e) => setUnixTime(e.target.value)}
-            value={unixTime}
-          />
-          <Button
-            type="primary"
-            onClick={setCurrentTime}
-            style={{ marginTop: 8 }}
-          >
-            Use Current Time
-          </Button>
-        </div>
+        <Grid.Container alignContent="center" direction="column">
+          <Grid>
+            <h5>Enter Unix Time String</h5>
+          </Grid>
+          <Grid>
+            <Input
+              bordered
+              type="text"
+              placeholder="E.g. 1633197049977"
+              autoFocus
+              onChange={(e) => setUnixTime(e.target.value)}
+              value={unixTime}
+              css={{
+                w: '100%',
+              }}
+            />
+          </Grid>
+          <Grid>
+            <Button
+              size={'sm'}
+              onClick={setCurrentTime}
+              style={{ marginTop: 8 }}
+            >
+              Use Current Time
+            </Button>
+          </Grid>
+        </Grid.Container>
         {localTime && utcTime && (
           <>
-            <div className={styles.timeZonesContainer}>
+            {/* <div className={styles.timeZonesContainer}>
               <div>
                 <div className={styles.titleBar}>Local Time</div>
                 <div className={styles.time}>{localTime}</div>
@@ -121,25 +131,44 @@ export const UnixTimeConverter = () => {
                 <div className={styles.titleBar}>UTC Time</div>
                 <div className={styles.time}>{utcTime}</div>
               </div>
-            </div>
+            </div> */}
+            <Grid.Container direction="row" gap={1}>
+              <Grid xs>
+                <Card variant="bordered">
+                  <Card.Header
+                    style={{ textAlign: 'center' }}
+                    css={{ bg: '#444', color: '#fff' }}
+                  >
+                    Local Time
+                  </Card.Header>
+                  <Card.Divider />
+                  <Card.Body>{localTime}</Card.Body>
+                </Card>
+              </Grid>
+              <Grid xs>
+                <Card variant="bordered">
+                  <Card.Header
+                    style={{ textAlign: 'center' }}
+                    css={{ bg: '#444', color: '#fff' }}
+                  >
+                    UTC Time
+                  </Card.Header>
+                  <Card.Divider />
+                  <Card.Body>{utcTime}</Card.Body>
+                </Card>
+              </Grid>
+            </Grid.Container>
             <br />
-            <div className={styles.timeZonesContainer}>
+            <Card variant="bordered">
               {otherTimes.map((t) => (
-                <div>
-                  <div className={styles.titleBar}>
-                    {t.tz}
-                    <button
-                      onClick={() => removeTz(t.tz)}
-                      className={styles.removeBtn}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                  <div className={styles.time}>{t.time}</div>
-                </div>
+                <>
+                  <Card.Header>{t.tz}</Card.Header>
+                  <Card.Divider />
+                  <Card.Body>{t.time}</Card.Body>
+                </>
               ))}
-            </div>
-            <hr className={styles.divider} />
+            </Card>
+            <Divider className={styles.divider} />
             <div>
               <h5>Add more Timezones</h5>
               <input

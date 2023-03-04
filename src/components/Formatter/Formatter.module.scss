@@ -7,8 +7,6 @@
 
 .actionBtnContainer {
   width: 48px;
-  background-color: #fff;
-  border-left: 1px solid #eee;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -17,7 +15,7 @@
 }
 
 .editorRoot {
-  width: calc(100% - 48px);
+  width: calc(100% - 60px);
   height: 100%;
   overflow: hidden;
 }

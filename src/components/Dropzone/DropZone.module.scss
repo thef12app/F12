@@ -1,7 +1,6 @@
 .dropTarget {
   height: 200px;
-  background-color: #eee;
-  border: 1px solid #e0e0e0;
+  
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -9,7 +8,7 @@
 }
 
 .draggingOver {
-  border: 4px dashed #ccc;
+  
 }
 
 .fileInput {

@@ -6,7 +6,7 @@ import URL from 'url-parse';
 import styles from './UriInspector.module.scss';
 import { FormField } from '../core/FormField';
 import { iteratorToArray } from '../../utils';
-import { Button } from 'antd';
+import { Button, Input, Spacer } from '@nextui-org/react';
 
 const u = new URL('h://test.com');
 
@@ -74,6 +74,7 @@ export const UriEditor: React.FC<UriEditorProps> = ({
 
   return (
     <div>
+      <Spacer y={1}></Spacer>
       <Form
         form={form}
         onBlur={onFormChange}
@@ -87,25 +88,26 @@ export const UriEditor: React.FC<UriEditorProps> = ({
             { pattern: /^[a-z,A-Z,0-9,\.,\-]*$/, message: 'Invalid protocol' },
           ]}
         >
-          <input placeholder={'Protocol'} className={styles.editableField} />
+          <Input bordered placeholder={'Protocol'} css={{ w: '100%' }} />
         </FormField>
 
+        <Spacer y={1}></Spacer>
         <div className={styles.urlEditSectionHeader}>Authentication</div>
         <div className={styles.row}>
           <div className={styles.column}>
             <div className={styles.label}>Username</div>
             <FormField name="username">
-              <input className={styles.editableField} />
+              <Input bordered css={{ w: '95%' }} />
             </FormField>
           </div>
           <div className={styles.column}>
             <div className={styles.label}>Password</div>
             <FormField name="password">
-              <input className={styles.editableField} />
+              <Input bordered css={{ w: '95%' }} />
             </FormField>
           </div>
         </div>
-
+        <Spacer y={1}></Spacer>
         <div className={styles.urlEditSectionHeader}>Host</div>
         <div className={styles.row}>
           <div className={styles.column}>
@@ -124,7 +126,7 @@ export const UriEditor: React.FC<UriEditorProps> = ({
                 },
               ]}
             >
-              <input className={styles.editableField} />
+              <Input bordered css={{ w: '95%' }} />
             </FormField>
           </div>
           <div className={styles.column}>
@@ -133,11 +135,11 @@ export const UriEditor: React.FC<UriEditorProps> = ({
               name="port"
               rules={[{ pattern: /^[0-9]*$/, message: 'Invalid port number' }]}
             >
-              <input className={styles.editableField} />
+              <Input bordered css={{ w: '95%' }} />
             </FormField>
           </div>
         </div>
-
+        <Spacer y={1}></Spacer>
         <div className={styles.urlEditSectionHeader}>Pathname</div>
         <div>
           <FormField
@@ -150,10 +152,10 @@ export const UriEditor: React.FC<UriEditorProps> = ({
               },
             ]}
           >
-            <input className={styles.editableField} />
+            <Input bordered css={{ w: '100%' }} />
           </FormField>
         </div>
-
+        <Spacer y={1}></Spacer>
         <div className={styles.urlEditSectionHeader}>Search Params</div>
         <List name="searchParams">
           {(fields, { add, remove }) => {
@@ -164,19 +166,19 @@ export const UriEditor: React.FC<UriEditorProps> = ({
                     <div className={styles.row} key={s.key}>
                       <div className={styles.column}>
                         <FormField name={[s.name, 0]}>
-                          <input className={styles.editableField} />
+                          <Input bordered css={{ w: '100%' }} />
                         </FormField>
                       </div>
                       <div className={styles.column}>
                         <FormField name={[s.name, 1]}>
-                          <input className={styles.editableField} />
+                          <Input bordered css={{ w: '100%' }} />
                         </FormField>
                       </div>
                     </div>
                   ))}
 
                   <div className={styles.addParamBtnContainer}>
-                    <Button type="primary" onClick={() => add(['', ''])}>
+                    <Button size={'sm'} bordered onClick={() => add(['', ''])}>
                       Add Param
                     </Button>
                   </div>
@@ -198,7 +200,7 @@ export const UriEditor: React.FC<UriEditorProps> = ({
               },
             ]}
           >
-            <input className={styles.editableField} />
+            <Input bordered css={{ w: '100%' }} />
           </FormField>
         </div>
       </Form>

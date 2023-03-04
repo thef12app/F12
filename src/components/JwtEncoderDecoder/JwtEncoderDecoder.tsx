@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import jwt_decode from 'jwt-decode';
 import style from './style.module.scss';
-import { Input } from 'antd';
+import { Grid, Textarea } from '@nextui-org/react';
 
 export const JwtEncoderDecoder = () => {
   const [decode, setDecode] = useState('');
@@ -24,24 +24,41 @@ export const JwtEncoderDecoder = () => {
   };
 
   return (
-    <>
-      <div className={style.row}>
-        <Input.TextArea
+    <Grid.Container
+      justify="flex-start"
+      style={{ width: '100%', marginTop: 30 }}
+      gap={1}
+    >
+      <Grid xs>
+        <Textarea
           autoFocus
+          bordered
+          labelPlaceholder="Enter or Pase JWT Token to Decode"
           style={{
-            background: errDecoding ? '#ffc0ca' : '',
             marginLeft: '15px',
+            maxWidth: '100%',
           }}
-          placeholder="Enter JWT Token to Decode"
+          css={{
+            w: '100%',
+          }}
+          status={errDecoding ? 'error' : 'default'}
           onChange={(e) => decodeJWT(e.target.value)}
           defaultValue=""
-        ></Input.TextArea>
-        <Input.TextArea
+        ></Textarea>
+      </Grid>
+      <Grid xs>
+        <Textarea
           readOnly
           value={!errDecoding ? decode : 'Invalid JWT! Enter Valid JWT'}
           defaultValue=""
-        ></Input.TextArea>
-      </div>
-    </>
+          style={{
+            maxWidth: '100%',
+          }}
+          css={{
+            w: '100%',
+          }}
+        ></Textarea>
+      </Grid>
+    </Grid.Container>
   );
 };
